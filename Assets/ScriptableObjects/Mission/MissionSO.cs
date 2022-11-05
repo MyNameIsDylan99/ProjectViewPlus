@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Mission", menuName = "ScriptableObjects/Missions", order = 10)]
+[CreateAssetMenu(fileName = "Mission", menuName = "Overview+/Missions", order = 10)]
 public class MissionSO : ScriptableObject
 {
     public string Description;

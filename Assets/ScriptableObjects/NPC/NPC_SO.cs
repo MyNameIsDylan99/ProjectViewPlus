@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "NSC", menuName = "ScriptableObjects/NPC", order = 10)]
+[CreateAssetMenu(fileName = "NSC", menuName = "Overview+/NPC", order = 10)]
 public class NPC_SO : ScriptableObject
 {
     public Sprite Sprite;
