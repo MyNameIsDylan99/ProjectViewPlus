@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: SoundFiles
   m_EditorClassIdentifier: 
   Name: SoundFiles
-  Filters: []
+  Filters:
+  - 't: AudioClip'

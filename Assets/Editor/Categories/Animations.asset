@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: Animations
   m_EditorClassIdentifier: 
   Name: Animations
-  Filters: []
+  Filters:
+  - 't: Animation'

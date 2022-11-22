@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: Materials
   m_EditorClassIdentifier: 
   Name: Materials
-  Filters: []
+  Filters:
+  - t:Material

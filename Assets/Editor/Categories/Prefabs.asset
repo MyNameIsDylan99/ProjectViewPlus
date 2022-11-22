@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: Prefabs
   m_EditorClassIdentifier: 
   Name: Prefabs
-  Filters: []
+  Filters:
+  - t:Prefab

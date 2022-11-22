@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: Scripts
   m_EditorClassIdentifier: 
   Name: Scripts
-  Filters: []
+  Filters:
+  - 't: Script'
