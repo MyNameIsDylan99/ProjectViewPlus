@@ -8,15 +8,19 @@ using UnityEngine;
 public class PVPFile
 {
     private static GUISkin _buttonSkin;
+    [SerializeField]
     private string path;
+    [SerializeField]
     private string extension;
+    [SerializeField]
     private string fileName;
-
+    [SerializeField]
     private UnityEngine.Object fileObject;
     [NonSerialized]
     private PVPFolder parentFolder;
-
+    [SerializeField]
     private Texture2D fileIcon;
+    [SerializeField]
     private GUIContent fileContent;
     private static GUIStyle _buttonStyle;
     private static PVPDataSO pvpData;

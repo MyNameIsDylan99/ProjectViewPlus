@@ -2,21 +2,15 @@
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using UnityEngine;
-using static PVPDataSO;
 
 [CreateAssetMenu(fileName = "PVPData", menuName = "PVPData")]
-public class PVPDataSO : ScriptableObject, ISerializationCallbackReceiver
+public class PVPDataSO : ScriptableObject
 {
     public List<PVPFolder> allFolders = new List<PVPFolder>();
     public List<PVPFile> allFiles = new List<PVPFile>();
     public PVPFolder RootFolder;
 
-    public void OnBeforeSerialize()
-    {
-
-    }
-
-    public void OnAfterDeserialize()
+    public void OnBeforeDeserialize()
     {
         foreach (var file in allFiles)
         {
@@ -26,15 +20,28 @@ public class PVPDataSO : ScriptableObject, ISerializationCallbackReceiver
         foreach (var folder in allFolders)
         {
             var childFolders = new List<PVPFolder>();
+
             if (folder.SerializationInfo.childFolderIndeces != null)
             {
                 foreach (var childFolderIndex in folder.SerializationInfo.childFolderIndeces)
                 {
+                    Debug.Log($"Added child folder {allFolders[childFolderIndex].GetName()} to {folder.GetName()}");
                     childFolders.Add(allFolders[childFolderIndex]);
                 }
             }
+
+            
             folder.ChildFolders = childFolders;
-            folder.ParentFolder = allFolders[folder.SerializationInfo.parentFolderIndex];
+            Debug.Log($"Folder{folder.GetName()} has {folder.ChildFolders.Count} childs");
+            if (!folder.IsRootFolder())
+            {
+                folder.ParentFolder = allFolders[folder.SerializationInfo.parentFolderIndex];
+            }
+            else
+            {
+                RootFolder = folder;
+            }
+            
         }
     }
 

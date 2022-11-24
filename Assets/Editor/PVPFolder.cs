@@ -8,7 +8,9 @@ using UnityEngine;
 [Serializable]
 public class PVPFolder
 {
+    [SerializeField]
     private string folderPath;
+    [SerializeField]
     private string folderName;
 
     private static PVPDataSO pvpData;
@@ -16,43 +18,50 @@ public class PVPFolder
     public FolderSerializationInfo SerializationInfo;
 
     [NonSerialized]
-    private List<PVPFolder> childFolders = new List<PVPFolder>();
+    private List<PVPFolder> childFolders;
     [NonSerialized]
     private PVPFolder parentFolder;
+    [SerializeField]
     private List<PVPFile> child_files;
+
     private PVPFile[,] groupedFiles;
 
-
+    [SerializeField]
     private GUIContent folderContent;
-
+    [SerializeField]
     private Texture2D folderIcon;
-
+    [SerializeField]
     UnityEngine.Object folderobj;
-
+    [SerializeField]
     private bool fold = false;
+    [SerializeField]
     private int depth;
-
+    [SerializeField]
     private bool childFoldersAreTabs;
-    public bool ChildFoldersAreTabs { get => childFoldersAreTabs; private set => childFoldersAreTabs =value; }
+    public bool ChildFoldersAreTabs { get => childFoldersAreTabs; private set => childFoldersAreTabs = value; }
     public List<PVPFolder> ChildFolders { get => childFolders; set => childFolders = value; }
 
     public PVPFolder ParentFolder { get { return parentFolder; } set { parentFolder = value; } }
 
+    [SerializeField]
     string[] filters;
-
+    [SerializeField]
     private Rect position;
 
-    public PVPFolder(string folderPath, PVPFolder parentFolder,int depth, Rect position)
+    public PVPFolder(string folderPath, PVPFolder parentFolder, int depth, Rect position)
     {
         #region Serialization
-        if (pvpData == null) { 
-        pvpData = AssetDatabase.LoadAssetAtPath<PVPDataSO>("Assets/Editor/PVPData.asset");
+
+        if (pvpData == null)
+        {
+            pvpData = AssetDatabase.LoadAssetAtPath<PVPDataSO>("Assets/Editor/PVPData.asset");
         }
 
         pvpData.allFolders.Add(this);
         SerializationInfo.folderIndex = pvpData.allFolders.Count - 1;
 
-        if (parentFolder == null) {
+        if (parentFolder == null)
+        {
             pvpData.RootFolder = this;
         }
         else
@@ -74,9 +83,9 @@ public class PVPFolder
 
         ChildFolders = FindChildFolders();
         child_files = FindChildFiles();
-       
+
         //Create the object by giving its path. Then get the assetpreview.
-       folderobj = AssetDatabase.LoadAssetAtPath(this.folderPath,typeof(UnityEngine.Object));
+        folderobj = AssetDatabase.LoadAssetAtPath(this.folderPath, typeof(UnityEngine.Object));
         folderIcon = AssetPreview.GetMiniThumbnail(folderobj);
 
 
@@ -84,7 +93,7 @@ public class PVPFolder
         string[] splitPath = this.folderPath.Split('\\');
         folderName = splitPath[splitPath.Length - 1];
 
-        folderContent = new GUIContent(folderName,folderIcon,folderPath);
+        folderContent = new GUIContent(folderName, folderIcon, folderPath);
     }
 
     public void VisualizeFolder()
@@ -93,19 +102,19 @@ public class PVPFolder
 
         //Do this to give horizontal space
         GUILayout.BeginHorizontal();
-        GUILayout.Space(15*depth);
-        fold = EditorGUILayout.Foldout(fold,folderContent,true);
+        GUILayout.Space(15 * depth);
+        fold = EditorGUILayout.Foldout(fold, folderContent, true);
         GUILayout.EndHorizontal();
 
 
         if (fold)
         {
             VisualizeChildFiles();
+
             foreach (var VARIABLE in ChildFolders)
                 VARIABLE.VisualizeFolder();
-
         }
-        
+
         GUILayout.EndVertical();
     }
 
@@ -117,7 +126,7 @@ public class PVPFolder
         foreach (var directory in dirs)
         {
             //Turn all directories into our 'UnityFolder' Object.
-            PVPFolder newfolder = new PVPFolder(directory,this,depth+1,position);
+            PVPFolder newfolder = new PVPFolder(directory, this, depth + 1, position);
             folders.Add(newfolder);
         }
         return folders;
@@ -130,7 +139,7 @@ public class PVPFolder
         List<PVPFile> files = new List<PVPFile>();
         foreach (var file in fileNames)
         {
-            PVPFile newfile = new PVPFile(file,this);
+            PVPFile newfile = new PVPFile(file, this);
             //Pass meta files.
             if (newfile.GetExtension().Equals("meta"))
                 continue;
@@ -146,26 +155,26 @@ public class PVPFolder
         //This method groups files by rows of 3. You can edit this
         //to change visuals.
         int size = files.Count;
-        int rows = (size / 3)+1;
-        PVPFile[,] groupedFiles = new PVPFile[rows,3];
+        int rows = (size / 3) + 1;
+        PVPFile[,] groupedFiles = new PVPFile[rows, 3];
         int index = 0;
         for (int i = 0; i < rows; i++)
             for (int j = 0; j < 3; j++)
-                if(i*3+j<=size-1)
+                if (i * 3 + j <= size - 1)
                     groupedFiles[i, j] = files[index++];
-       
+
         return groupedFiles;
     }
 
     private void VisualizeChildFiles()
     {
         int size = child_files.Count;
-        int rows = (size / 3)+1;
+        int rows = (size / 3) + 1;
         groupedFiles = GroupChildFiles(child_files);
         int i = 0, j = 0;
         for (i = 0; i < rows; i++)
         {
-            
+
             GUILayout.BeginVertical();
             GUILayout.BeginHorizontal();
 
@@ -173,7 +182,7 @@ public class PVPFolder
             {
                 if (i * 3 + j <= size - 1)
                     groupedFiles[i, j].VisualizeFile();
-                
+
             }
             GUILayout.EndHorizontal();
             GUILayout.EndVertical();
@@ -192,7 +201,7 @@ public class PVPFolder
             foreach (var guid in guids)
             {
                 var path = AssetDatabase.GUIDToAssetPath(guid);
-                PVPFile file = new PVPFile(path,this);
+                PVPFile file = new PVPFile(path, this);
 
                 bool userWantsToMoveFile = false;
                 if (!file.IsChildOfRootFolder())
@@ -200,14 +209,14 @@ public class PVPFolder
                     userWantsToMoveFile = EditorUtility.DisplayDialog("File conflict", $"File {file.GetName()} is currently in this path: {file.GetPath()}. Do you want to move the file to {path}?", "Yes", "No");
                 }
 
-                if (!child_files.Contains(file)&&userWantsToMoveFile)
+                if (!child_files.Contains(file) && userWantsToMoveFile)
                 {
                     child_files.Add(file);
                 }
                 Debug.Log("New file added : " + file.GetPath());
             }
         }
-        
+
     }
 
     public string GetName()
@@ -222,7 +231,7 @@ public class PVPFolder
 
     public bool IsRootFolder()
     {
-        if(parentFolder == null)
+        if (folderPath=="Assets")
         {
             return true;
         }

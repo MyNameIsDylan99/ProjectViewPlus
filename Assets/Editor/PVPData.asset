@@ -12,5 +12,1456 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57dd26b3b7a87464bb00fd35be3f1f84, type: 3}
   m_Name: PVPData
   m_EditorClassIdentifier: 
-  allFolders: []
-  serializationInfos: []
+  allFolders:
+  - folderPath: Assets
+    folderName: Assets
+    SerializationInfo:
+      parentFolderIndex: 0
+      folderIndex: 0
+      childFolderIndeces: 010000000500000006000000
+    child_files:
+    - path: Assets\Assets.index
+      extension: index
+      fileName: Assets\Assets
+      fileObject: {fileID: 6653382117853536652, guid: c636cafd04426dc459549a265ef9daf9, type: 3}
+      fileIcon: {fileID: 0}
+      fileContent:
+        m_Text: Assets\Assets
+        m_Image: {fileID: 0}
+        m_Tooltip: Assets\Assets.index
+      FileSerializationInfo:
+        fileIndex: 61
+        parentFolderIndex: 0
+    folderContent:
+      m_Text: Assets
+      m_Image: {fileID: 3764734208316478041, guid: 0000000000000000d000000000000000, type: 0}
+      m_Tooltip: Assets
+    folderIcon: {fileID: 3764734208316478041, guid: 0000000000000000d000000000000000, type: 0}
+    folderobj: {fileID: 102900000, guid: 00000000000000001000000000000000, type: 3}
+    fold: 1
+    depth: 0
+    childFoldersAreTabs: 0
+    filters: []
+    position:
+      serializedVersion: 2
+      x: -1913
+      y: 105
+      width: 1920
+      height: 902
+  - folderPath: Assets\Editor
+    folderName: Editor
+    SerializationInfo:
+      parentFolderIndex: 0
+      folderIndex: 1
+      childFolderIndeces: 0200000004000000
+    child_files:
+    - path: Assets\Editor\ContextualMenuDemo.cs
+      extension: cs
+      fileName: Assets\Editor\ContextualMenuDemo
+      fileObject: {fileID: 11500000, guid: e9957dbe2618f9f4d868f0dd8bd579fc, type: 3}
+      fileIcon: {fileID: -8204150473280056172, guid: 0000000000000000d000000000000000, type: 0}
+      fileContent:
+        m_Text: Assets\Editor\ContextualMenuDemo
+        m_Image: {fileID: -8204150473280056172, guid: 0000000000000000d000000000000000, type: 0}
+        m_Tooltip: Assets\Editor\ContextualMenuDemo.cs
+      FileSerializationInfo:
+        fileIndex: 28
+        parentFolderIndex: 1
+    - path: Assets\Editor\ProjectViewPlus.cs
+      extension: cs
+      fileName: Assets\Editor\ProjectViewPlus
+      fileObject: {fileID: 11500000, guid: 4a1a607fb456a8744a0f0e8aec3b895b, type: 3}
+      fileIcon: {fileID: -8204150473280056172, guid: 0000000000000000d000000000000000, type: 0}
+      fileContent:
+        m_Text: Assets\Editor\ProjectViewPlus
+        m_Image: {fileID: -8204150473280056172, guid: 0000000000000000d000000000000000, type: 0}
+        m_Tooltip: Assets\Editor\ProjectViewPlus.cs
+      FileSerializationInfo:
+        fileIndex: 31
+        parentFolderIndex: 1
+    - path: Assets\Editor\PVPData.asset
+      extension: asset
+      fileName: Assets\Editor\PVPData
+      fileObject: {fileID: 11400000}
+      fileIcon: {fileID: 2376468200823113483, guid: 0000000000000000d000000000000000, type: 0}
+      fileContent:
+        m_Text: Assets\Editor\PVPData
+        m_Image: {fileID: 2376468200823113483, guid: 0000000000000000d000000000000000, type: 0}
+        m_Tooltip: Assets\Editor\PVPData.asset
+      FileSerializationInfo:
+        fileIndex: 33
+        parentFolderIndex: 1
+    - path: Assets\Editor\PVPDataSO.cs
+      extension: cs
+      fileName: Assets\Editor\PVPDataSO
+      fileObject: {fileID: 11500000, guid: 57dd26b3b7a87464bb00fd35be3f1f84, type: 3}
+      fileIcon: {fileID: -8204150473280056172, guid: 0000000000000000d000000000000000, type: 0}
+      fileContent:
+        m_Text: Assets\Editor\PVPDataSO
+        m_Image: {fileID: -8204150473280056172, guid: 0000000000000000d000000000000000, type: 0}
+        m_Tooltip: Assets\Editor\PVPDataSO.cs
+      FileSerializationInfo:
+        fileIndex: 35
+        parentFolderIndex: 1
+    - path: Assets\Editor\PVPFile.cs
+      extension: cs
+      fileName: Assets\Editor\PVPFile
+      fileObject: {fileID: 11500000, guid: 0ec0939e6e0b5284bb5b0289308b6c71, type: 3}
+      fileIcon: {fileID: -8204150473280056172, guid: 0000000000000000d000000000000000, type: 0}
+      fileContent:
+        m_Text: Assets\Editor\PVPFile
+        m_Image: {fileID: -8204150473280056172, guid: 0000000000000000d000000000000000, type: 0}
+        m_Tooltip: Assets\Editor\PVPFile.cs
+      FileSerializationInfo:
+        fileIndex: 37
+        parentFolderIndex: 1
+    - path: Assets\Editor\PVPFolder.cs
+      extension: cs
+      fileName: Assets\Editor\PVPFolder
+      fileObject: {fileID: 11500000, guid: 803b9189ffefc784d8cf25da9709ea72, type: 3}
+      fileIcon: {fileID: -8204150473280056172, guid: 0000000000000000d000000000000000, type: 0}
+      fileContent:
+        m_Text: Assets\Editor\PVPFolder
+        m_Image: {fileID: -8204150473280056172, guid: 0000000000000000d000000000000000, type: 0}
+        m_Tooltip: Assets\Editor\PVPFolder.cs
+      FileSerializationInfo:
+        fileIndex: 39
+        parentFolderIndex: 1
+    folderContent:
+      m_Text: Editor
+      m_Image: {fileID: 3764734208316478041, guid: 0000000000000000d000000000000000, type: 0}
+      m_Tooltip: Assets\Editor
+    folderIcon: {fileID: 3764734208316478041, guid: 0000000000000000d000000000000000, type: 0}
+    folderobj: {fileID: 102900000, guid: 50522a65de4a93f47898a000d79fab05, type: 3}
+    fold: 0
+    depth: 1
+    childFoldersAreTabs: 0
+    filters: []
+    position:
+      serializedVersion: 2
+      x: -1913
+      y: 105
+      width: 1920
+      height: 902
+  - folderPath: Assets\Editor\Categories
+    folderName: Categories
+    SerializationInfo:
+      parentFolderIndex: 1
+      folderIndex: 2
+      childFolderIndeces: 03000000
+    child_files:
+    - path: Assets\Editor\Categories\Animations.asset
+      extension: asset
+      fileName: Assets\Editor\Categories\Animations
+      fileObject: {fileID: 0}
+      fileIcon: {fileID: 0}
+      fileContent:
+        m_Text: Assets\Editor\Categories\Animations
+        m_Image: {fileID: 0}
+        m_Tooltip: Assets\Editor\Categories\Animations.asset
+      FileSerializationInfo:
+        fileIndex: 12
+        parentFolderIndex: 2
+    - path: Assets\Editor\Categories\Materials.asset
+      extension: asset
+      fileName: Assets\Editor\Categories\Materials
+      fileObject: {fileID: 0}
+      fileIcon: {fileID: 0}
+      fileContent:
+        m_Text: Assets\Editor\Categories\Materials
+        m_Image: {fileID: 0}
+        m_Tooltip: Assets\Editor\Categories\Materials.asset
+      FileSerializationInfo:
+        fileIndex: 14
+        parentFolderIndex: 2
+    - path: Assets\Editor\Categories\Prefabs.asset
+      extension: asset
+      fileName: Assets\Editor\Categories\Prefabs
+      fileObject: {fileID: 0}
+      fileIcon: {fileID: 0}
+      fileContent:
+        m_Text: Assets\Editor\Categories\Prefabs
+        m_Image: {fileID: 0}
+        m_Tooltip: Assets\Editor\Categories\Prefabs.asset
+      FileSerializationInfo:
+        fileIndex: 16
+        parentFolderIndex: 2
+    - path: Assets\Editor\Categories\ScriptableObjects.asset
+      extension: asset
+      fileName: Assets\Editor\Categories\ScriptableObjects
+      fileObject: {fileID: 0}
+      fileIcon: {fileID: 0}
+      fileContent:
+        m_Text: Assets\Editor\Categories\ScriptableObjects
+        m_Image: {fileID: 0}
+        m_Tooltip: Assets\Editor\Categories\ScriptableObjects.asset
+      FileSerializationInfo:
+        fileIndex: 19
+        parentFolderIndex: 2
+    - path: Assets\Editor\Categories\Scripts.asset
+      extension: asset
+      fileName: Assets\Editor\Categories\Scripts
+      fileObject: {fileID: 0}
+      fileIcon: {fileID: 0}
+      fileContent:
+        m_Text: Assets\Editor\Categories\Scripts
+        m_Image: {fileID: 0}
+        m_Tooltip: Assets\Editor\Categories\Scripts.asset
+      FileSerializationInfo:
+        fileIndex: 21
+        parentFolderIndex: 2
+    - path: Assets\Editor\Categories\SoundFiles.asset
+      extension: asset
+      fileName: Assets\Editor\Categories\SoundFiles
+      fileObject: {fileID: 0}
+      fileIcon: {fileID: 0}
+      fileContent:
+        m_Text: Assets\Editor\Categories\SoundFiles
+        m_Image: {fileID: 0}
+        m_Tooltip: Assets\Editor\Categories\SoundFiles.asset
+      FileSerializationInfo:
+        fileIndex: 23
+        parentFolderIndex: 2
+    folderContent:
+      m_Text: Categories
+      m_Image: {fileID: 3764734208316478041, guid: 0000000000000000d000000000000000, type: 0}
+      m_Tooltip: Assets\Editor\Categories
+    folderIcon: {fileID: 3764734208316478041, guid: 0000000000000000d000000000000000, type: 0}
+    folderobj: {fileID: 102900000, guid: a897234275f56af4d884f82591f46662, type: 3}
+    fold: 0
+    depth: 2
+    childFoldersAreTabs: 0
+    filters: []
+    position:
+      serializedVersion: 2
+      x: -1913
+      y: 105
+      width: 1920
+      height: 902
+  - folderPath: Assets\Editor\Categories\SampleObjectsForCategories
+    folderName: SampleObjectsForCategories
+    SerializationInfo:
+      parentFolderIndex: 2
+      folderIndex: 3
+      childFolderIndeces: 
+    child_files:
+    - path: Assets\Editor\Categories\SampleObjectsForCategories\LOL.cs
+      extension: cs
+      fileName: Assets\Editor\Categories\SampleObjectsForCategories\LOL
+      fileObject: {fileID: 11500000, guid: 7d86e5d11a3a5cd4980d1c732589e997, type: 3}
+      fileIcon: {fileID: -8204150473280056172, guid: 0000000000000000d000000000000000, type: 0}
+      fileContent:
+        m_Text: Assets\Editor\Categories\SampleObjectsForCategories\LOL
+        m_Image: {fileID: -8204150473280056172, guid: 0000000000000000d000000000000000, type: 0}
+        m_Tooltip: Assets\Editor\Categories\SampleObjectsForCategories\LOL.cs
+      FileSerializationInfo:
+        fileIndex: 0
+        parentFolderIndex: 3
+    - path: Assets\Editor\Categories\SampleObjectsForCategories\SampleAnimation.anim
+      extension: anim
+      fileName: Assets\Editor\Categories\SampleObjectsForCategories\SampleAnimation
+      fileObject: {fileID: 7400000, guid: 841446a63e112e14189997838988c824, type: 2}
+      fileIcon: {fileID: -3945805152363740611, guid: 0000000000000000d000000000000000, type: 0}
+      fileContent:
+        m_Text: Assets\Editor\Categories\SampleObjectsForCategories\SampleAnimation
+        m_Image: {fileID: -3945805152363740611, guid: 0000000000000000d000000000000000, type: 0}
+        m_Tooltip: Assets\Editor\Categories\SampleObjectsForCategories\SampleAnimation.anim
+      FileSerializationInfo:
+        fileIndex: 2
+        parentFolderIndex: 3
+    - path: Assets\Editor\Categories\SampleObjectsForCategories\SampleMaterial.mat
+      extension: mat
+      fileName: Assets\Editor\Categories\SampleObjectsForCategories\SampleMaterial
+      fileObject: {fileID: 2100000, guid: 6fad511d796a3f04292bbb66c285c3ab, type: 2}
+      fileIcon: {fileID: 5596697988196858232, guid: 0000000000000000d000000000000000, type: 0}
+      fileContent:
+        m_Text: Assets\Editor\Categories\SampleObjectsForCategories\SampleMaterial
+        m_Image: {fileID: 5596697988196858232, guid: 0000000000000000d000000000000000, type: 0}
+        m_Tooltip: Assets\Editor\Categories\SampleObjectsForCategories\SampleMaterial.mat
+      FileSerializationInfo:
+        fileIndex: 4
+        parentFolderIndex: 3
+    - path: Assets\Editor\Categories\SampleObjectsForCategories\SamplePrefab.prefab
+      extension: prefab
+      fileName: Assets\Editor\Categories\SampleObjectsForCategories\SamplePrefab
+      fileObject: {fileID: 8267297027572460908, guid: ef3b177ea5d27224fa58c4152ebe07e3, type: 3}
+      fileIcon: {fileID: 7853449062886713960, guid: 0000000000000000d000000000000000, type: 0}
+      fileContent:
+        m_Text: Assets\Editor\Categories\SampleObjectsForCategories\SamplePrefab
+        m_Image: {fileID: 7853449062886713960, guid: 0000000000000000d000000000000000, type: 0}
+        m_Tooltip: Assets\Editor\Categories\SampleObjectsForCategories\SamplePrefab.prefab
+      FileSerializationInfo:
+        fileIndex: 6
+        parentFolderIndex: 3
+    - path: Assets\Editor\Categories\SampleObjectsForCategories\SampleRenderTexture.renderTexture
+      extension: renderTexture
+      fileName: Assets\Editor\Categories\SampleObjectsForCategories\SampleRenderTexture
+      fileObject: {fileID: 8400000, guid: a962ccafb0a52814191d8368740a150c, type: 2}
+      fileIcon: {fileID: -4189084624433949143, guid: 0000000000000000d000000000000000, type: 0}
+      fileContent:
+        m_Text: Assets\Editor\Categories\SampleObjectsForCategories\SampleRenderTexture
+        m_Image: {fileID: -4189084624433949143, guid: 0000000000000000d000000000000000, type: 0}
+        m_Tooltip: Assets\Editor\Categories\SampleObjectsForCategories\SampleRenderTexture.renderTexture
+      FileSerializationInfo:
+        fileIndex: 8
+        parentFolderIndex: 3
+    - path: Assets\Editor\Categories\SampleObjectsForCategories\SampleScript.cs
+      extension: cs
+      fileName: Assets\Editor\Categories\SampleObjectsForCategories\SampleScript
+      fileObject: {fileID: 11500000, guid: 6b4dd8a983b2b5f4db5a7d78e4a632da, type: 3}
+      fileIcon: {fileID: -8204150473280056172, guid: 0000000000000000d000000000000000, type: 0}
+      fileContent:
+        m_Text: Assets\Editor\Categories\SampleObjectsForCategories\SampleScript
+        m_Image: {fileID: -8204150473280056172, guid: 0000000000000000d000000000000000, type: 0}
+        m_Tooltip: Assets\Editor\Categories\SampleObjectsForCategories\SampleScript.cs
+      FileSerializationInfo:
+        fileIndex: 10
+        parentFolderIndex: 3
+    folderContent:
+      m_Text: SampleObjectsForCategories
+      m_Image: {fileID: 3764734208316478041, guid: 0000000000000000d000000000000000, type: 0}
+      m_Tooltip: Assets\Editor\Categories\SampleObjectsForCategories
+    folderIcon: {fileID: 3764734208316478041, guid: 0000000000000000d000000000000000, type: 0}
+    folderobj: {fileID: 102900000, guid: 418aa122b8b38574f97d589dd106d8fe, type: 3}
+    fold: 0
+    depth: 3
+    childFoldersAreTabs: 0
+    filters: []
+    position:
+      serializedVersion: 2
+      x: -1913
+      y: 105
+      width: 1920
+      height: 902
+  - folderPath: Assets\Editor\GUISkins
+    folderName: GUISkins
+    SerializationInfo:
+      parentFolderIndex: 1
+      folderIndex: 4
+      childFolderIndeces: 
+    child_files:
+    - path: Assets\Editor\GUISkins\ButtonSkin.guiskin
+      extension: guiskin
+      fileName: Assets\Editor\GUISkins\ButtonSkin
+      fileObject: {fileID: 11400000, guid: a704c2ae3121ceb4ea0bfb7bfb1fdd7f, type: 2}
+      fileIcon: {fileID: -5787505426856470801, guid: 0000000000000000d000000000000000, type: 0}
+      fileContent:
+        m_Text: Assets\Editor\GUISkins\ButtonSkin
+        m_Image: {fileID: -5787505426856470801, guid: 0000000000000000d000000000000000, type: 0}
+        m_Tooltip: Assets\Editor\GUISkins\ButtonSkin.guiskin
+      FileSerializationInfo:
+        fileIndex: 25
+        parentFolderIndex: 4
+    folderContent:
+      m_Text: GUISkins
+      m_Image: {fileID: 3764734208316478041, guid: 0000000000000000d000000000000000, type: 0}
+      m_Tooltip: Assets\Editor\GUISkins
+    folderIcon: {fileID: 3764734208316478041, guid: 0000000000000000d000000000000000, type: 0}
+    folderobj: {fileID: 102900000, guid: 2c17e4804b9d5f44494e3d5cca44916a, type: 3}
+    fold: 0
+    depth: 2
+    childFoldersAreTabs: 0
+    filters: []
+    position:
+      serializedVersion: 2
+      x: -1913
+      y: 105
+      width: 1920
+      height: 902
+  - folderPath: Assets\Scenes
+    folderName: Scenes
+    SerializationInfo:
+      parentFolderIndex: 0
+      folderIndex: 5
+      childFolderIndeces: 
+    child_files:
+    - path: Assets\Scenes\SampleScene.unity
+      extension: unity
+      fileName: Assets\Scenes\SampleScene
+      fileObject: {fileID: 102900000, guid: 9fc0d4010bbf28b4594072e72b8655ab, type: 3}
+      fileIcon: {fileID: 985423054452513129, guid: 0000000000000000d000000000000000, type: 0}
+      fileContent:
+        m_Text: Assets\Scenes\SampleScene
+        m_Image: {fileID: 985423054452513129, guid: 0000000000000000d000000000000000, type: 0}
+        m_Tooltip: Assets\Scenes\SampleScene.unity
+      FileSerializationInfo:
+        fileIndex: 41
+        parentFolderIndex: 5
+    folderContent:
+      m_Text: Scenes
+      m_Image: {fileID: 3764734208316478041, guid: 0000000000000000d000000000000000, type: 0}
+      m_Tooltip: Assets\Scenes
+    folderIcon: {fileID: 3764734208316478041, guid: 0000000000000000d000000000000000, type: 0}
+    folderobj: {fileID: 102900000, guid: f78aa477e102c0340b80303bff7ca231, type: 3}
+    fold: 0
+    depth: 1
+    childFoldersAreTabs: 0
+    filters: []
+    position:
+      serializedVersion: 2
+      x: -1913
+      y: 105
+      width: 1920
+      height: 902
+  - folderPath: Assets\ScriptableObjects
+    folderName: ScriptableObjects
+    SerializationInfo:
+      parentFolderIndex: 0
+      folderIndex: 6
+      childFolderIndeces: 07000000090000000b000000
+    child_files: []
+    folderContent:
+      m_Text: ScriptableObjects
+      m_Image: {fileID: 3764734208316478041, guid: 0000000000000000d000000000000000, type: 0}
+      m_Tooltip: Assets\ScriptableObjects
+    folderIcon: {fileID: 3764734208316478041, guid: 0000000000000000d000000000000000, type: 0}
+    folderobj: {fileID: 102900000, guid: e797236207c20724ca5e6d039190302d, type: 3}
+    fold: 0
+    depth: 1
+    childFoldersAreTabs: 0
+    filters: []
+    position:
+      serializedVersion: 2
+      x: -1913
+      y: 105
+      width: 1920
+      height: 902
+  - folderPath: Assets\ScriptableObjects\Character
+    folderName: Character
+    SerializationInfo:
+      parentFolderIndex: 6
+      folderIndex: 7
+      childFolderIndeces: 08000000
+    child_files:
+    - path: Assets\ScriptableObjects\Character\CharacterSO.cs
+      extension: cs
+      fileName: Assets\ScriptableObjects\Character\CharacterSO
+      fileObject: {fileID: 11500000, guid: 7ca5d0899b0a2c74cb4c0b1623f0f0d4, type: 3}
+      fileIcon: {fileID: -8204150473280056172, guid: 0000000000000000d000000000000000, type: 0}
+      fileContent:
+        m_Text: Assets\ScriptableObjects\Character\CharacterSO
+        m_Image: {fileID: -8204150473280056172, guid: 0000000000000000d000000000000000, type: 0}
+        m_Tooltip: Assets\ScriptableObjects\Character\CharacterSO.cs
+      FileSerializationInfo:
+        fileIndex: 46
+        parentFolderIndex: 7
+    folderContent:
+      m_Text: Character
+      m_Image: {fileID: 3764734208316478041, guid: 0000000000000000d000000000000000, type: 0}
+      m_Tooltip: Assets\ScriptableObjects\Character
+    folderIcon: {fileID: 3764734208316478041, guid: 0000000000000000d000000000000000, type: 0}
+    folderobj: {fileID: 102900000, guid: e410bca93186a5a49870f9c864bcf36f, type: 3}
+    fold: 0
+    depth: 2
+    childFoldersAreTabs: 0
+    filters: []
+    position:
+      serializedVersion: 2
+      x: -1913
+      y: 105
+      width: 1920
+      height: 902
+  - folderPath: Assets\ScriptableObjects\Character\Characters
+    folderName: Characters
+    SerializationInfo:
+      parentFolderIndex: 7
+      folderIndex: 8
+      childFolderIndeces: 
+    child_files:
+    - path: Assets\ScriptableObjects\Character\Characters\ExampleCharacter.asset
+      extension: asset
+      fileName: Assets\ScriptableObjects\Character\Characters\ExampleCharacter
+      fileObject: {fileID: 11400000, guid: 2078bc504d026684aa7c6365e5ad3153, type: 2}
+      fileIcon: {fileID: 2376468200823113483, guid: 0000000000000000d000000000000000, type: 0}
+      fileContent:
+        m_Text: Assets\ScriptableObjects\Character\Characters\ExampleCharacter
+        m_Image: {fileID: 2376468200823113483, guid: 0000000000000000d000000000000000, type: 0}
+        m_Tooltip: Assets\ScriptableObjects\Character\Characters\ExampleCharacter.asset
+      FileSerializationInfo:
+        fileIndex: 43
+        parentFolderIndex: 8
+    folderContent:
+      m_Text: Characters
+      m_Image: {fileID: 3764734208316478041, guid: 0000000000000000d000000000000000, type: 0}
+      m_Tooltip: Assets\ScriptableObjects\Character\Characters
+    folderIcon: {fileID: 3764734208316478041, guid: 0000000000000000d000000000000000, type: 0}
+    folderobj: {fileID: 102900000, guid: 056d5988d9893284b9eff0a6b687d893, type: 3}
+    fold: 0
+    depth: 3
+    childFoldersAreTabs: 0
+    filters: []
+    position:
+      serializedVersion: 2
+      x: -1913
+      y: 105
+      width: 1920
+      height: 902
+  - folderPath: Assets\ScriptableObjects\Mission
+    folderName: Mission
+    SerializationInfo:
+      parentFolderIndex: 6
+      folderIndex: 9
+      childFolderIndeces: 0a000000
+    child_files:
+    - path: Assets\ScriptableObjects\Mission\MissionSO.cs
+      extension: cs
+      fileName: Assets\ScriptableObjects\Mission\MissionSO
+      fileObject: {fileID: 11500000, guid: ca3345d2f842f634d8536c187ebaf14c, type: 3}
+      fileIcon: {fileID: -8204150473280056172, guid: 0000000000000000d000000000000000, type: 0}
+      fileContent:
+        m_Text: Assets\ScriptableObjects\Mission\MissionSO
+        m_Image: {fileID: -8204150473280056172, guid: 0000000000000000d000000000000000, type: 0}
+        m_Tooltip: Assets\ScriptableObjects\Mission\MissionSO.cs
+      FileSerializationInfo:
+        fileIndex: 51
+        parentFolderIndex: 9
+    folderContent:
+      m_Text: Mission
+      m_Image: {fileID: 3764734208316478041, guid: 0000000000000000d000000000000000, type: 0}
+      m_Tooltip: Assets\ScriptableObjects\Mission
+    folderIcon: {fileID: 3764734208316478041, guid: 0000000000000000d000000000000000, type: 0}
+    folderobj: {fileID: 102900000, guid: 779fb37e17a39814da97a7b2408ad356, type: 3}
+    fold: 0
+    depth: 2
+    childFoldersAreTabs: 0
+    filters: []
+    position:
+      serializedVersion: 2
+      x: -1913
+      y: 105
+      width: 1920
+      height: 902
+  - folderPath: Assets\ScriptableObjects\Mission\Missions
+    folderName: Missions
+    SerializationInfo:
+      parentFolderIndex: 9
+      folderIndex: 10
+      childFolderIndeces: 
+    child_files:
+    - path: Assets\ScriptableObjects\Mission\Missions\ExampleMission.asset
+      extension: asset
+      fileName: Assets\ScriptableObjects\Mission\Missions\ExampleMission
+      fileObject: {fileID: 11400000, guid: 782b2be5c6b6a2d438ba2d5842fcd51f, type: 2}
+      fileIcon: {fileID: 2376468200823113483, guid: 0000000000000000d000000000000000, type: 0}
+      fileContent:
+        m_Text: Assets\ScriptableObjects\Mission\Missions\ExampleMission
+        m_Image: {fileID: 2376468200823113483, guid: 0000000000000000d000000000000000, type: 0}
+        m_Tooltip: Assets\ScriptableObjects\Mission\Missions\ExampleMission.asset
+      FileSerializationInfo:
+        fileIndex: 48
+        parentFolderIndex: 10
+    folderContent:
+      m_Text: Missions
+      m_Image: {fileID: 3764734208316478041, guid: 0000000000000000d000000000000000, type: 0}
+      m_Tooltip: Assets\ScriptableObjects\Mission\Missions
+    folderIcon: {fileID: 3764734208316478041, guid: 0000000000000000d000000000000000, type: 0}
+    folderobj: {fileID: 102900000, guid: 1b3c72efee525a146b02f541d3c09022, type: 3}
+    fold: 0
+    depth: 3
+    childFoldersAreTabs: 0
+    filters: []
+    position:
+      serializedVersion: 2
+      x: -1913
+      y: 105
+      width: 1920
+      height: 902
+  - folderPath: Assets\ScriptableObjects\NPC
+    folderName: NPC
+    SerializationInfo:
+      parentFolderIndex: 6
+      folderIndex: 11
+      childFolderIndeces: 0c000000
+    child_files:
+    - path: Assets\ScriptableObjects\NPC\NPC_SO.cs
+      extension: cs
+      fileName: Assets\ScriptableObjects\NPC\NPC_SO
+      fileObject: {fileID: 11500000, guid: e8deb6f9f5b38094f8f2183987a2ae4a, type: 3}
+      fileIcon: {fileID: -8204150473280056172, guid: 0000000000000000d000000000000000, type: 0}
+      fileContent:
+        m_Text: Assets\ScriptableObjects\NPC\NPC_SO
+        m_Image: {fileID: -8204150473280056172, guid: 0000000000000000d000000000000000, type: 0}
+        m_Tooltip: Assets\ScriptableObjects\NPC\NPC_SO.cs
+      FileSerializationInfo:
+        fileIndex: 56
+        parentFolderIndex: 11
+    folderContent:
+      m_Text: NPC
+      m_Image: {fileID: 3764734208316478041, guid: 0000000000000000d000000000000000, type: 0}
+      m_Tooltip: Assets\ScriptableObjects\NPC
+    folderIcon: {fileID: 3764734208316478041, guid: 0000000000000000d000000000000000, type: 0}
+    folderobj: {fileID: 102900000, guid: bae831b74c7bdb643873e09b8149bcae, type: 3}
+    fold: 0
+    depth: 2
+    childFoldersAreTabs: 0
+    filters: []
+    position:
+      serializedVersion: 2
+      x: -1913
+      y: 105
+      width: 1920
+      height: 902
+  - folderPath: Assets\ScriptableObjects\NPC\NPCs
+    folderName: NPCs
+    SerializationInfo:
+      parentFolderIndex: 11
+      folderIndex: 12
+      childFolderIndeces: 
+    child_files:
+    - path: Assets\ScriptableObjects\NPC\NPCs\ExampleNPC.asset
+      extension: asset
+      fileName: Assets\ScriptableObjects\NPC\NPCs\ExampleNPC
+      fileObject: {fileID: 11400000, guid: 3c5662175edaa5247bf5f78cae2d9866, type: 2}
+      fileIcon: {fileID: 2376468200823113483, guid: 0000000000000000d000000000000000, type: 0}
+      fileContent:
+        m_Text: Assets\ScriptableObjects\NPC\NPCs\ExampleNPC
+        m_Image: {fileID: 2376468200823113483, guid: 0000000000000000d000000000000000, type: 0}
+        m_Tooltip: Assets\ScriptableObjects\NPC\NPCs\ExampleNPC.asset
+      FileSerializationInfo:
+        fileIndex: 53
+        parentFolderIndex: 12
+    folderContent:
+      m_Text: NPCs
+      m_Image: {fileID: 3764734208316478041, guid: 0000000000000000d000000000000000, type: 0}
+      m_Tooltip: Assets\ScriptableObjects\NPC\NPCs
+    folderIcon: {fileID: 3764734208316478041, guid: 0000000000000000d000000000000000, type: 0}
+    folderobj: {fileID: 102900000, guid: 7a8f9a42b4bfde241b0190ace5a4caec, type: 3}
+    fold: 0
+    depth: 3
+    childFoldersAreTabs: 0
+    filters: []
+    position:
+      serializedVersion: 2
+      x: -1913
+      y: 105
+      width: 1920
+      height: 902
+  allFiles:
+  - path: Assets\Editor\Categories\SampleObjectsForCategories\LOL.cs
+    extension: cs
+    fileName: Assets\Editor\Categories\SampleObjectsForCategories\LOL
+    fileObject: {fileID: 11500000, guid: 7d86e5d11a3a5cd4980d1c732589e997, type: 3}
+    fileIcon: {fileID: -8204150473280056172, guid: 0000000000000000d000000000000000, type: 0}
+    fileContent:
+      m_Text: Assets\Editor\Categories\SampleObjectsForCategories\LOL
+      m_Image: {fileID: -8204150473280056172, guid: 0000000000000000d000000000000000, type: 0}
+      m_Tooltip: Assets\Editor\Categories\SampleObjectsForCategories\LOL.cs
+    FileSerializationInfo:
+      fileIndex: 0
+      parentFolderIndex: 3
+  - path: Assets\Editor\Categories\SampleObjectsForCategories\LOL.cs.meta
+    extension: meta
+    fileName: Assets\Editor\Categories\SampleObjectsForCategories\LOL
+    fileObject: {fileID: 0}
+    fileIcon: {fileID: 0}
+    fileContent:
+      m_Text: Assets\Editor\Categories\SampleObjectsForCategories\LOL
+      m_Image: {fileID: 0}
+      m_Tooltip: Assets\Editor\Categories\SampleObjectsForCategories\LOL.cs.meta
+    FileSerializationInfo:
+      fileIndex: 1
+      parentFolderIndex: 3
+  - path: Assets\Editor\Categories\SampleObjectsForCategories\SampleAnimation.anim
+    extension: anim
+    fileName: Assets\Editor\Categories\SampleObjectsForCategories\SampleAnimation
+    fileObject: {fileID: 7400000, guid: 841446a63e112e14189997838988c824, type: 2}
+    fileIcon: {fileID: -3945805152363740611, guid: 0000000000000000d000000000000000, type: 0}
+    fileContent:
+      m_Text: Assets\Editor\Categories\SampleObjectsForCategories\SampleAnimation
+      m_Image: {fileID: -3945805152363740611, guid: 0000000000000000d000000000000000, type: 0}
+      m_Tooltip: Assets\Editor\Categories\SampleObjectsForCategories\SampleAnimation.anim
+    FileSerializationInfo:
+      fileIndex: 2
+      parentFolderIndex: 3
+  - path: Assets\Editor\Categories\SampleObjectsForCategories\SampleAnimation.anim.meta
+    extension: meta
+    fileName: Assets\Editor\Categories\SampleObjectsForCategories\SampleAnimation
+    fileObject: {fileID: 0}
+    fileIcon: {fileID: 0}
+    fileContent:
+      m_Text: Assets\Editor\Categories\SampleObjectsForCategories\SampleAnimation
+      m_Image: {fileID: 0}
+      m_Tooltip: Assets\Editor\Categories\SampleObjectsForCategories\SampleAnimation.anim.meta
+    FileSerializationInfo:
+      fileIndex: 3
+      parentFolderIndex: 3
+  - path: Assets\Editor\Categories\SampleObjectsForCategories\SampleMaterial.mat
+    extension: mat
+    fileName: Assets\Editor\Categories\SampleObjectsForCategories\SampleMaterial
+    fileObject: {fileID: 2100000, guid: 6fad511d796a3f04292bbb66c285c3ab, type: 2}
+    fileIcon: {fileID: 5596697988196858232, guid: 0000000000000000d000000000000000, type: 0}
+    fileContent:
+      m_Text: Assets\Editor\Categories\SampleObjectsForCategories\SampleMaterial
+      m_Image: {fileID: 5596697988196858232, guid: 0000000000000000d000000000000000, type: 0}
+      m_Tooltip: Assets\Editor\Categories\SampleObjectsForCategories\SampleMaterial.mat
+    FileSerializationInfo:
+      fileIndex: 4
+      parentFolderIndex: 3
+  - path: Assets\Editor\Categories\SampleObjectsForCategories\SampleMaterial.mat.meta
+    extension: meta
+    fileName: Assets\Editor\Categories\SampleObjectsForCategories\SampleMaterial
+    fileObject: {fileID: 0}
+    fileIcon: {fileID: 0}
+    fileContent:
+      m_Text: Assets\Editor\Categories\SampleObjectsForCategories\SampleMaterial
+      m_Image: {fileID: 0}
+      m_Tooltip: Assets\Editor\Categories\SampleObjectsForCategories\SampleMaterial.mat.meta
+    FileSerializationInfo:
+      fileIndex: 5
+      parentFolderIndex: 3
+  - path: Assets\Editor\Categories\SampleObjectsForCategories\SamplePrefab.prefab
+    extension: prefab
+    fileName: Assets\Editor\Categories\SampleObjectsForCategories\SamplePrefab
+    fileObject: {fileID: 8267297027572460908, guid: ef3b177ea5d27224fa58c4152ebe07e3, type: 3}
+    fileIcon: {fileID: 7853449062886713960, guid: 0000000000000000d000000000000000, type: 0}
+    fileContent:
+      m_Text: Assets\Editor\Categories\SampleObjectsForCategories\SamplePrefab
+      m_Image: {fileID: 7853449062886713960, guid: 0000000000000000d000000000000000, type: 0}
+      m_Tooltip: Assets\Editor\Categories\SampleObjectsForCategories\SamplePrefab.prefab
+    FileSerializationInfo:
+      fileIndex: 6
+      parentFolderIndex: 3
+  - path: Assets\Editor\Categories\SampleObjectsForCategories\SamplePrefab.prefab.meta
+    extension: meta
+    fileName: Assets\Editor\Categories\SampleObjectsForCategories\SamplePrefab
+    fileObject: {fileID: 0}
+    fileIcon: {fileID: 0}
+    fileContent:
+      m_Text: Assets\Editor\Categories\SampleObjectsForCategories\SamplePrefab
+      m_Image: {fileID: 0}
+      m_Tooltip: Assets\Editor\Categories\SampleObjectsForCategories\SamplePrefab.prefab.meta
+    FileSerializationInfo:
+      fileIndex: 7
+      parentFolderIndex: 3
+  - path: Assets\Editor\Categories\SampleObjectsForCategories\SampleRenderTexture.renderTexture
+    extension: renderTexture
+    fileName: Assets\Editor\Categories\SampleObjectsForCategories\SampleRenderTexture
+    fileObject: {fileID: 8400000, guid: a962ccafb0a52814191d8368740a150c, type: 2}
+    fileIcon: {fileID: -4189084624433949143, guid: 0000000000000000d000000000000000, type: 0}
+    fileContent:
+      m_Text: Assets\Editor\Categories\SampleObjectsForCategories\SampleRenderTexture
+      m_Image: {fileID: -4189084624433949143, guid: 0000000000000000d000000000000000, type: 0}
+      m_Tooltip: Assets\Editor\Categories\SampleObjectsForCategories\SampleRenderTexture.renderTexture
+    FileSerializationInfo:
+      fileIndex: 8
+      parentFolderIndex: 3
+  - path: Assets\Editor\Categories\SampleObjectsForCategories\SampleRenderTexture.renderTexture.meta
+    extension: meta
+    fileName: Assets\Editor\Categories\SampleObjectsForCategories\SampleRenderTexture
+    fileObject: {fileID: 0}
+    fileIcon: {fileID: 0}
+    fileContent:
+      m_Text: Assets\Editor\Categories\SampleObjectsForCategories\SampleRenderTexture
+      m_Image: {fileID: 0}
+      m_Tooltip: Assets\Editor\Categories\SampleObjectsForCategories\SampleRenderTexture.renderTexture.meta
+    FileSerializationInfo:
+      fileIndex: 9
+      parentFolderIndex: 3
+  - path: Assets\Editor\Categories\SampleObjectsForCategories\SampleScript.cs
+    extension: cs
+    fileName: Assets\Editor\Categories\SampleObjectsForCategories\SampleScript
+    fileObject: {fileID: 11500000, guid: 6b4dd8a983b2b5f4db5a7d78e4a632da, type: 3}
+    fileIcon: {fileID: -8204150473280056172, guid: 0000000000000000d000000000000000, type: 0}
+    fileContent:
+      m_Text: Assets\Editor\Categories\SampleObjectsForCategories\SampleScript
+      m_Image: {fileID: -8204150473280056172, guid: 0000000000000000d000000000000000, type: 0}
+      m_Tooltip: Assets\Editor\Categories\SampleObjectsForCategories\SampleScript.cs
+    FileSerializationInfo:
+      fileIndex: 10
+      parentFolderIndex: 3
+  - path: Assets\Editor\Categories\SampleObjectsForCategories\SampleScript.cs.meta
+    extension: meta
+    fileName: Assets\Editor\Categories\SampleObjectsForCategories\SampleScript
+    fileObject: {fileID: 0}
+    fileIcon: {fileID: 0}
+    fileContent:
+      m_Text: Assets\Editor\Categories\SampleObjectsForCategories\SampleScript
+      m_Image: {fileID: 0}
+      m_Tooltip: Assets\Editor\Categories\SampleObjectsForCategories\SampleScript.cs.meta
+    FileSerializationInfo:
+      fileIndex: 11
+      parentFolderIndex: 3
+  - path: Assets\Editor\Categories\Animations.asset
+    extension: asset
+    fileName: Assets\Editor\Categories\Animations
+    fileObject: {fileID: 0}
+    fileIcon: {fileID: 0}
+    fileContent:
+      m_Text: Assets\Editor\Categories\Animations
+      m_Image: {fileID: 0}
+      m_Tooltip: Assets\Editor\Categories\Animations.asset
+    FileSerializationInfo:
+      fileIndex: 12
+      parentFolderIndex: 2
+  - path: Assets\Editor\Categories\Animations.asset.meta
+    extension: meta
+    fileName: Assets\Editor\Categories\Animations
+    fileObject: {fileID: 0}
+    fileIcon: {fileID: 0}
+    fileContent:
+      m_Text: Assets\Editor\Categories\Animations
+      m_Image: {fileID: 0}
+      m_Tooltip: Assets\Editor\Categories\Animations.asset.meta
+    FileSerializationInfo:
+      fileIndex: 13
+      parentFolderIndex: 2
+  - path: Assets\Editor\Categories\Materials.asset
+    extension: asset
+    fileName: Assets\Editor\Categories\Materials
+    fileObject: {fileID: 0}
+    fileIcon: {fileID: 0}
+    fileContent:
+      m_Text: Assets\Editor\Categories\Materials
+      m_Image: {fileID: 0}
+      m_Tooltip: Assets\Editor\Categories\Materials.asset
+    FileSerializationInfo:
+      fileIndex: 14
+      parentFolderIndex: 2
+  - path: Assets\Editor\Categories\Materials.asset.meta
+    extension: meta
+    fileName: Assets\Editor\Categories\Materials
+    fileObject: {fileID: 0}
+    fileIcon: {fileID: 0}
+    fileContent:
+      m_Text: Assets\Editor\Categories\Materials
+      m_Image: {fileID: 0}
+      m_Tooltip: Assets\Editor\Categories\Materials.asset.meta
+    FileSerializationInfo:
+      fileIndex: 15
+      parentFolderIndex: 2
+  - path: Assets\Editor\Categories\Prefabs.asset
+    extension: asset
+    fileName: Assets\Editor\Categories\Prefabs
+    fileObject: {fileID: 0}
+    fileIcon: {fileID: 0}
+    fileContent:
+      m_Text: Assets\Editor\Categories\Prefabs
+      m_Image: {fileID: 0}
+      m_Tooltip: Assets\Editor\Categories\Prefabs.asset
+    FileSerializationInfo:
+      fileIndex: 16
+      parentFolderIndex: 2
+  - path: Assets\Editor\Categories\Prefabs.asset.meta
+    extension: meta
+    fileName: Assets\Editor\Categories\Prefabs
+    fileObject: {fileID: 0}
+    fileIcon: {fileID: 0}
+    fileContent:
+      m_Text: Assets\Editor\Categories\Prefabs
+      m_Image: {fileID: 0}
+      m_Tooltip: Assets\Editor\Categories\Prefabs.asset.meta
+    FileSerializationInfo:
+      fileIndex: 17
+      parentFolderIndex: 2
+  - path: Assets\Editor\Categories\SampleObjectsForCategories.meta
+    extension: meta
+    fileName: Assets\Editor\Categories\SampleObjectsForCategories
+    fileObject: {fileID: 0}
+    fileIcon: {fileID: 0}
+    fileContent:
+      m_Text: Assets\Editor\Categories\SampleObjectsForCategories
+      m_Image: {fileID: 0}
+      m_Tooltip: Assets\Editor\Categories\SampleObjectsForCategories.meta
+    FileSerializationInfo:
+      fileIndex: 18
+      parentFolderIndex: 2
+  - path: Assets\Editor\Categories\ScriptableObjects.asset
+    extension: asset
+    fileName: Assets\Editor\Categories\ScriptableObjects
+    fileObject: {fileID: 0}
+    fileIcon: {fileID: 0}
+    fileContent:
+      m_Text: Assets\Editor\Categories\ScriptableObjects
+      m_Image: {fileID: 0}
+      m_Tooltip: Assets\Editor\Categories\ScriptableObjects.asset
+    FileSerializationInfo:
+      fileIndex: 19
+      parentFolderIndex: 2
+  - path: Assets\Editor\Categories\ScriptableObjects.asset.meta
+    extension: meta
+    fileName: Assets\Editor\Categories\ScriptableObjects
+    fileObject: {fileID: 0}
+    fileIcon: {fileID: 0}
+    fileContent:
+      m_Text: Assets\Editor\Categories\ScriptableObjects
+      m_Image: {fileID: 0}
+      m_Tooltip: Assets\Editor\Categories\ScriptableObjects.asset.meta
+    FileSerializationInfo:
+      fileIndex: 20
+      parentFolderIndex: 2
+  - path: Assets\Editor\Categories\Scripts.asset
+    extension: asset
+    fileName: Assets\Editor\Categories\Scripts
+    fileObject: {fileID: 0}
+    fileIcon: {fileID: 0}
+    fileContent:
+      m_Text: Assets\Editor\Categories\Scripts
+      m_Image: {fileID: 0}
+      m_Tooltip: Assets\Editor\Categories\Scripts.asset
+    FileSerializationInfo:
+      fileIndex: 21
+      parentFolderIndex: 2
+  - path: Assets\Editor\Categories\Scripts.asset.meta
+    extension: meta
+    fileName: Assets\Editor\Categories\Scripts
+    fileObject: {fileID: 0}
+    fileIcon: {fileID: 0}
+    fileContent:
+      m_Text: Assets\Editor\Categories\Scripts
+      m_Image: {fileID: 0}
+      m_Tooltip: Assets\Editor\Categories\Scripts.asset.meta
+    FileSerializationInfo:
+      fileIndex: 22
+      parentFolderIndex: 2
+  - path: Assets\Editor\Categories\SoundFiles.asset
+    extension: asset
+    fileName: Assets\Editor\Categories\SoundFiles
+    fileObject: {fileID: 0}
+    fileIcon: {fileID: 0}
+    fileContent:
+      m_Text: Assets\Editor\Categories\SoundFiles
+      m_Image: {fileID: 0}
+      m_Tooltip: Assets\Editor\Categories\SoundFiles.asset
+    FileSerializationInfo:
+      fileIndex: 23
+      parentFolderIndex: 2
+  - path: Assets\Editor\Categories\SoundFiles.asset.meta
+    extension: meta
+    fileName: Assets\Editor\Categories\SoundFiles
+    fileObject: {fileID: 0}
+    fileIcon: {fileID: 0}
+    fileContent:
+      m_Text: Assets\Editor\Categories\SoundFiles
+      m_Image: {fileID: 0}
+      m_Tooltip: Assets\Editor\Categories\SoundFiles.asset.meta
+    FileSerializationInfo:
+      fileIndex: 24
+      parentFolderIndex: 2
+  - path: Assets\Editor\GUISkins\ButtonSkin.guiskin
+    extension: guiskin
+    fileName: Assets\Editor\GUISkins\ButtonSkin
+    fileObject: {fileID: 11400000, guid: a704c2ae3121ceb4ea0bfb7bfb1fdd7f, type: 2}
+    fileIcon: {fileID: -5787505426856470801, guid: 0000000000000000d000000000000000, type: 0}
+    fileContent:
+      m_Text: Assets\Editor\GUISkins\ButtonSkin
+      m_Image: {fileID: -5787505426856470801, guid: 0000000000000000d000000000000000, type: 0}
+      m_Tooltip: Assets\Editor\GUISkins\ButtonSkin.guiskin
+    FileSerializationInfo:
+      fileIndex: 25
+      parentFolderIndex: 4
+  - path: Assets\Editor\GUISkins\ButtonSkin.guiskin.meta
+    extension: meta
+    fileName: Assets\Editor\GUISkins\ButtonSkin
+    fileObject: {fileID: 0}
+    fileIcon: {fileID: 0}
+    fileContent:
+      m_Text: Assets\Editor\GUISkins\ButtonSkin
+      m_Image: {fileID: 0}
+      m_Tooltip: Assets\Editor\GUISkins\ButtonSkin.guiskin.meta
+    FileSerializationInfo:
+      fileIndex: 26
+      parentFolderIndex: 4
+  - path: Assets\Editor\Categories.meta
+    extension: meta
+    fileName: Assets\Editor\Categories
+    fileObject: {fileID: 0}
+    fileIcon: {fileID: 0}
+    fileContent:
+      m_Text: Assets\Editor\Categories
+      m_Image: {fileID: 0}
+      m_Tooltip: Assets\Editor\Categories.meta
+    FileSerializationInfo:
+      fileIndex: 27
+      parentFolderIndex: 1
+  - path: Assets\Editor\ContextualMenuDemo.cs
+    extension: cs
+    fileName: Assets\Editor\ContextualMenuDemo
+    fileObject: {fileID: 11500000, guid: e9957dbe2618f9f4d868f0dd8bd579fc, type: 3}
+    fileIcon: {fileID: -8204150473280056172, guid: 0000000000000000d000000000000000, type: 0}
+    fileContent:
+      m_Text: Assets\Editor\ContextualMenuDemo
+      m_Image: {fileID: -8204150473280056172, guid: 0000000000000000d000000000000000, type: 0}
+      m_Tooltip: Assets\Editor\ContextualMenuDemo.cs
+    FileSerializationInfo:
+      fileIndex: 28
+      parentFolderIndex: 1
+  - path: Assets\Editor\ContextualMenuDemo.cs.meta
+    extension: meta
+    fileName: Assets\Editor\ContextualMenuDemo
+    fileObject: {fileID: 0}
+    fileIcon: {fileID: 0}
+    fileContent:
+      m_Text: Assets\Editor\ContextualMenuDemo
+      m_Image: {fileID: 0}
+      m_Tooltip: Assets\Editor\ContextualMenuDemo.cs.meta
+    FileSerializationInfo:
+      fileIndex: 29
+      parentFolderIndex: 1
+  - path: Assets\Editor\GUISkins.meta
+    extension: meta
+    fileName: Assets\Editor\GUISkins
+    fileObject: {fileID: 0}
+    fileIcon: {fileID: 0}
+    fileContent:
+      m_Text: Assets\Editor\GUISkins
+      m_Image: {fileID: 0}
+      m_Tooltip: Assets\Editor\GUISkins.meta
+    FileSerializationInfo:
+      fileIndex: 30
+      parentFolderIndex: 1
+  - path: Assets\Editor\ProjectViewPlus.cs
+    extension: cs
+    fileName: Assets\Editor\ProjectViewPlus
+    fileObject: {fileID: 11500000, guid: 4a1a607fb456a8744a0f0e8aec3b895b, type: 3}
+    fileIcon: {fileID: -8204150473280056172, guid: 0000000000000000d000000000000000, type: 0}
+    fileContent:
+      m_Text: Assets\Editor\ProjectViewPlus
+      m_Image: {fileID: -8204150473280056172, guid: 0000000000000000d000000000000000, type: 0}
+      m_Tooltip: Assets\Editor\ProjectViewPlus.cs
+    FileSerializationInfo:
+      fileIndex: 31
+      parentFolderIndex: 1
+  - path: Assets\Editor\ProjectViewPlus.cs.meta
+    extension: meta
+    fileName: Assets\Editor\ProjectViewPlus
+    fileObject: {fileID: 0}
+    fileIcon: {fileID: 0}
+    fileContent:
+      m_Text: Assets\Editor\ProjectViewPlus
+      m_Image: {fileID: 0}
+      m_Tooltip: Assets\Editor\ProjectViewPlus.cs.meta
+    FileSerializationInfo:
+      fileIndex: 32
+      parentFolderIndex: 1
+  - path: Assets\Editor\PVPData.asset
+    extension: asset
+    fileName: Assets\Editor\PVPData
+    fileObject: {fileID: 11400000}
+    fileIcon: {fileID: 2376468200823113483, guid: 0000000000000000d000000000000000, type: 0}
+    fileContent:
+      m_Text: Assets\Editor\PVPData
+      m_Image: {fileID: 2376468200823113483, guid: 0000000000000000d000000000000000, type: 0}
+      m_Tooltip: Assets\Editor\PVPData.asset
+    FileSerializationInfo:
+      fileIndex: 33
+      parentFolderIndex: 1
+  - path: Assets\Editor\PVPData.asset.meta
+    extension: meta
+    fileName: Assets\Editor\PVPData
+    fileObject: {fileID: 0}
+    fileIcon: {fileID: 0}
+    fileContent:
+      m_Text: Assets\Editor\PVPData
+      m_Image: {fileID: 0}
+      m_Tooltip: Assets\Editor\PVPData.asset.meta
+    FileSerializationInfo:
+      fileIndex: 34
+      parentFolderIndex: 1
+  - path: Assets\Editor\PVPDataSO.cs
+    extension: cs
+    fileName: Assets\Editor\PVPDataSO
+    fileObject: {fileID: 11500000, guid: 57dd26b3b7a87464bb00fd35be3f1f84, type: 3}
+    fileIcon: {fileID: -8204150473280056172, guid: 0000000000000000d000000000000000, type: 0}
+    fileContent:
+      m_Text: Assets\Editor\PVPDataSO
+      m_Image: {fileID: -8204150473280056172, guid: 0000000000000000d000000000000000, type: 0}
+      m_Tooltip: Assets\Editor\PVPDataSO.cs
+    FileSerializationInfo:
+      fileIndex: 35
+      parentFolderIndex: 1
+  - path: Assets\Editor\PVPDataSO.cs.meta
+    extension: meta
+    fileName: Assets\Editor\PVPDataSO
+    fileObject: {fileID: 0}
+    fileIcon: {fileID: 0}
+    fileContent:
+      m_Text: Assets\Editor\PVPDataSO
+      m_Image: {fileID: 0}
+      m_Tooltip: Assets\Editor\PVPDataSO.cs.meta
+    FileSerializationInfo:
+      fileIndex: 36
+      parentFolderIndex: 1
+  - path: Assets\Editor\PVPFile.cs
+    extension: cs
+    fileName: Assets\Editor\PVPFile
+    fileObject: {fileID: 11500000, guid: 0ec0939e6e0b5284bb5b0289308b6c71, type: 3}
+    fileIcon: {fileID: -8204150473280056172, guid: 0000000000000000d000000000000000, type: 0}
+    fileContent:
+      m_Text: Assets\Editor\PVPFile
+      m_Image: {fileID: -8204150473280056172, guid: 0000000000000000d000000000000000, type: 0}
+      m_Tooltip: Assets\Editor\PVPFile.cs
+    FileSerializationInfo:
+      fileIndex: 37
+      parentFolderIndex: 1
+  - path: Assets\Editor\PVPFile.cs.meta
+    extension: meta
+    fileName: Assets\Editor\PVPFile
+    fileObject: {fileID: 0}
+    fileIcon: {fileID: 0}
+    fileContent:
+      m_Text: Assets\Editor\PVPFile
+      m_Image: {fileID: 0}
+      m_Tooltip: Assets\Editor\PVPFile.cs.meta
+    FileSerializationInfo:
+      fileIndex: 38
+      parentFolderIndex: 1
+  - path: Assets\Editor\PVPFolder.cs
+    extension: cs
+    fileName: Assets\Editor\PVPFolder
+    fileObject: {fileID: 11500000, guid: 803b9189ffefc784d8cf25da9709ea72, type: 3}
+    fileIcon: {fileID: -8204150473280056172, guid: 0000000000000000d000000000000000, type: 0}
+    fileContent:
+      m_Text: Assets\Editor\PVPFolder
+      m_Image: {fileID: -8204150473280056172, guid: 0000000000000000d000000000000000, type: 0}
+      m_Tooltip: Assets\Editor\PVPFolder.cs
+    FileSerializationInfo:
+      fileIndex: 39
+      parentFolderIndex: 1
+  - path: Assets\Editor\PVPFolder.cs.meta
+    extension: meta
+    fileName: Assets\Editor\PVPFolder
+    fileObject: {fileID: 0}
+    fileIcon: {fileID: 0}
+    fileContent:
+      m_Text: Assets\Editor\PVPFolder
+      m_Image: {fileID: 0}
+      m_Tooltip: Assets\Editor\PVPFolder.cs.meta
+    FileSerializationInfo:
+      fileIndex: 40
+      parentFolderIndex: 1
+  - path: Assets\Scenes\SampleScene.unity
+    extension: unity
+    fileName: Assets\Scenes\SampleScene
+    fileObject: {fileID: 102900000, guid: 9fc0d4010bbf28b4594072e72b8655ab, type: 3}
+    fileIcon: {fileID: 985423054452513129, guid: 0000000000000000d000000000000000, type: 0}
+    fileContent:
+      m_Text: Assets\Scenes\SampleScene
+      m_Image: {fileID: 985423054452513129, guid: 0000000000000000d000000000000000, type: 0}
+      m_Tooltip: Assets\Scenes\SampleScene.unity
+    FileSerializationInfo:
+      fileIndex: 41
+      parentFolderIndex: 5
+  - path: Assets\Scenes\SampleScene.unity.meta
+    extension: meta
+    fileName: Assets\Scenes\SampleScene
+    fileObject: {fileID: 0}
+    fileIcon: {fileID: 0}
+    fileContent:
+      m_Text: Assets\Scenes\SampleScene
+      m_Image: {fileID: 0}
+      m_Tooltip: Assets\Scenes\SampleScene.unity.meta
+    FileSerializationInfo:
+      fileIndex: 42
+      parentFolderIndex: 5
+  - path: Assets\ScriptableObjects\Character\Characters\ExampleCharacter.asset
+    extension: asset
+    fileName: Assets\ScriptableObjects\Character\Characters\ExampleCharacter
+    fileObject: {fileID: 11400000, guid: 2078bc504d026684aa7c6365e5ad3153, type: 2}
+    fileIcon: {fileID: 2376468200823113483, guid: 0000000000000000d000000000000000, type: 0}
+    fileContent:
+      m_Text: Assets\ScriptableObjects\Character\Characters\ExampleCharacter
+      m_Image: {fileID: 2376468200823113483, guid: 0000000000000000d000000000000000, type: 0}
+      m_Tooltip: Assets\ScriptableObjects\Character\Characters\ExampleCharacter.asset
+    FileSerializationInfo:
+      fileIndex: 43
+      parentFolderIndex: 8
+  - path: Assets\ScriptableObjects\Character\Characters\ExampleCharacter.asset.meta
+    extension: meta
+    fileName: Assets\ScriptableObjects\Character\Characters\ExampleCharacter
+    fileObject: {fileID: 0}
+    fileIcon: {fileID: 0}
+    fileContent:
+      m_Text: Assets\ScriptableObjects\Character\Characters\ExampleCharacter
+      m_Image: {fileID: 0}
+      m_Tooltip: Assets\ScriptableObjects\Character\Characters\ExampleCharacter.asset.meta
+    FileSerializationInfo:
+      fileIndex: 44
+      parentFolderIndex: 8
+  - path: Assets\ScriptableObjects\Character\Characters.meta
+    extension: meta
+    fileName: Assets\ScriptableObjects\Character\Characters
+    fileObject: {fileID: 0}
+    fileIcon: {fileID: 0}
+    fileContent:
+      m_Text: Assets\ScriptableObjects\Character\Characters
+      m_Image: {fileID: 0}
+      m_Tooltip: Assets\ScriptableObjects\Character\Characters.meta
+    FileSerializationInfo:
+      fileIndex: 45
+      parentFolderIndex: 7
+  - path: Assets\ScriptableObjects\Character\CharacterSO.cs
+    extension: cs
+    fileName: Assets\ScriptableObjects\Character\CharacterSO
+    fileObject: {fileID: 11500000, guid: 7ca5d0899b0a2c74cb4c0b1623f0f0d4, type: 3}
+    fileIcon: {fileID: -8204150473280056172, guid: 0000000000000000d000000000000000, type: 0}
+    fileContent:
+      m_Text: Assets\ScriptableObjects\Character\CharacterSO
+      m_Image: {fileID: -8204150473280056172, guid: 0000000000000000d000000000000000, type: 0}
+      m_Tooltip: Assets\ScriptableObjects\Character\CharacterSO.cs
+    FileSerializationInfo:
+      fileIndex: 46
+      parentFolderIndex: 7
+  - path: Assets\ScriptableObjects\Character\CharacterSO.cs.meta
+    extension: meta
+    fileName: Assets\ScriptableObjects\Character\CharacterSO
+    fileObject: {fileID: 0}
+    fileIcon: {fileID: 0}
+    fileContent:
+      m_Text: Assets\ScriptableObjects\Character\CharacterSO
+      m_Image: {fileID: 0}
+      m_Tooltip: Assets\ScriptableObjects\Character\CharacterSO.cs.meta
+    FileSerializationInfo:
+      fileIndex: 47
+      parentFolderIndex: 7
+  - path: Assets\ScriptableObjects\Mission\Missions\ExampleMission.asset
+    extension: asset
+    fileName: Assets\ScriptableObjects\Mission\Missions\ExampleMission
+    fileObject: {fileID: 11400000, guid: 782b2be5c6b6a2d438ba2d5842fcd51f, type: 2}
+    fileIcon: {fileID: 2376468200823113483, guid: 0000000000000000d000000000000000, type: 0}
+    fileContent:
+      m_Text: Assets\ScriptableObjects\Mission\Missions\ExampleMission
+      m_Image: {fileID: 2376468200823113483, guid: 0000000000000000d000000000000000, type: 0}
+      m_Tooltip: Assets\ScriptableObjects\Mission\Missions\ExampleMission.asset
+    FileSerializationInfo:
+      fileIndex: 48
+      parentFolderIndex: 10
+  - path: Assets\ScriptableObjects\Mission\Missions\ExampleMission.asset.meta
+    extension: meta
+    fileName: Assets\ScriptableObjects\Mission\Missions\ExampleMission
+    fileObject: {fileID: 0}
+    fileIcon: {fileID: 0}
+    fileContent:
+      m_Text: Assets\ScriptableObjects\Mission\Missions\ExampleMission
+      m_Image: {fileID: 0}
+      m_Tooltip: Assets\ScriptableObjects\Mission\Missions\ExampleMission.asset.meta
+    FileSerializationInfo:
+      fileIndex: 49
+      parentFolderIndex: 10
+  - path: Assets\ScriptableObjects\Mission\Missions.meta
+    extension: meta
+    fileName: Assets\ScriptableObjects\Mission\Missions
+    fileObject: {fileID: 0}
+    fileIcon: {fileID: 0}
+    fileContent:
+      m_Text: Assets\ScriptableObjects\Mission\Missions
+      m_Image: {fileID: 0}
+      m_Tooltip: Assets\ScriptableObjects\Mission\Missions.meta
+    FileSerializationInfo:
+      fileIndex: 50
+      parentFolderIndex: 9
+  - path: Assets\ScriptableObjects\Mission\MissionSO.cs
+    extension: cs
+    fileName: Assets\ScriptableObjects\Mission\MissionSO
+    fileObject: {fileID: 11500000, guid: ca3345d2f842f634d8536c187ebaf14c, type: 3}
+    fileIcon: {fileID: -8204150473280056172, guid: 0000000000000000d000000000000000, type: 0}
+    fileContent:
+      m_Text: Assets\ScriptableObjects\Mission\MissionSO
+      m_Image: {fileID: -8204150473280056172, guid: 0000000000000000d000000000000000, type: 0}
+      m_Tooltip: Assets\ScriptableObjects\Mission\MissionSO.cs
+    FileSerializationInfo:
+      fileIndex: 51
+      parentFolderIndex: 9
+  - path: Assets\ScriptableObjects\Mission\MissionSO.cs.meta
+    extension: meta
+    fileName: Assets\ScriptableObjects\Mission\MissionSO
+    fileObject: {fileID: 0}
+    fileIcon: {fileID: 0}
+    fileContent:
+      m_Text: Assets\ScriptableObjects\Mission\MissionSO
+      m_Image: {fileID: 0}
+      m_Tooltip: Assets\ScriptableObjects\Mission\MissionSO.cs.meta
+    FileSerializationInfo:
+      fileIndex: 52
+      parentFolderIndex: 9
+  - path: Assets\ScriptableObjects\NPC\NPCs\ExampleNPC.asset
+    extension: asset
+    fileName: Assets\ScriptableObjects\NPC\NPCs\ExampleNPC
+    fileObject: {fileID: 11400000, guid: 3c5662175edaa5247bf5f78cae2d9866, type: 2}
+    fileIcon: {fileID: 2376468200823113483, guid: 0000000000000000d000000000000000, type: 0}
+    fileContent:
+      m_Text: Assets\ScriptableObjects\NPC\NPCs\ExampleNPC
+      m_Image: {fileID: 2376468200823113483, guid: 0000000000000000d000000000000000, type: 0}
+      m_Tooltip: Assets\ScriptableObjects\NPC\NPCs\ExampleNPC.asset
+    FileSerializationInfo:
+      fileIndex: 53
+      parentFolderIndex: 12
+  - path: Assets\ScriptableObjects\NPC\NPCs\ExampleNPC.asset.meta
+    extension: meta
+    fileName: Assets\ScriptableObjects\NPC\NPCs\ExampleNPC
+    fileObject: {fileID: 0}
+    fileIcon: {fileID: 0}
+    fileContent:
+      m_Text: Assets\ScriptableObjects\NPC\NPCs\ExampleNPC
+      m_Image: {fileID: 0}
+      m_Tooltip: Assets\ScriptableObjects\NPC\NPCs\ExampleNPC.asset.meta
+    FileSerializationInfo:
+      fileIndex: 54
+      parentFolderIndex: 12
+  - path: Assets\ScriptableObjects\NPC\NPCs.meta
+    extension: meta
+    fileName: Assets\ScriptableObjects\NPC\NPCs
+    fileObject: {fileID: 0}
+    fileIcon: {fileID: 0}
+    fileContent:
+      m_Text: Assets\ScriptableObjects\NPC\NPCs
+      m_Image: {fileID: 0}
+      m_Tooltip: Assets\ScriptableObjects\NPC\NPCs.meta
+    FileSerializationInfo:
+      fileIndex: 55
+      parentFolderIndex: 11
+  - path: Assets\ScriptableObjects\NPC\NPC_SO.cs
+    extension: cs
+    fileName: Assets\ScriptableObjects\NPC\NPC_SO
+    fileObject: {fileID: 11500000, guid: e8deb6f9f5b38094f8f2183987a2ae4a, type: 3}
+    fileIcon: {fileID: -8204150473280056172, guid: 0000000000000000d000000000000000, type: 0}
+    fileContent:
+      m_Text: Assets\ScriptableObjects\NPC\NPC_SO
+      m_Image: {fileID: -8204150473280056172, guid: 0000000000000000d000000000000000, type: 0}
+      m_Tooltip: Assets\ScriptableObjects\NPC\NPC_SO.cs
+    FileSerializationInfo:
+      fileIndex: 56
+      parentFolderIndex: 11
+  - path: Assets\ScriptableObjects\NPC\NPC_SO.cs.meta
+    extension: meta
+    fileName: Assets\ScriptableObjects\NPC\NPC_SO
+    fileObject: {fileID: 0}
+    fileIcon: {fileID: 0}
+    fileContent:
+      m_Text: Assets\ScriptableObjects\NPC\NPC_SO
+      m_Image: {fileID: 0}
+      m_Tooltip: Assets\ScriptableObjects\NPC\NPC_SO.cs.meta
+    FileSerializationInfo:
+      fileIndex: 57
+      parentFolderIndex: 11
+  - path: Assets\ScriptableObjects\Character.meta
+    extension: meta
+    fileName: Assets\ScriptableObjects\Character
+    fileObject: {fileID: 0}
+    fileIcon: {fileID: 0}
+    fileContent:
+      m_Text: Assets\ScriptableObjects\Character
+      m_Image: {fileID: 0}
+      m_Tooltip: Assets\ScriptableObjects\Character.meta
+    FileSerializationInfo:
+      fileIndex: 58
+      parentFolderIndex: 6
+  - path: Assets\ScriptableObjects\Mission.meta
+    extension: meta
+    fileName: Assets\ScriptableObjects\Mission
+    fileObject: {fileID: 0}
+    fileIcon: {fileID: 0}
+    fileContent:
+      m_Text: Assets\ScriptableObjects\Mission
+      m_Image: {fileID: 0}
+      m_Tooltip: Assets\ScriptableObjects\Mission.meta
+    FileSerializationInfo:
+      fileIndex: 59
+      parentFolderIndex: 6
+  - path: Assets\ScriptableObjects\NPC.meta
+    extension: meta
+    fileName: Assets\ScriptableObjects\NPC
+    fileObject: {fileID: 0}
+    fileIcon: {fileID: 0}
+    fileContent:
+      m_Text: Assets\ScriptableObjects\NPC
+      m_Image: {fileID: 0}
+      m_Tooltip: Assets\ScriptableObjects\NPC.meta
+    FileSerializationInfo:
+      fileIndex: 60
+      parentFolderIndex: 6
+  - path: Assets\Assets.index
+    extension: index
+    fileName: Assets\Assets
+    fileObject: {fileID: 6653382117853536652, guid: c636cafd04426dc459549a265ef9daf9, type: 3}
+    fileIcon: {fileID: 0}
+    fileContent:
+      m_Text: Assets\Assets
+      m_Image: {fileID: 0}
+      m_Tooltip: Assets\Assets.index
+    FileSerializationInfo:
+      fileIndex: 61
+      parentFolderIndex: 0
+  - path: Assets\Assets.index.meta
+    extension: meta
+    fileName: Assets\Assets
+    fileObject: {fileID: 0}
+    fileIcon: {fileID: 0}
+    fileContent:
+      m_Text: Assets\Assets
+      m_Image: {fileID: 0}
+      m_Tooltip: Assets\Assets.index.meta
+    FileSerializationInfo:
+      fileIndex: 62
+      parentFolderIndex: 0
+  - path: Assets\Editor.meta
+    extension: meta
+    fileName: Assets\Editor
+    fileObject: {fileID: 0}
+    fileIcon: {fileID: 0}
+    fileContent:
+      m_Text: Assets\Editor
+      m_Image: {fileID: 0}
+      m_Tooltip: Assets\Editor.meta
+    FileSerializationInfo:
+      fileIndex: 63
+      parentFolderIndex: 0
+  - path: Assets\Scenes.meta
+    extension: meta
+    fileName: Assets\Scenes
+    fileObject: {fileID: 0}
+    fileIcon: {fileID: 0}
+    fileContent:
+      m_Text: Assets\Scenes
+      m_Image: {fileID: 0}
+      m_Tooltip: Assets\Scenes.meta
+    FileSerializationInfo:
+      fileIndex: 64
+      parentFolderIndex: 0
+  - path: Assets\ScriptableObjects.meta
+    extension: meta
+    fileName: Assets\ScriptableObjects
+    fileObject: {fileID: 0}
+    fileIcon: {fileID: 0}
+    fileContent:
+      m_Text: Assets\ScriptableObjects
+      m_Image: {fileID: 0}
+      m_Tooltip: Assets\ScriptableObjects.meta
+    FileSerializationInfo:
+      fileIndex: 65
+      parentFolderIndex: 0
+  RootFolder:
+    folderPath: Assets
+    folderName: Assets
+    SerializationInfo:
+      parentFolderIndex: 0
+      folderIndex: 0
+      childFolderIndeces: 010000000500000006000000
+    child_files:
+    - path: Assets\Assets.index
+      extension: index
+      fileName: Assets\Assets
+      fileObject: {fileID: 6653382117853536652, guid: c636cafd04426dc459549a265ef9daf9, type: 3}
+      fileIcon: {fileID: 0}
+      fileContent:
+        m_Text: Assets\Assets
+        m_Image: {fileID: 0}
+        m_Tooltip: Assets\Assets.index
+      FileSerializationInfo:
+        fileIndex: 61
+        parentFolderIndex: 0
+    folderContent:
+      m_Text: Assets
+      m_Image: {fileID: 3764734208316478041, guid: 0000000000000000d000000000000000, type: 0}
+      m_Tooltip: Assets
+    folderIcon: {fileID: 3764734208316478041, guid: 0000000000000000d000000000000000, type: 0}
+    folderobj: {fileID: 102900000, guid: 00000000000000001000000000000000, type: 3}
+    fold: 1
+    depth: 0
+    childFoldersAreTabs: 0
+    filters: []
+    position:
+      serializedVersion: 2
+      x: -1913
+      y: 105
+      width: 1920
+      height: 902

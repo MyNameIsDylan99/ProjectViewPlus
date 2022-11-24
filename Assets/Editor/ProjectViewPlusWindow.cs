@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.UIElements;
 
 
-public class ProjectViewPlus : EditorWindow
+public class ProjectViewPlusWindow : EditorWindow
 {
     private PVPDataSO projectViewPlusData;
 
@@ -19,18 +19,17 @@ public class ProjectViewPlus : EditorWindow
     [MenuItem("Tools/Overview+")]
     static void OpenOverviewPlusWindow()
     {
-        var window = GetWindow<ProjectViewPlus>();
+        var window = GetWindow<ProjectViewPlusWindow>();
         window.titleContent = new GUIContent("Overview+");
     }
 
     private void OnEnable()
     {
-        if(projectViewPlusData == null)
+        
+        if (projectViewPlusData == null)
         projectViewPlusData = AssetDatabase.LoadAssetAtPath<PVPDataSO>("Assets/Editor/PVPData.asset");
 
-        //projectViewPlusData.RootFolder = null;
-        //projectViewPlusData.allFolders = new List<PVPFolder>();
-        //projectViewPlusData.allFiles = new List<PVPFile>();
+        Undo.RecordObject(projectViewPlusData, "projectViewPlusDataChanged");
 
         if (projectViewPlusData.RootFolder == null)
         {
@@ -38,7 +37,7 @@ public class ProjectViewPlus : EditorWindow
         }
         else
         {
-            projectViewPlusData.OnAfterDeserialize();
+            projectViewPlusData.OnBeforeDeserialize();
         }
     }
 
@@ -51,7 +50,9 @@ public class ProjectViewPlus : EditorWindow
             projectViewPlusData.allFiles = new List<PVPFile>();
             projectViewPlusData.RootFolder = new PVPFolder("Assets", null, 0, position);
         }
+        
         projectViewPlusData.RootFolder.VisualizeFolder();
+        DisplayPopupMenu();
     }
 
     private void DisplayPopupMenu()
@@ -63,6 +64,7 @@ public class ProjectViewPlus : EditorWindow
             EditorUtility.DisplayPopupMenu(new Rect(mousePos.x, mousePos.y, 0, 0), "Assets/", null);
             current.Use();
         }
+        
     }
 
     private void DrawTabs()
