@@ -1,29 +1,45 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-public class UnityFile
+[Serializable]
+public class PVPFile
 {
     private static GUISkin _buttonSkin;
     private string path;
     private string extension;
     private string fileName;
-    Object fileObject;
+
+    private UnityEngine.Object fileObject;
+    [NonSerialized]
+    private PVPFolder parentFolder;
 
     private Texture2D fileIcon;
     private GUIContent fileContent;
     private static GUIStyle _buttonStyle;
+    private static PVPDataSO pvpData;
 
-    public UnityFile(string path)
+    public PVPFolder ParentFolder { get => parentFolder; set => parentFolder = value; }
+    public FileSerializationInfo FileSerializationInfo;
+
+    public PVPFile(string path, PVPFolder parentFolder)
     {
+        if (pvpData == null)
+        {
+            pvpData = AssetDatabase.LoadAssetAtPath<PVPDataSO>("Assets/Editor/PVPData.asset");
+        }
+        pvpData.allFiles.Add(this);
+        FileSerializationInfo.fileIndex = pvpData.allFiles.Count - 1;
+        FileSerializationInfo.parentFolderIndex = parentFolder.SerializationInfo.folderIndex;
         this.path = path;
         extension = FindExtension(path);
         fileName = FindFileName(path);
 
 
-
-        fileObject = AssetDatabase.LoadAssetAtPath(this.path, typeof(Object));
+        
+        fileObject = AssetDatabase.LoadAssetAtPath(this.path, typeof(UnityEngine.Object));
         fileIcon = AssetPreview.GetMiniThumbnail(fileObject);
 
         fileContent = new GUIContent(fileName, fileIcon, path);
@@ -61,7 +77,7 @@ public class UnityFile
         GUI.skin.button.alignment = TextAnchor.MiddleLeft;
         if(Selection.activeObject == fileObject)
         {
-            GUI.color = Color.blue;
+            
         }
         if (GUILayout.Button(fileContent, GUILayout.Height(50)))
         {
@@ -81,5 +97,13 @@ public class UnityFile
 
     }
 
+    public string GetName()
+    {
+        return fileName+extension;
+    }
 
+    public bool IsChildOfRootFolder()
+    {
+        return parentFolder.IsRootFolder();
+    }
 }
