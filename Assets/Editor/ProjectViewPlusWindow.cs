@@ -13,7 +13,6 @@ public class ProjectViewPlusWindow : EditorWindow
     private string[] _categoryNames;
     private int _selectedCategoryIndex;
     private List<List<PVPFile>> _categoryFiles = new List<List<PVPFile>>();
-    private bool _filesLoaded;
     private Vector2 _scrollPosition;
 
     [MenuItem("Tools/Overview+")]
@@ -39,20 +38,57 @@ public class ProjectViewPlusWindow : EditorWindow
         {
             projectViewPlusData.OnBeforeDeserialize();
         }
+        AssemblyReloadEvents.afterAssemblyReload += OnAfterAssemblyReload;
+    }
+
+    private void OnAfterAssemblyReload()
+    {
+        projectViewPlusData.OnBeforeDeserialize();
     }
 
     private void OnGUI()
     {
-        if(GUILayout.Button("Fetch data"))
+        
+        if (GUILayout.Button("Fetch data"))
         {
             projectViewPlusData.RootFolder = null;
             projectViewPlusData.allFolders = new List<PVPFolder>();
             projectViewPlusData.allFiles = new List<PVPFile>();
             projectViewPlusData.RootFolder = new PVPFolder("Assets", null, 0, position);
         }
-        
+       _scrollPosition = GUILayout.BeginScrollView(_scrollPosition);
         projectViewPlusData.RootFolder.VisualizeFolder();
         DisplayPopupMenu();
+        GUILayout.EndScrollView();
+    }
+
+    public void DropAreaGUI()
+    {
+        
+        Event evt = Event.current;
+        Rect drop_area = GUILayoutUtility.GetRect(0.0f, 50.0f, GUILayout.ExpandWidth(true));
+        GUI.Box(drop_area, "Add Trigger");
+
+        switch (evt.type)
+        {
+            case EventType.DragUpdated:
+            case EventType.DragPerform:
+                if (!drop_area.Contains(evt.mousePosition))
+                    return;
+
+                DragAndDrop.visualMode = DragAndDropVisualMode.Copy;
+
+                if (evt.type == EventType.DragPerform)
+                {
+                    DragAndDrop.AcceptDrag();
+
+                    foreach (UnityEngine.Object dragged_object in DragAndDrop.objectReferences)
+                    {
+                        // Do On Drag Stuff here
+                    }
+                }
+                break;
+        }
     }
 
     private void DisplayPopupMenu()

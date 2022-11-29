@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
@@ -22,9 +20,9 @@ public class PVPFile
     private Texture2D fileIcon;
     [SerializeField]
     private GUIContent fileContent;
-    private static GUIStyle _buttonStyle;
-    private static PVPDataSO pvpData;
-
+    [SerializeField]
+    private  PVPDataSO pvpData;
+    private bool isBeingDraged = false;
     public PVPFolder ParentFolder { get => parentFolder; set => parentFolder = value; }
     public FileSerializationInfo FileSerializationInfo;
 
@@ -41,22 +39,12 @@ public class PVPFile
         extension = FindExtension(path);
         fileName = FindFileName(path);
 
+        this.parentFolder = parentFolder;
 
-        
         fileObject = AssetDatabase.LoadAssetAtPath(this.path, typeof(UnityEngine.Object));
         fileIcon = AssetPreview.GetMiniThumbnail(fileObject);
 
         fileContent = new GUIContent(fileName, fileIcon, path);
-        if (_buttonSkin = null)
-        {
-           string[] buttonSkinPath = AssetDatabase.FindAssets("ButtonSkin t:GUISkin");
-            _buttonSkin = AssetDatabase.LoadAssetAtPath<GUISkin>(buttonSkinPath[0]);
-            
-        }
-        if(_buttonStyle == null)
-        {
-            _buttonStyle = new GUIStyle();
-        }
 
     }
 
@@ -68,7 +56,7 @@ public class PVPFile
     }
     private string FindFileName(string path)
     {
-        string[] splitPath = path.Split('/');
+        string[] splitPath = path.Split('\\');
         string fullName = splitPath[splitPath.Length - 1];
         string splitExt = fullName.Split('.')[0];
 
@@ -76,20 +64,53 @@ public class PVPFile
     }
     public void VisualizeFile()
     {
-
-        //GUILayout.BeginHorizontal(EditorStyles.helpBox,GUILayout.Width(300));
-        GUI.skin.button.alignment = TextAnchor.MiddleLeft;
-        if(Selection.activeObject == fileObject)
+        if (Selection.activeObject == fileObject)
         {
-            
+
         }
-        if (GUILayout.Button(fileContent, GUILayout.Height(50)))
+        Rect fileRect = GUILayoutUtility.GetRect(10, 25);
+        GUI.Box(fileRect,fileContent);
+        var evt = Event.current;
+        if (evt.type == EventType.MouseUp && fileRect.Contains(evt.mousePosition))
         {
             Selection.activeObject = fileObject;
         }
-        //GUILayout.Label(fileContent,GUILayout.Width(256),GUILayout.Height(64));
-        //GUILayout.EndHorizontal();
+        CheckForDragAndDrop(fileRect);
     }
+
+    private void CheckForDragAndDrop(Rect dragArea)
+    {
+        var evt = Event.current;
+
+        if (evt.type == EventType.MouseDrag && dragArea.Contains(evt.mousePosition))
+        {
+            DragAndDrop.StartDrag($"Drag file {fileName}");
+            DragAndDrop.SetGenericData("File", fileObject);
+            Debug.Log("Start Drag on file" + fileName);
+            DragAndDrop.visualMode = DragAndDropVisualMode.Move;
+            isBeingDraged = true;
+        }
+        else if(evt.type == EventType.DragPerform && isBeingDraged)
+        {
+            if (parentFolder == null)
+            {
+                parentFolder = pvpData.allFolders[FileSerializationInfo.parentFolderIndex]; //TODO: Find the root cause of this.
+            }
+
+            if (parentFolder == null)
+            {
+                Debug.Log("Parent folder null");
+            }
+            else
+            {
+                Debug.Log("Parent folder not null");
+                parentFolder.ChildFiles.Remove(this);
+            }
+
+            
+        }
+    }
+    //
     public string GetPath()
     {
         return path;
@@ -103,7 +124,7 @@ public class PVPFile
 
     public string GetName()
     {
-        return fileName+extension;
+        return fileName + extension;
     }
 
     public bool IsChildOfRootFolder()

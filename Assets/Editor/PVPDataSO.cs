@@ -9,7 +9,9 @@ public class PVPDataSO : ScriptableObject
     public List<PVPFolder> allFolders = new List<PVPFolder>();
     public List<PVPFile> allFiles = new List<PVPFile>();
     public PVPFolder RootFolder;
-
+    public Texture2D FolderIcon;
+    public Texture2D FoldoutIcon;
+    public GUISkin GUISkin;
     public void OnBeforeDeserialize()
     {
         foreach (var file in allFiles)
