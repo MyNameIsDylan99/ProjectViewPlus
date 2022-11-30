@@ -48,6 +48,8 @@ public class PVPFolder
     [SerializeField]
     private Rect position;
 
+    private PVPFile previewChildFile;
+
     public PVPFolder(string folderPath, PVPFolder parentFolder, int depth, Rect position)
     {
         #region Serialization
@@ -103,7 +105,9 @@ public class PVPFolder
         //Do this to give horizontal space
         GUILayout.BeginHorizontal();
         GUILayout.Space(15 * depth);
-        fold = EditorGUILayout.Foldout(fold, folderContent, true);
+        Rect folderRect = GUILayoutUtility.GetRect(100, 50);
+        fold = EditorGUI.Foldout(folderRect,fold, folderContent, true);
+        DisplayContextMenu(folderRect);
         GUILayout.EndHorizontal();
 
 
@@ -219,6 +223,20 @@ public class PVPFolder
 
     }
 
+    public void AddPreviewChildFile(UnityEngine.Object fileObject) {
+        previewChildFile = new PVPFile(this, fileObject);
+        child_files.Add(previewChildFile);
+
+    }
+
+    private void DisplayContextMenu(Rect contextRect) {
+        var evt = Event.current;
+
+        if (evt.type == EventType.ContextClick && contextRect.Contains(evt.mousePosition)) {
+            ProjectViewPlusWindow.ContextMenu.selectedFolder = this;
+            ProjectViewPlusWindow.ContextMenu.DisplayContextMenu();
+        }
+    }
     public string GetName()
     {
         return folderPath;

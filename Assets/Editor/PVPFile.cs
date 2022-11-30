@@ -22,12 +22,14 @@ public class PVPFile
     private Texture2D fileIcon;
     [SerializeField]
     private GUIContent fileContent;
-    private static GUIStyle _buttonStyle;
     private static PVPDataSO pvpData;
+    private bool showRenameTextField;
 
     public PVPFolder ParentFolder { get => parentFolder; set => parentFolder = value; }
     public FileSerializationInfo FileSerializationInfo;
 
+
+    //Normal constructor
     public PVPFile(string path, PVPFolder parentFolder)
     {
         if (pvpData == null)
@@ -47,17 +49,23 @@ public class PVPFile
         fileIcon = AssetPreview.GetMiniThumbnail(fileObject);
 
         fileContent = new GUIContent(fileName, fileIcon, path);
+
         if (_buttonSkin = null)
         {
            string[] buttonSkinPath = AssetDatabase.FindAssets("ButtonSkin t:GUISkin");
             _buttonSkin = AssetDatabase.LoadAssetAtPath<GUISkin>(buttonSkinPath[0]);
-            
-        }
-        if(_buttonStyle == null)
-        {
-            _buttonStyle = new GUIStyle();
         }
 
+    }
+
+    //Preview file when creating in context Menu
+    public PVPFile(PVPFolder parentFolder, UnityEngine.Object fileObject) {
+        this.parentFolder = parentFolder;
+        this.fileObject = fileObject;
+        fileIcon = AssetPreview.GetMiniThumbnail(fileObject);
+        fileContent = new GUIContent(fileIcon);
+        fileName = "New File";
+        showRenameTextField = true;
     }
 
     private string FindExtension(string path)
@@ -77,7 +85,7 @@ public class PVPFile
     public void VisualizeFile()
     {
 
-        //GUILayout.BeginHorizontal(EditorStyles.helpBox,GUILayout.Width(300));
+
         GUI.skin.button.alignment = TextAnchor.MiddleLeft;
         if(Selection.activeObject == fileObject)
         {
@@ -87,8 +95,9 @@ public class PVPFile
         {
             Selection.activeObject = fileObject;
         }
-        //GUILayout.Label(fileContent,GUILayout.Width(256),GUILayout.Height(64));
-        //GUILayout.EndHorizontal();
+        if (showRenameTextField)
+            fileName = GUILayout.TextField(fileName);
+
     }
     public string GetPath()
     {

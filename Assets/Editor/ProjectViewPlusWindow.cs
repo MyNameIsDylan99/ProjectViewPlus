@@ -9,6 +9,7 @@ using UnityEngine.UIElements;
 public class ProjectViewPlusWindow : EditorWindow
 {
     private PVPDataSO projectViewPlusData;
+    public static PVPContextMenu ContextMenu;
 
     private string[] _categoryNames;
     private int _selectedCategoryIndex;
@@ -26,6 +27,8 @@ public class ProjectViewPlusWindow : EditorWindow
     private void OnEnable()
     {
         
+        ContextMenu = new PVPContextMenu();
+
         if (projectViewPlusData == null)
         projectViewPlusData = AssetDatabase.LoadAssetAtPath<PVPDataSO>("Assets/Editor/PVPData.asset");
 
@@ -52,7 +55,6 @@ public class ProjectViewPlusWindow : EditorWindow
         }
         
         projectViewPlusData.RootFolder.VisualizeFolder();
-        DisplayPopupMenu();
     }
 
     private void DisplayPopupMenu()
@@ -61,7 +63,10 @@ public class ProjectViewPlusWindow : EditorWindow
         Vector2 mousePos = current.mousePosition;
         if (current.type == EventType.ContextClick)
         {
-            EditorUtility.DisplayPopupMenu(new Rect(mousePos.x, mousePos.y, 0, 0), "Assets/", null);
+            GenericMenu menu = new GenericMenu();
+            menu.AddItem(new GUIContent("Hello"), false, () => Debug.Log("Hi"));
+            menu.AddItem(new GUIContent("Create new scripts"),false, CreateScript);
+            menu.ShowAsContext();
             current.Use();
         }
         
@@ -156,6 +161,11 @@ public class ProjectViewPlusWindow : EditorWindow
         }
 
         return objects;
+    }
+
+    private void CreateScript() {
+
+        
     }
 }
 
