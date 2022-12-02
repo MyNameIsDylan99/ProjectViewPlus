@@ -8,13 +8,6 @@ using UnityEngine;
 [Serializable]
 public class PVPFolder
 {
-    [SerializeField]
-    private string folderPath;
-    [SerializeField]
-    private string folderName;
-    [SerializeField]
-    private PVPDataSO pvpData;
-
     public FolderSerializationInfo SerializationInfo;
 
     [NonSerialized]
@@ -22,10 +15,11 @@ public class PVPFolder
     [NonSerialized]
     private PVPFolder parentFolder;
     [SerializeField]
-    private List<PVPFile> childFiles;
-
-    private PVPFile[,] groupedFiles;
-
+    private string folderPath;
+    [SerializeField]
+    private string folderName;
+    [SerializeField]
+    private PVPDataSO pvpData;
     [SerializeField]
     private GUIContent folderContent;
     [SerializeField]
@@ -37,32 +31,35 @@ public class PVPFolder
     [SerializeField]
     UnityEngine.Object folderobj;
     [SerializeField]
-    private bool fold = false;
-    [SerializeField]
     private int depth;
     [SerializeField]
     private bool childFoldersAreTabs;
+    [SerializeField]
+    string[] filters;
+
+    private static GUIStyle foldoutStyle;
+    private bool fold = false;
+    private List<PVPFile> childFiles;
+    private PVPFile[,] groupedFiles;
+    private const int filesPerRow = 1;
+
     public bool ChildFoldersAreTabs { get => childFoldersAreTabs; private set => childFoldersAreTabs = value; }
     public List<PVPFolder> ChildFolders { get => childFolders; set => childFolders = value; }
 
     public PVPFolder ParentFolder { get { return parentFolder; } set { parentFolder = value; } }
 
     public List<PVPFile> ChildFiles { get => childFiles; set => childFiles = value; }
+    public string FolderPath { get => folderPath; set => folderPath = value; }
 
-    [SerializeField]
-    string[] filters;
-    [SerializeField]
-    private Rect position;
+    
 
-    private static GUIStyle foldoutStyle;
-
-    public PVPFolder(string folderPath, PVPFolder parentFolder, int depth, Rect position)
+    public PVPFolder(string folderPath, PVPFolder parentFolder, int depth)
     {
         #region Serialization
 
         if (pvpData == null)
         {
-            pvpData = AssetDatabase.LoadAssetAtPath<PVPDataSO>("Assets/Editor/PVPData.asset");
+            pvpData = AssetDatabase.LoadAssetAtPath<PVPDataSO>(PVPWindow.CurrentPath + "/PVPData.asset");
         }
 
         pvpData.allFolders.Add(this);
@@ -86,16 +83,15 @@ public class PVPFolder
 
         this.folderPath = folderPath;
         this.depth = depth;
-        this.position = position;//Position is a variable of the EditorWindow.
 
 
-        ChildFolders = FindChildFolders();
-        childFiles = FindChildFiles();
+            ChildFolders = FindChildFolders();
+            childFiles = FindChildFiles();
 
         //Create the object by giving its path. Then get the assetpreview.
         folderobj = AssetDatabase.LoadAssetAtPath(this.folderPath, typeof(UnityEngine.Object));
-        folderIcon = pvpData.FolderIcon;
-        foldoutIcon = pvpData.FoldoutIcon;
+        folderIcon = pvpData.PVPSettings.FolderIcon;
+        foldoutIcon = pvpData.PVPSettings.FoldoutIcon;
 
         //Assets/New Folder-> folderName:New Folder
         string[] splitPath = this.folderPath.Split('\\');
@@ -111,7 +107,11 @@ public class PVPFolder
     public void VisualizeFolder()
     {
 
-        GUI.skin = pvpData.GUISkin;
+        if (pvpData == null)
+        {
+            pvpData = AssetDatabase.LoadAssetAtPath<PVPDataSO>("Assets/Editor/PVPData.asset");
+        }
+
         GUILayout.BeginVertical();
 
         //Do this to give horizontal space
@@ -121,7 +121,6 @@ public class PVPFolder
         if (fold)
         {
             VisualizeChildFiles();
-
             foreach (var VARIABLE in ChildFolders)
                 VARIABLE.VisualizeFolder();
         }
@@ -141,25 +140,11 @@ public class PVPFolder
                 if (!dropArea.Contains(evt.mousePosition))
                     return;
 
-
-
-
                 DragAndDrop.visualMode = DragAndDropVisualMode.Move;
 
                 if (evt.type == EventType.DragPerform)
                 {
-                    DragAndDrop.AcceptDrag();
-
-                    var dragged_object = (UnityEngine.Object)DragAndDrop.GetGenericData("File");
-
-                    Debug.Log($"Performed drag on object {dragged_object.name} to folder {folderName}");
-
-                    var oldPath = AssetDatabase.GetAssetPath(dragged_object);
-                    var splitName = oldPath.Split('/');
-                    var fileName = splitName[splitName.Length - 1];
-                    var newPath = folderPath + "\\" + fileName;
-                    AssetDatabase.MoveAsset(oldPath, newPath);
-                    childFiles.Add(new PVPFile(newPath, this));
+                    PVPDragAndDrop.AcceptDrag(this);
 
                 }
                 break;
@@ -168,9 +153,10 @@ public class PVPFolder
 
     private void FoldoutWithFolder()
     {
+
         GUILayout.BeginHorizontal();
         GUILayout.Space(15 * depth);
-        Rect buttonRect = GUILayoutUtility.GetRect(35, 35);
+        Rect buttonRect = GUILayoutUtility.GetRect(PVPWindow.IconSize, PVPWindow.IconSize);
         var matrix = GUI.matrix;
         if (fold)
         {
@@ -182,7 +168,7 @@ public class PVPFolder
             fold = !fold;
         }
         GUI.matrix = matrix;
-        Rect folderRect = GUILayoutUtility.GetRect(100, 35);
+        Rect folderRect = GUILayoutUtility.GetRect(folderContent,GUI.skin.box,GUILayout.Height(PVPWindow.IconSize));
         GUI.Label(folderRect, folderContent);
         DropAreaGUI(folderRect);
         GUILayout.FlexibleSpace();
@@ -197,7 +183,7 @@ public class PVPFolder
         foreach (var directory in dirs)
         {
             //Turn all directories into our 'UnityFolder' Object.
-            PVPFolder newfolder = new PVPFolder(directory, this, depth + 1, position);
+            PVPFolder newfolder = new PVPFolder(directory, this, depth + 1);
             folders.Add(newfolder);
         }
         return folders;
@@ -214,10 +200,11 @@ public class PVPFolder
             //Pass meta files.
             if (newfile.GetExtension().Equals("meta"))
             {
+                SerializationInfo.childFileIndeces.Remove(newfile.FileSerializationInfo.fileIndex);
                 pvpData.allFiles.Remove(newfile);
                 continue;
             }
-                
+
             files.Add(newfile);
         }
 
@@ -225,17 +212,17 @@ public class PVPFolder
 
     }
 
-    private PVPFile[,] GroupChildFiles( List<PVPFile> files)
+    private PVPFile[,] GroupChildFiles(List<PVPFile> files)
     {
         //This method groups files by rows of 3. You can edit this
         //to change visuals.
         int size = files.Count;
-        int rows = (size / 3) + 1;
-        groupedFiles = new PVPFile[rows, 3];
+        int rows = (size / pvpData.PVPSettings.FilesPerRow) + 1;
+        groupedFiles = new PVPFile[rows, pvpData.PVPSettings.FilesPerRow];
         int index = 0;
         for (int i = 0; i < rows; i++)
-            for (int j = 0; j < 3; j++)
-                if (i * 3 + j <= size - 1)
+            for (int j = 0; j < pvpData.PVPSettings.FilesPerRow; j++)
+                if (i * pvpData.PVPSettings.FilesPerRow + j <= size - 1)
                     groupedFiles[i, j] = files[index++];
         return groupedFiles;
     }
@@ -243,17 +230,17 @@ public class PVPFolder
     private void VisualizeChildFiles()
     {
         int size = childFiles.Count;
-        int rows = (size / 3) + 1;
-       groupedFiles = GroupChildFiles(childFiles);
+        int rows = (size / pvpData.PVPSettings.FilesPerRow) + 1;
+        groupedFiles = GroupChildFiles(childFiles);
         int i = 0, j = 0;
         for (i = 0; i < rows; i++)
         {
             GUILayout.BeginVertical();
             GUILayout.BeginHorizontal();
-            GUILayout.Space(15 * depth);
-            for (j = 0; j < 3; j++)
+            GUILayout.Space(25 * depth);
+            for (j = 0; j < pvpData.PVPSettings.FilesPerRow; j++)
             {
-                if (i * 3 + j <= size - 1)
+                if (i * pvpData.PVPSettings.FilesPerRow + j <= size - 1)
                     groupedFiles[i, j].VisualizeFile();
             }
 

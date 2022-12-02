@@ -6,65 +6,108 @@ using UnityEngine;
 using UnityEngine.UIElements;
 
 
-public class ProjectViewPlusWindow : EditorWindow
+public class PVPWindow : EditorWindow
 {
-    private PVPDataSO projectViewPlusData;
+    private PVPDataSO pvpData;
 
     private string[] _categoryNames;
     private int _selectedCategoryIndex;
     private List<List<PVPFile>> _categoryFiles = new List<List<PVPFile>>();
     private Vector2 _scrollPosition;
+    public static string CurrentPath;
+    public static int IconSize;
 
-    [MenuItem("Tools/Overview+")]
+    [MenuItem("Tools/ProjectView+")]
     static void OpenOverviewPlusWindow()
     {
-        var window = GetWindow<ProjectViewPlusWindow>();
-        window.titleContent = new GUIContent("Overview+");
+        var window = GetWindow<PVPWindow>();
+        window.titleContent = new GUIContent("ProjectView+");
     }
 
     private void OnEnable()
     {
-        
-        if (projectViewPlusData == null)
-        projectViewPlusData = AssetDatabase.LoadAssetAtPath<PVPDataSO>("Assets/Editor/PVPData.asset");
+        SubscribeToEvents();
+        CurrentPath = PVPRelativePathUtility.GetPathOfScriptableObject(this);
+        pvpData = AssetDatabase.LoadAssetAtPath<PVPDataSO>(CurrentPath + "/PVPData.asset");
 
-        Undo.RecordObject(projectViewPlusData, "projectViewPlusDataChanged");
-
-        if (projectViewPlusData.RootFolder == null)
+        if (pvpData == null)
         {
-            projectViewPlusData.RootFolder = new PVPFolder("Assets", null, 0, position);
+            pvpData = PVPDataSO.CreateInstance<PVPDataSO>();
+            AssetDatabase.CreateAsset(pvpData, CurrentPath + "/PVPData.asset");
+            pvpData.PVPSettings.FolderIcon = AssetDatabase.LoadAssetAtPath<Texture2D>(CurrentPath + "/Sprites/Folder.png");
+            pvpData.PVPSettings.FoldoutIcon = AssetDatabase.LoadAssetAtPath<Texture2D>(CurrentPath + "/Sprites/FoldoutArrow.png");
+            pvpData.PVPSettings.NormalBackground = AssetDatabase.LoadAssetAtPath<Texture2D>(CurrentPath + "/Sprites/CompleteTransparent.png");
+            pvpData.PVPSettings.SelectedBackground = AssetDatabase.LoadAssetAtPath<Texture2D>(CurrentPath + "/Sprites/SelectedBackground.png");
+            pvpData.PVPSettings.GUISkin = AssetDatabase.LoadAssetAtPath<GUISkin>(CurrentPath + "/GUISkins/PVPSkin.guiskin");
+        }
+
+        Undo.RecordObject(pvpData, "projectViewPlusDataChanged");
+
+        if (pvpData.RootFolder == null)
+        {
+            pvpData.RootFolder = new PVPFolder("Assets", null, 0);
         }
         else
         {
-            projectViewPlusData.OnBeforeDeserialize();
+            pvpData.OnBeforeDeserialize();
         }
+
+        switch (pvpData.PVPSettings.IconSize)
+        {
+            case PVPSettings.IconSizes.Small:
+                IconSize = pvpData.PVPSettings.SmallSize;
+                break;
+            case PVPSettings.IconSizes.Normal:
+                IconSize = pvpData.PVPSettings.NormalSize;
+                break;
+            case PVPSettings.IconSizes.Large:
+                IconSize = pvpData.PVPSettings.LargeSize;
+                break;
+        }
+
         AssemblyReloadEvents.afterAssemblyReload += OnAfterAssemblyReload;
     }
 
     private void OnAfterAssemblyReload()
     {
-        projectViewPlusData.OnBeforeDeserialize();
+        pvpData.OnBeforeDeserialize();
     }
 
     private void OnGUI()
     {
-        
+
+        GUI.skin = pvpData.PVPSettings.GUISkin;
+
         if (GUILayout.Button("Fetch data"))
         {
-            projectViewPlusData.RootFolder = null;
-            projectViewPlusData.allFolders = new List<PVPFolder>();
-            projectViewPlusData.allFiles = new List<PVPFile>();
-            projectViewPlusData.RootFolder = new PVPFolder("Assets", null, 0, position);
+            FetchData();
         }
-       _scrollPosition = GUILayout.BeginScrollView(_scrollPosition);
-        projectViewPlusData.RootFolder.VisualizeFolder();
+        _scrollPosition = GUILayout.BeginScrollView(_scrollPosition);
+        pvpData.RootFolder.VisualizeFolder();
         DisplayPopupMenu();
         GUILayout.EndScrollView();
+
+            
+    }
+
+    private void SubscribeToEvents()
+    {
+        PVPEvents.RepaintWindowEvent += Repaint;
+    }
+    
+
+    private void FetchData()
+    {
+        Undo.RecordObject(pvpData, "projectViewPlusDataChanged");
+        pvpData.RootFolder = null;
+        pvpData.allFolders = new List<PVPFolder>();
+        pvpData.allFiles = new List<PVPFile>();
+        pvpData.RootFolder = new PVPFolder("Assets", null, 0);
     }
 
     public void DropAreaGUI()
     {
-        
+
         Event evt = Event.current;
         Rect drop_area = GUILayoutUtility.GetRect(0.0f, 50.0f, GUILayout.ExpandWidth(true));
         GUI.Box(drop_area, "Add Trigger");
@@ -100,7 +143,7 @@ public class ProjectViewPlusWindow : EditorWindow
             EditorUtility.DisplayPopupMenu(new Rect(mousePos.x, mousePos.y, 0, 0), "Assets/", null);
             current.Use();
         }
-        
+
     }
 
     private void DrawTabs()

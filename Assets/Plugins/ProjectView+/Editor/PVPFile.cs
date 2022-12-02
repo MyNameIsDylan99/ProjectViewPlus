@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
@@ -6,6 +7,7 @@ using UnityEngine;
 public class PVPFile
 {
     private static GUISkin _buttonSkin;
+    private bool _selected;
     [SerializeField]
     private string path;
     [SerializeField]
@@ -21,20 +23,34 @@ public class PVPFile
     [SerializeField]
     private GUIContent fileContent;
     [SerializeField]
-    private  PVPDataSO pvpData;
-    private bool isBeingDraged = false;
+    private PVPDataSO pvpData;
+
     public PVPFolder ParentFolder { get => parentFolder; set => parentFolder = value; }
     public FileSerializationInfo FileSerializationInfo;
 
-    public PVPFile(string path, PVPFolder parentFolder)
+    public PVPFile(string path, PVPFolder parentFolder, int? fileIndex = null)
     {
         if (pvpData == null)
         {
-            pvpData = AssetDatabase.LoadAssetAtPath<PVPDataSO>("Assets/Editor/PVPData.asset");
+            pvpData = AssetDatabase.LoadAssetAtPath<PVPDataSO>(PVPWindow.CurrentPath + "/PVPData.asset");
         }
-        pvpData.allFiles.Add(this);
-        FileSerializationInfo.fileIndex = pvpData.allFiles.Count - 1;
+        if (fileIndex == null)
+        {
+            pvpData.allFiles.Add(this);
+            FileSerializationInfo.fileIndex = pvpData.allFiles.Count - 1;
+        }
+        else
+        {
+            pvpData.allFiles[(int)fileIndex] = this;
+            FileSerializationInfo.fileIndex = (int)fileIndex;
+        }
         FileSerializationInfo.parentFolderIndex = parentFolder.SerializationInfo.folderIndex;
+
+        if (parentFolder.SerializationInfo.childFileIndeces == null)
+            parentFolder.SerializationInfo.childFileIndeces = new List<int>();
+        parentFolder.SerializationInfo.childFileIndeces.Add(FileSerializationInfo.fileIndex);
+
+
         this.path = path;
         extension = FindExtension(path);
         fileName = FindFileName(path);
@@ -64,18 +80,33 @@ public class PVPFile
     }
     public void VisualizeFile()
     {
-        if (Selection.activeObject == fileObject)
-        {
 
-        }
-        Rect fileRect = GUILayoutUtility.GetRect(10, 25);
-        GUI.Box(fileRect,fileContent);
+
+        Rect fileRect = GUILayoutUtility.GetRect(0, PVPWindow.IconSize);
+        
         var evt = Event.current;
         if (evt.type == EventType.MouseUp && fileRect.Contains(evt.mousePosition))
         {
             Selection.activeObject = fileObject;
+            GUI.skin.box.normal.background = pvpData.PVPSettings.SelectedBackground;
+            GUI.skin.box.hover.background = pvpData.PVPSettings.SelectedBackground;
+            PVPEvents.InvokeRepaintWindowEvent();
+        }
+        else if (evt.type == EventType.MouseDown && evt.clickCount >= 2 && fileRect.Contains(evt.mousePosition))
+        {
+            AssetDatabase.OpenAsset(fileObject);
         }
         CheckForDragAndDrop(fileRect);
+        _selected = Selection.activeObject == fileObject;
+
+        if (_selected)
+        {
+            GUI.skin.box.normal.background = pvpData.PVPSettings.SelectedBackground;
+            GUI.skin.box.hover.background = pvpData.PVPSettings.SelectedBackground;
+        }
+        GUI.Box(fileRect, fileContent);
+        GUI.skin.box.normal.background = pvpData.PVPSettings.NormalBackground;
+        GUI.skin.box.hover.background = pvpData.PVPSettings.NormalBackground;
     }
 
     private void CheckForDragAndDrop(Rect dragArea)
@@ -84,33 +115,17 @@ public class PVPFile
 
         if (evt.type == EventType.MouseDrag && dragArea.Contains(evt.mousePosition))
         {
-            DragAndDrop.StartDrag($"Drag file {fileName}");
-            DragAndDrop.SetGenericData("File", fileObject);
-            Debug.Log("Start Drag on file" + fileName);
-            DragAndDrop.visualMode = DragAndDropVisualMode.Move;
-            isBeingDraged = true;
-        }
-        else if(evt.type == EventType.DragPerform && isBeingDraged)
-        {
-            if (parentFolder == null)
-            {
-                parentFolder = pvpData.allFolders[FileSerializationInfo.parentFolderIndex]; //TODO: Find the root cause of this.
-            }
-
-            if (parentFolder == null)
-            {
-                Debug.Log("Parent folder null");
-            }
-            else
-            {
-                Debug.Log("Parent folder not null");
-                parentFolder.ChildFiles.Remove(this);
-            }
-
-            
+            PVPDragAndDrop.StartDrag(this);
         }
     }
-    //
+    public int RemoveAllFileReferences()
+    {
+        var fileIndex = FileSerializationInfo.fileIndex;
+        pvpData.allFiles[fileIndex] = null;
+        parentFolder.ChildFiles.Remove(this);
+        parentFolder.SerializationInfo.childFileIndeces.Remove(FileSerializationInfo.fileIndex);
+        return fileIndex;
+    }
     public string GetPath()
     {
         return path;
