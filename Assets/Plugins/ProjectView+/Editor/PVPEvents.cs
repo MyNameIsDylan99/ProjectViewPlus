@@ -12,4 +12,5 @@ public static class PVPEvents
         if (RepaintWindowEvent != null)
             RepaintWindowEvent();
     }
+
 }

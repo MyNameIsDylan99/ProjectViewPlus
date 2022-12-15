@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Runtime.Serialization;
+using System.Linq;
+using UnityEditor;
 using UnityEngine;
-using UnityEngine.Events;
 
 public class PVPDataSO : ScriptableObject
 {
@@ -13,13 +13,20 @@ public class PVPDataSO : ScriptableObject
 
     public void OnBeforeDeserialize()
     {
+        PVPSelection.allSelectables = new List<ISelectable>();
         foreach (var file in allFiles)
         {
             file.ParentFolder = allFolders[file.FileSerializationInfo.parentFolderIndex];
+            PVPSelection.allSelectables.Add(file);
+            file.IsSelected = false;
         }
+
+        //Add child folders to folder
 
         foreach (var folder in allFolders)
         {
+            PVPSelection.allSelectables.Add(folder);
+            folder.IsSelected = false;
             var childFolders = new List<PVPFolder>();
 
             if (folder.SerializationInfo.childFolderIndeces != null)
@@ -33,6 +40,8 @@ public class PVPDataSO : ScriptableObject
 
 
             folder.ChildFolders = childFolders;
+
+            //Add child files to folder
 
             var childFiles = new List<PVPFile>();
             if (folder.SerializationInfo.childFileIndeces != null)
@@ -52,8 +61,21 @@ public class PVPDataSO : ScriptableObject
             {
                 RootFolder = folder;
             }
+
+            folder.ParentFolder = allFolders[folder.SerializationInfo.parentFolderIndex];
             
         }
+
+        //Sort selectables list
+
+        var sortedSelectables = new List<ISelectable>();
+        for(int i = 0; i < PVPSelection.allSelectables.Count; i++)
+        {
+            ISelectable selectable = PVPSelection.allSelectables.Where<ISelectable>(x => x.SelectableIndex == i).FirstOrDefault();
+           sortedSelectables.Add(selectable);
+
+        }
+        PVPSelection.allSelectables = sortedSelectables;
     }
 
 }
@@ -72,8 +94,7 @@ public struct FolderSerializationInfo
 public struct FileSerializationInfo
 {
     public int fileIndex;
-    public int parentFolderIndex;
-}
+    public int parentFolderIndex;}
 
 [Serializable]
 public struct PVPSettings

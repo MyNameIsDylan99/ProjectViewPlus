@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
@@ -8,7 +6,7 @@ public static class PVPRelativePathUtility
 
     public static string GetPathOfMonoScript(MonoScript monoScript)
     {
-
+        
         var currentPathWithName = AssetDatabase.GetAssetPath(monoScript);
         var splitCurrentPath = currentPathWithName.Split('/');
         string currentPath = "";

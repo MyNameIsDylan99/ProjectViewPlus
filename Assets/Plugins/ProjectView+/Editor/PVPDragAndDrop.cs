@@ -1,19 +1,22 @@
-using System.Collections;
+using NUnit.Framework;
 using System.Collections.Generic;
 using UnityEditor;
-using UnityEngine;
 
 /// <summary>
 /// Helper class that interacts with Unitys DragAndDrop class.
 /// </summary>
 public static class PVPDragAndDrop
 {
-    public static PVPFile DraggedFile { get; private set; }
-
-    public static void StartDrag(PVPFile draggedFile)
+    public static void StartDrag()
     {
-        DraggedFile = draggedFile;
+
         DragAndDrop.StartDrag("PVPDragAndDrop");
+        var objReferences = new List<UnityEngine.Object>();
+        foreach (var selectable in PVPSelection.SelectedElements)
+        {
+            objReferences.Add(selectable.SelectableObject);
+        }
+        DragAndDrop.objectReferences = objReferences.ToArray();
         DragAndDrop.visualMode = DragAndDropVisualMode.Move;
     }
 
@@ -21,14 +24,11 @@ public static class PVPDragAndDrop
     {
 
         DragAndDrop.AcceptDrag();
-        var fileIndex = DraggedFile.RemoveAllFileReferences();
+        foreach (var selectable in PVPSelection.SelectedElements)
+        {
+            selectable.Move(targetFolder);
+        }
 
-        var oldPath = DraggedFile.GetPath();
-        var splitName = oldPath.Split('\\');
-        var fileName = splitName[splitName.Length - 1];
-        var newPath = targetFolder.FolderPath + "\\" + fileName;
-        AssetDatabase.MoveAsset(oldPath, newPath);
-
-        targetFolder.ChildFiles.Add(new PVPFile(newPath, targetFolder, fileIndex));
     }
+    //TODO: Finish drag and drop
 }

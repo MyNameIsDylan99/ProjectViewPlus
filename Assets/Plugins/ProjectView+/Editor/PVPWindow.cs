@@ -8,14 +8,22 @@ using UnityEngine.UIElements;
 
 public class PVPWindow : EditorWindow
 {
-    private PVPDataSO pvpData;
-
+    #region Private Fields
     private string[] _categoryNames;
     private int _selectedCategoryIndex;
     private List<List<PVPFile>> _categoryFiles = new List<List<PVPFile>>();
     private Vector2 _scrollPosition;
-    public static string CurrentPath;
-    public static int IconSize;
+    #endregion
+
+    #region Properties
+    public static PVPDataSO PVPData { get; private set; }
+    public static string CurrentPath { get; private set; }
+    public static int IconSize { get; private set; }
+    public static Rect Position { get; private set; }
+
+    public static bool RepaintFlag {get; set;}
+
+    #endregion
 
     [MenuItem("Tools/ProjectView+")]
     static void OpenOverviewPlusWindow()
@@ -28,81 +36,98 @@ public class PVPWindow : EditorWindow
     {
         SubscribeToEvents();
         CurrentPath = PVPRelativePathUtility.GetPathOfScriptableObject(this);
-        pvpData = AssetDatabase.LoadAssetAtPath<PVPDataSO>(CurrentPath + "/PVPData.asset");
+        PVPData = AssetDatabase.LoadAssetAtPath<PVPDataSO>(CurrentPath + "/PVPData.asset");
 
-        if (pvpData == null)
+        if (PVPData == null)
         {
-            pvpData = PVPDataSO.CreateInstance<PVPDataSO>();
-            AssetDatabase.CreateAsset(pvpData, CurrentPath + "/PVPData.asset");
-            pvpData.PVPSettings.FolderIcon = AssetDatabase.LoadAssetAtPath<Texture2D>(CurrentPath + "/Sprites/Folder.png");
-            pvpData.PVPSettings.FoldoutIcon = AssetDatabase.LoadAssetAtPath<Texture2D>(CurrentPath + "/Sprites/FoldoutArrow.png");
-            pvpData.PVPSettings.NormalBackground = AssetDatabase.LoadAssetAtPath<Texture2D>(CurrentPath + "/Sprites/CompleteTransparent.png");
-            pvpData.PVPSettings.SelectedBackground = AssetDatabase.LoadAssetAtPath<Texture2D>(CurrentPath + "/Sprites/SelectedBackground.png");
-            pvpData.PVPSettings.GUISkin = AssetDatabase.LoadAssetAtPath<GUISkin>(CurrentPath + "/GUISkins/PVPSkin.guiskin");
+            CreateNewPVPDataInstance();
+            FetchData();
         }
 
-        Undo.RecordObject(pvpData, "projectViewPlusDataChanged");
-
-        if (pvpData.RootFolder == null)
-        {
-            pvpData.RootFolder = new PVPFolder("Assets", null, 0);
-        }
-        else
-        {
-            pvpData.OnBeforeDeserialize();
-        }
-
-        switch (pvpData.PVPSettings.IconSize)
-        {
-            case PVPSettings.IconSizes.Small:
-                IconSize = pvpData.PVPSettings.SmallSize;
-                break;
-            case PVPSettings.IconSizes.Normal:
-                IconSize = pvpData.PVPSettings.NormalSize;
-                break;
-            case PVPSettings.IconSizes.Large:
-                IconSize = pvpData.PVPSettings.LargeSize;
-                break;
-        }
-
-        AssemblyReloadEvents.afterAssemblyReload += OnAfterAssemblyReload;
+        CheckIconSize();
+        PVPData.OnBeforeDeserialize();
+        
     }
 
     private void OnAfterAssemblyReload()
     {
-        pvpData.OnBeforeDeserialize();
+        PVPData.OnBeforeDeserialize();
     }
 
     private void OnGUI()
     {
-
-        GUI.skin = pvpData.PVPSettings.GUISkin;
-
+        Position = position;
+        GUI.skin = PVPData.PVPSettings.GUISkin;
+        
         if (GUILayout.Button("Fetch data"))
         {
             FetchData();
         }
+
         _scrollPosition = GUILayout.BeginScrollView(_scrollPosition);
-        pvpData.RootFolder.VisualizeFolder();
+
+        try
+        {
+            PVPData.RootFolder.VisualizeFolder();
+        }
+        catch (Exception)
+        {
+
+        }
+        
         DisplayPopupMenu();
         GUILayout.EndScrollView();
+        EditorUtility.SetDirty(PVPData);
 
-            
+        if (RepaintFlag)
+        {
+            Repaint();
+            RepaintFlag = false;
+        }
+    }
+
+    private void CheckIconSize()
+    {
+
+        switch (PVPData.PVPSettings.IconSize)
+        {
+            case PVPSettings.IconSizes.Small:
+                IconSize = PVPData.PVPSettings.SmallSize;
+                break;
+            case PVPSettings.IconSizes.Normal:
+                IconSize = PVPData.PVPSettings.NormalSize;
+                break;
+            case PVPSettings.IconSizes.Large:
+                IconSize = PVPData.PVPSettings.LargeSize;
+                break;
+        }
     }
 
     private void SubscribeToEvents()
     {
         PVPEvents.RepaintWindowEvent += Repaint;
+        AssemblyReloadEvents.afterAssemblyReload += OnAfterAssemblyReload;
     }
     
+    private void CreateNewPVPDataInstance()
+    {
+        PVPData = PVPDataSO.CreateInstance<PVPDataSO>();
+        AssetDatabase.CreateAsset(PVPData, CurrentPath + "/PVPData.asset");
+        PVPData.PVPSettings.FolderIcon = AssetDatabase.LoadAssetAtPath<Texture2D>(CurrentPath + "/Sprites/Folder.png");
+        PVPData.PVPSettings.FoldoutIcon = AssetDatabase.LoadAssetAtPath<Texture2D>(CurrentPath + "/Sprites/FoldoutArrow.png");
+        PVPData.PVPSettings.NormalBackground = AssetDatabase.LoadAssetAtPath<Texture2D>(CurrentPath + "/Sprites/CompleteTransparent.png");
+        PVPData.PVPSettings.SelectedBackground = AssetDatabase.LoadAssetAtPath<Texture2D>(CurrentPath + "/Sprites/SelectedBackground.png");
+        PVPData.PVPSettings.GUISkin = AssetDatabase.LoadAssetAtPath<GUISkin>(CurrentPath + "/GUISkins/PVPSkin.guiskin");
+    }
 
     private void FetchData()
     {
-        Undo.RecordObject(pvpData, "projectViewPlusDataChanged");
-        pvpData.RootFolder = null;
-        pvpData.allFolders = new List<PVPFolder>();
-        pvpData.allFiles = new List<PVPFile>();
-        pvpData.RootFolder = new PVPFolder("Assets", null, 0);
+        Undo.RecordObject(PVPData, "projectViewPlusDataChanged");
+        PVPData.RootFolder = null;
+        PVPData.allFolders = new List<PVPFolder>();
+        PVPData.allFiles = new List<PVPFile>();
+        PVPSelection.allSelectables = new List<ISelectable>();
+        PVPData.RootFolder = new PVPFolder("Assets", null, 0); //
     }
 
     public void DropAreaGUI()
