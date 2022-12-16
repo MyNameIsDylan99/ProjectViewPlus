@@ -20,7 +20,6 @@ public class PVPContextMenu
         contextMenu.AddItem(new GUIContent("Create/ScriptableObject"), false, CreateScriptableObject);
         contextMenu.AddItem(new GUIContent("Create/Scene"), false, CreateScene);
         contextMenu.AddItem(new GUIContent("Create/GUISkin"), false, CreateGUISkin);
-
         
     }
 
@@ -49,7 +48,18 @@ public class PVPContextMenu
     }
 
     private void CreateScript() {
-        selectedFolder.AddPreviewChildFile(new MonoScript());
+
+        // Create a new text file with the code for a MonoBehaviour script
+        string path = "Assets/MyScript.cs";
+        File.WriteAllText(path, @"using UnityEngine;
+
+public class MyScript : MonoBehaviour
+{
+    // Your code here...
+}");
+
+        // Import the text file as a script asset
+        AssetDatabase.ImportAsset(path);
     }
 
     public void DisplayContextMenu() {
