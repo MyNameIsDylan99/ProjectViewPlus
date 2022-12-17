@@ -31,15 +31,16 @@ MonoBehaviour:
     _depth: 0
     _childFoldersAreTabs: 0
     _filters: []
-    selectableObject: {fileID: 102900000, guid: 00000000000000001000000000000000, type: 3}
+    selectableUnityObject: {fileID: 102900000, guid: 00000000000000001000000000000000, type: 3}
     selectionRect:
       serializedVersion: 2
       x: 0
       y: 0
-      width: 787
+      width: 1906
       height: 25
     isVisible: 1
     selectableIndex: 0
+    isFile: 0
   - SerializationInfo:
       parentFolderIndex: 0
       folderIndex: 1
@@ -58,15 +59,16 @@ MonoBehaviour:
     _depth: 1
     _childFoldersAreTabs: 0
     _filters: []
-    selectableObject: {fileID: 102900000, guid: bdb11fdbed3c646418eea6c959f3b952, type: 3}
+    selectableUnityObject: {fileID: 102900000, guid: bdb11fdbed3c646418eea6c959f3b952, type: 3}
     selectionRect:
       serializedVersion: 2
       x: 0
       y: 50
-      width: 787
+      width: 1906
       height: 25
     isVisible: 1
     selectableIndex: 2
+    isFile: 0
   - SerializationInfo:
       parentFolderIndex: 1
       folderIndex: 2
@@ -85,20 +87,21 @@ MonoBehaviour:
     _depth: 2
     _childFoldersAreTabs: 0
     _filters: []
-    selectableObject: {fileID: 102900000, guid: 448a4bc250cbb6f4492b597590b1bdf5, type: 3}
+    selectableUnityObject: {fileID: 102900000, guid: 448a4bc250cbb6f4492b597590b1bdf5, type: 3}
     selectionRect:
       serializedVersion: 2
       x: 0
-      y: 0
-      width: 1
-      height: 1
-    isVisible: 0
+      y: 75
+      width: 1906
+      height: 25
+    isVisible: 1
     selectableIndex: 3
+    isFile: 0
   - SerializationInfo:
       parentFolderIndex: 2
       folderIndex: 3
       childFolderIndeces: 040000000500000008000000
-      childFileIndeces: 0100000002000000030000000400000005000000060000000700000008000000090000000a0000000b000000
+      childFileIndeces: 0100000002000000030000000400000005000000060000000700000008000000090000000a0000000b0000000c0000000d000000
     _folderPath: Assets\Plugins\ProjectView+\Editor
     _folderName: Editor
     _folderContent:
@@ -112,20 +115,21 @@ MonoBehaviour:
     _depth: 3
     _childFoldersAreTabs: 0
     _filters: []
-    selectableObject: {fileID: 102900000, guid: 50522a65de4a93f47898a000d79fab05, type: 3}
+    selectableUnityObject: {fileID: 102900000, guid: 50522a65de4a93f47898a000d79fab05, type: 3}
     selectionRect:
       serializedVersion: 2
       x: 0
-      y: 0
-      width: 1
-      height: 1
-    isVisible: 0
+      y: 100
+      width: 1906
+      height: 25
+    isVisible: 1
     selectableIndex: 4
+    isFile: 0
   - SerializationInfo:
       parentFolderIndex: 3
       folderIndex: 4
       childFolderIndeces: 
-      childFileIndeces: 0c000000
+      childFileIndeces: 0e0000000f00000010000000
     _folderPath: Assets\Plugins\ProjectView+\Editor\GUISkins
     _folderName: GUISkins
     _folderContent:
@@ -139,20 +143,21 @@ MonoBehaviour:
     _depth: 4
     _childFoldersAreTabs: 0
     _filters: []
-    selectableObject: {fileID: 102900000, guid: 2c17e4804b9d5f44494e3d5cca44916a, type: 3}
+    selectableUnityObject: {fileID: 102900000, guid: 2c17e4804b9d5f44494e3d5cca44916a, type: 3}
     selectionRect:
       serializedVersion: 2
       x: 0
-      y: 0
-      width: 1
-      height: 1
-    isVisible: 0
-    selectableIndex: 16
+      y: 450
+      width: 1906
+      height: 25
+    isVisible: 1
+    selectableIndex: 18
+    isFile: 0
   - SerializationInfo:
       parentFolderIndex: 3
       folderIndex: 5
       childFolderIndeces: 06000000
-      childFileIndeces: 0d0000000e0000000f000000
+      childFileIndeces: 11000000120000001300000014000000150000001600000017000000
     _folderPath: Assets\Plugins\ProjectView+\Editor\Samples
     _folderName: Samples
     _folderContent:
@@ -166,20 +171,21 @@ MonoBehaviour:
     _depth: 4
     _childFoldersAreTabs: 0
     _filters: []
-    selectableObject: {fileID: 102900000, guid: 418aa122b8b38574f97d589dd106d8fe, type: 3}
+    selectableUnityObject: {fileID: 102900000, guid: 418aa122b8b38574f97d589dd106d8fe, type: 3}
     selectionRect:
       serializedVersion: 2
       x: 0
-      y: 0
-      width: 1
-      height: 1
-    isVisible: 0
-    selectableIndex: 18
+      y: 550
+      width: 1906
+      height: 25
+    isVisible: 1
+    selectableIndex: 22
+    isFile: 0
   - SerializationInfo:
       parentFolderIndex: 5
       folderIndex: 6
       childFolderIndeces: 07000000
-      childFileIndeces: 1000000011000000
+      childFileIndeces: 18000000190000001a0000001b0000001c0000001d000000
     _folderPath: Assets\Plugins\ProjectView+\Editor\Samples\LaTest
     _folderName: LaTest
     _folderContent:
@@ -193,26 +199,27 @@ MonoBehaviour:
     _depth: 5
     _childFoldersAreTabs: 0
     _filters: []
-    selectableObject: {fileID: 102900000, guid: 742126675716e2349897bf50141e1c23, type: 3}
+    selectableUnityObject: {fileID: 102900000, guid: 742126675716e2349897bf50141e1c23, type: 3}
     selectionRect:
       serializedVersion: 2
       x: 0
       y: 0
-      width: 1
-      height: 1
-    isVisible: 1
-    selectableIndex: 22
+      width: 0
+      height: 0
+    isVisible: 0
+    selectableIndex: 30
+    isFile: 0
   - SerializationInfo:
       parentFolderIndex: 6
       folderIndex: 7
       childFolderIndeces: 
-      childFileIndeces: 
+      childFileIndeces: 1e000000
     _folderPath: Assets\Plugins\ProjectView+\Editor\Samples\LaTest\New Folder
     _folderName: New Folder
     _folderContent:
       m_Text: New Folder
       m_Image: {fileID: 2800000, guid: bea1d6254b7ecdf4eb81bf72132130e9, type: 3}
-      m_Tooltip: Assets\Plugins\ProjectView+\Editor\Samples\New Folder
+      m_Tooltip: Assets\Plugins\ProjectView+\Editor\Samples\LaTest\New Folder
     _foldoutContent:
       m_Text: 
       m_Image: {fileID: 2800000, guid: 6cee8f0b27f85534d88779b7246c667b, type: 3}
@@ -220,20 +227,21 @@ MonoBehaviour:
     _depth: 6
     _childFoldersAreTabs: 0
     _filters: []
-    selectableObject: {fileID: 102900000, guid: ff8cb19da8fe40547904b59a9c0a409b, type: 3}
+    selectableUnityObject: {fileID: 102900000, guid: ff8cb19da8fe40547904b59a9c0a409b, type: 3}
     selectionRect:
       serializedVersion: 2
       x: 0
       y: 0
-      width: 1
-      height: 1
-    isVisible: 1
-    selectableIndex: 25
+      width: 0
+      height: 0
+    isVisible: 0
+    selectableIndex: 37
+    isFile: 0
   - SerializationInfo:
       parentFolderIndex: 3
       folderIndex: 8
       childFolderIndeces: 
-      childFileIndeces: 1200000013000000140000001500000016000000
+      childFileIndeces: 1f00000020000000210000002200000023000000
     _folderPath: Assets\Plugins\ProjectView+\Editor\Sprites
     _folderName: Sprites
     _folderContent:
@@ -247,20 +255,21 @@ MonoBehaviour:
     _depth: 4
     _childFoldersAreTabs: 0
     _filters: []
-    selectableObject: {fileID: 102900000, guid: 24938c3cb8b39034c94f8ab27a319da4, type: 3}
+    selectableUnityObject: {fileID: 102900000, guid: 24938c3cb8b39034c94f8ab27a319da4, type: 3}
     selectionRect:
       serializedVersion: 2
       x: 0
-      y: 0
-      width: 1
-      height: 1
-    isVisible: 0
-    selectableIndex: 26
+      y: 575
+      width: 1906
+      height: 25
+    isVisible: 1
+    selectableIndex: 39
+    isFile: 0
   - SerializationInfo:
       parentFolderIndex: 0
       folderIndex: 9
       childFolderIndeces: 
-      childFileIndeces: 17000000
+      childFileIndeces: 24000000
     _folderPath: Assets\Scenes
     _folderName: Scenes
     _folderContent:
@@ -274,15 +283,16 @@ MonoBehaviour:
     _depth: 1
     _childFoldersAreTabs: 0
     _filters: []
-    selectableObject: {fileID: 102900000, guid: f78aa477e102c0340b80303bff7ca231, type: 3}
+    selectableUnityObject: {fileID: 102900000, guid: f78aa477e102c0340b80303bff7ca231, type: 3}
     selectionRect:
       serializedVersion: 2
       x: 0
-      y: 75
-      width: 787
+      y: 600
+      width: 1906
       height: 25
     isVisible: 1
-    selectableIndex: 32
+    selectableIndex: 45
+    isFile: 0
   allFiles:
   - FileSerializationInfo:
       fileIndex: 0
@@ -300,10 +310,11 @@ MonoBehaviour:
       serializedVersion: 2
       x: 0
       y: 25
-      width: 787
+      width: 1906
       height: 25
     isVisible: 1
     selectableIndex: 1
+    isFile: 1
   - FileSerializationInfo:
       fileIndex: 1
       parentFolderIndex: 3
@@ -319,11 +330,12 @@ MonoBehaviour:
     selectionRect:
       serializedVersion: 2
       x: 0
-      y: 0
-      width: 1
-      height: 1
-    isVisible: 0
+      y: 125
+      width: 1906
+      height: 25
+    isVisible: 1
     selectableIndex: 5
+    isFile: 1
   - FileSerializationInfo:
       fileIndex: 2
       parentFolderIndex: 3
@@ -339,13 +351,56 @@ MonoBehaviour:
     selectionRect:
       serializedVersion: 2
       x: 0
-      y: 0
-      width: 1
-      height: 1
-    isVisible: 0
+      y: 150
+      width: 1906
+      height: 25
+    isVisible: 1
     selectableIndex: 6
+    isFile: 1
   - FileSerializationInfo:
       fileIndex: 3
+      parentFolderIndex: 3
+    path: Assets\Plugins\ProjectView+\Editor\NewScene.unity
+    extension: unity
+    fileName: NewScene
+    fileIcon: {fileID: 985423054452513129, guid: 0000000000000000d000000000000000, type: 0}
+    fileContent:
+      m_Text: NewScene
+      m_Image: {fileID: 985423054452513129, guid: 0000000000000000d000000000000000, type: 0}
+      m_Tooltip: Assets\Plugins\ProjectView+\Editor\NewScene.unity
+    selectableObject: {fileID: 102900000, guid: fdd3ec8eab1ed674d9b276304fb7dee6, type: 3}
+    selectionRect:
+      serializedVersion: 2
+      x: 0
+      y: 175
+      width: 1906
+      height: 25
+    isVisible: 1
+    selectableIndex: 7
+    isFile: 1
+  - FileSerializationInfo:
+      fileIndex: 4
+      parentFolderIndex: 3
+    path: Assets\Plugins\ProjectView+\Editor\PVPContextMenu.cs
+    extension: cs
+    fileName: PVPContextMenu
+    fileIcon: {fileID: -8204150473280056172, guid: 0000000000000000d000000000000000, type: 0}
+    fileContent:
+      m_Text: PVPContextMenu
+      m_Image: {fileID: -8204150473280056172, guid: 0000000000000000d000000000000000, type: 0}
+      m_Tooltip: Assets\Plugins\ProjectView+\Editor\PVPContextMenu.cs
+    selectableObject: {fileID: 11500000, guid: 5744f03c9b778074da25596aba73ae2a, type: 3}
+    selectionRect:
+      serializedVersion: 2
+      x: 0
+      y: 200
+      width: 1906
+      height: 25
+    isVisible: 1
+    selectableIndex: 8
+    isFile: 1
+  - FileSerializationInfo:
+      fileIndex: 5
       parentFolderIndex: 3
     path: Assets\Plugins\ProjectView+\Editor\PVPData.asset
     extension: asset
@@ -359,13 +414,14 @@ MonoBehaviour:
     selectionRect:
       serializedVersion: 2
       x: 0
-      y: 0
-      width: 1
-      height: 1
-    isVisible: 0
-    selectableIndex: 7
+      y: 225
+      width: 1906
+      height: 25
+    isVisible: 1
+    selectableIndex: 9
+    isFile: 1
   - FileSerializationInfo:
-      fileIndex: 4
+      fileIndex: 6
       parentFolderIndex: 3
     path: Assets\Plugins\ProjectView+\Editor\PVPDataSO.cs
     extension: cs
@@ -379,13 +435,14 @@ MonoBehaviour:
     selectionRect:
       serializedVersion: 2
       x: 0
-      y: 0
-      width: 1
-      height: 1
-    isVisible: 0
-    selectableIndex: 8
+      y: 250
+      width: 1906
+      height: 25
+    isVisible: 1
+    selectableIndex: 10
+    isFile: 1
   - FileSerializationInfo:
-      fileIndex: 5
+      fileIndex: 7
       parentFolderIndex: 3
     path: Assets\Plugins\ProjectView+\Editor\PVPDragAndDrop.cs
     extension: cs
@@ -399,13 +456,14 @@ MonoBehaviour:
     selectionRect:
       serializedVersion: 2
       x: 0
-      y: 0
-      width: 1
-      height: 1
-    isVisible: 0
-    selectableIndex: 9
+      y: 275
+      width: 1906
+      height: 25
+    isVisible: 1
+    selectableIndex: 11
+    isFile: 1
   - FileSerializationInfo:
-      fileIndex: 6
+      fileIndex: 8
       parentFolderIndex: 3
     path: Assets\Plugins\ProjectView+\Editor\PVPEvents.cs
     extension: cs
@@ -419,13 +477,14 @@ MonoBehaviour:
     selectionRect:
       serializedVersion: 2
       x: 0
-      y: 0
-      width: 1
-      height: 1
-    isVisible: 0
-    selectableIndex: 10
+      y: 300
+      width: 1906
+      height: 25
+    isVisible: 1
+    selectableIndex: 12
+    isFile: 1
   - FileSerializationInfo:
-      fileIndex: 7
+      fileIndex: 9
       parentFolderIndex: 3
     path: Assets\Plugins\ProjectView+\Editor\PVPFile.cs
     extension: cs
@@ -439,13 +498,14 @@ MonoBehaviour:
     selectionRect:
       serializedVersion: 2
       x: 0
-      y: 0
-      width: 1
-      height: 1
-    isVisible: 0
-    selectableIndex: 11
+      y: 325
+      width: 1906
+      height: 25
+    isVisible: 1
+    selectableIndex: 13
+    isFile: 1
   - FileSerializationInfo:
-      fileIndex: 8
+      fileIndex: 10
       parentFolderIndex: 3
     path: Assets\Plugins\ProjectView+\Editor\PVPFolder.cs
     extension: cs
@@ -459,33 +519,35 @@ MonoBehaviour:
     selectionRect:
       serializedVersion: 2
       x: 0
-      y: 0
-      width: 1
-      height: 1
-    isVisible: 0
-    selectableIndex: 12
+      y: 350
+      width: 1906
+      height: 25
+    isVisible: 1
+    selectableIndex: 14
+    isFile: 1
   - FileSerializationInfo:
-      fileIndex: 9
+      fileIndex: 11
       parentFolderIndex: 3
-    path: Assets\Plugins\ProjectView+\Editor\PVPRelativePathUtility.cs
+    path: Assets\Plugins\ProjectView+\Editor\PVPPathUtility.cs
     extension: cs
-    fileName: PVPRelativePathUtility
+    fileName: PVPPathUtility
     fileIcon: {fileID: -8204150473280056172, guid: 0000000000000000d000000000000000, type: 0}
     fileContent:
-      m_Text: PVPRelativePathUtility
+      m_Text: PVPPathUtility
       m_Image: {fileID: -8204150473280056172, guid: 0000000000000000d000000000000000, type: 0}
-      m_Tooltip: Assets\Plugins\ProjectView+\Editor\PVPRelativePathUtility.cs
+      m_Tooltip: Assets\Plugins\ProjectView+\Editor\PVPPathUtility.cs
     selectableObject: {fileID: 11500000, guid: 768d0f35105f0be4698364ab2f7e1e32, type: 3}
     selectionRect:
       serializedVersion: 2
       x: 0
-      y: 0
-      width: 1
-      height: 1
-    isVisible: 0
-    selectableIndex: 13
+      y: 375
+      width: 1906
+      height: 25
+    isVisible: 1
+    selectableIndex: 15
+    isFile: 1
   - FileSerializationInfo:
-      fileIndex: 10
+      fileIndex: 12
       parentFolderIndex: 3
     path: Assets\Plugins\ProjectView+\Editor\PVPSelection.cs
     extension: cs
@@ -499,13 +561,14 @@ MonoBehaviour:
     selectionRect:
       serializedVersion: 2
       x: 0
-      y: 0
-      width: 1
-      height: 1
-    isVisible: 0
-    selectableIndex: 14
+      y: 400
+      width: 1906
+      height: 25
+    isVisible: 1
+    selectableIndex: 16
+    isFile: 1
   - FileSerializationInfo:
-      fileIndex: 11
+      fileIndex: 13
       parentFolderIndex: 3
     path: Assets\Plugins\ProjectView+\Editor\PVPWindow.cs
     extension: cs
@@ -519,13 +582,56 @@ MonoBehaviour:
     selectionRect:
       serializedVersion: 2
       x: 0
-      y: 0
-      width: 1
-      height: 1
-    isVisible: 0
-    selectableIndex: 15
+      y: 425
+      width: 1906
+      height: 25
+    isVisible: 1
+    selectableIndex: 17
+    isFile: 1
   - FileSerializationInfo:
-      fileIndex: 12
+      fileIndex: 14
+      parentFolderIndex: 4
+    path: Assets\Plugins\ProjectView+\Editor\GUISkins\NewScene.unity
+    extension: unity
+    fileName: NewScene
+    fileIcon: {fileID: 985423054452513129, guid: 0000000000000000d000000000000000, type: 0}
+    fileContent:
+      m_Text: NewScene
+      m_Image: {fileID: 985423054452513129, guid: 0000000000000000d000000000000000, type: 0}
+      m_Tooltip: Assets\Plugins\ProjectView+\Editor\GUISkins\NewScene.unity
+    selectableObject: {fileID: 102900000, guid: 49fa4a92a80b84b45af91817e8047c1f, type: 3}
+    selectionRect:
+      serializedVersion: 2
+      x: 0
+      y: 475
+      width: 1906
+      height: 25
+    isVisible: 1
+    selectableIndex: 19
+    isFile: 1
+  - FileSerializationInfo:
+      fileIndex: 15
+      parentFolderIndex: 4
+    path: Assets\Plugins\ProjectView+\Editor\GUISkins\NewScene1.unity
+    extension: unity
+    fileName: NewScene1
+    fileIcon: {fileID: 985423054452513129, guid: 0000000000000000d000000000000000, type: 0}
+    fileContent:
+      m_Text: NewScene1
+      m_Image: {fileID: 985423054452513129, guid: 0000000000000000d000000000000000, type: 0}
+      m_Tooltip: Assets\Plugins\ProjectView+\Editor\GUISkins\NewScene1.unity
+    selectableObject: {fileID: 102900000, guid: 754df3725d4a03746b4909f0de04f554, type: 3}
+    selectionRect:
+      serializedVersion: 2
+      x: 0
+      y: 500
+      width: 1906
+      height: 25
+    isVisible: 1
+    selectableIndex: 20
+    isFile: 1
+  - FileSerializationInfo:
+      fileIndex: 16
       parentFolderIndex: 4
     path: Assets\Plugins\ProjectView+\Editor\GUISkins\PVPSkin.guiskin
     extension: guiskin
@@ -539,13 +645,14 @@ MonoBehaviour:
     selectionRect:
       serializedVersion: 2
       x: 0
-      y: 0
-      width: 1
-      height: 1
+      y: 525
+      width: 1906
+      height: 25
     isVisible: 1
-    selectableIndex: 17
+    selectableIndex: 21
+    isFile: 1
   - FileSerializationInfo:
-      fileIndex: 13
+      fileIndex: 17
       parentFolderIndex: 5
     path: Assets\Plugins\ProjectView+\Editor\Samples\New Material 3.mat
     extension: mat
@@ -560,12 +667,13 @@ MonoBehaviour:
       serializedVersion: 2
       x: 0
       y: 0
-      width: 1
-      height: 1
-    isVisible: 1
-    selectableIndex: 19
+      width: 0
+      height: 0
+    isVisible: 0
+    selectableIndex: 23
+    isFile: 1
   - FileSerializationInfo:
-      fileIndex: 14
+      fileIndex: 18
       parentFolderIndex: 5
     path: Assets\Plugins\ProjectView+\Editor\Samples\New Material 4.mat
     extension: mat
@@ -580,12 +688,13 @@ MonoBehaviour:
       serializedVersion: 2
       x: 0
       y: 0
-      width: 1
-      height: 1
-    isVisible: 1
-    selectableIndex: 20
+      width: 0
+      height: 0
+    isVisible: 0
+    selectableIndex: 24
+    isFile: 1
   - FileSerializationInfo:
-      fileIndex: 15
+      fileIndex: 19
       parentFolderIndex: 5
     path: Assets\Plugins\ProjectView+\Editor\Samples\New Material 5.mat
     extension: mat
@@ -600,12 +709,97 @@ MonoBehaviour:
       serializedVersion: 2
       x: 0
       y: 0
-      width: 1
-      height: 1
-    isVisible: 1
-    selectableIndex: 21
+      width: 0
+      height: 0
+    isVisible: 0
+    selectableIndex: 25
+    isFile: 1
   - FileSerializationInfo:
-      fileIndex: 16
+      fileIndex: 20
+      parentFolderIndex: 5
+    path: Assets\Plugins\ProjectView+\Editor\Samples\NewMaterial.mat
+    extension: mat
+    fileName: NewMaterial
+    fileIcon: {fileID: 5596697988196858232, guid: 0000000000000000d000000000000000, type: 0}
+    fileContent:
+      m_Text: NewMaterial
+      m_Image: {fileID: 5596697988196858232, guid: 0000000000000000d000000000000000, type: 0}
+      m_Tooltip: Assets\Plugins\ProjectView+\Editor\Samples\NewMaterial.mat
+    selectableObject: {fileID: 2100000, guid: b255c943d96312f4ea14b9be266f8638, type: 2}
+    selectionRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    isVisible: 0
+    selectableIndex: 26
+    isFile: 1
+  - FileSerializationInfo:
+      fileIndex: 21
+      parentFolderIndex: 5
+    path: Assets\Plugins\ProjectView+\Editor\Samples\NewMaterial1.mat
+    extension: mat
+    fileName: NewMaterial1
+    fileIcon: {fileID: 5596697988196858232, guid: 0000000000000000d000000000000000, type: 0}
+    fileContent:
+      m_Text: NewMaterial1
+      m_Image: {fileID: 5596697988196858232, guid: 0000000000000000d000000000000000, type: 0}
+      m_Tooltip: Assets\Plugins\ProjectView+\Editor\Samples\NewMaterial1.mat
+    selectableObject: {fileID: 2100000, guid: f40c117b1d105b84a82904aeb5d38b5d, type: 2}
+    selectionRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    isVisible: 0
+    selectableIndex: 27
+    isFile: 1
+  - FileSerializationInfo:
+      fileIndex: 22
+      parentFolderIndex: 5
+    path: Assets\Plugins\ProjectView+\Editor\Samples\NewScript2.cs
+    extension: cs
+    fileName: NewScript2
+    fileIcon: {fileID: -8204150473280056172, guid: 0000000000000000d000000000000000, type: 0}
+    fileContent:
+      m_Text: NewScript2
+      m_Image: {fileID: -8204150473280056172, guid: 0000000000000000d000000000000000, type: 0}
+      m_Tooltip: Assets\Plugins\ProjectView+\Editor\Samples\NewScript2.cs
+    selectableObject: {fileID: 11500000, guid: ae1ade5743c02b4478181a22d8f6058a, type: 3}
+    selectionRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    isVisible: 0
+    selectableIndex: 28
+    isFile: 1
+  - FileSerializationInfo:
+      fileIndex: 23
+      parentFolderIndex: 5
+    path: Assets\Plugins\ProjectView+\Editor\Samples\NewScript3.cs
+    extension: cs
+    fileName: NewScript3
+    fileIcon: {fileID: -8204150473280056172, guid: 0000000000000000d000000000000000, type: 0}
+    fileContent:
+      m_Text: NewScript3
+      m_Image: {fileID: -8204150473280056172, guid: 0000000000000000d000000000000000, type: 0}
+      m_Tooltip: Assets\Plugins\ProjectView+\Editor\Samples\NewScript3.cs
+    selectableObject: {fileID: 11500000, guid: 287ca852b1bf3014cb016f15ac2514a9, type: 3}
+    selectionRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    isVisible: 0
+    selectableIndex: 29
+    isFile: 1
+  - FileSerializationInfo:
+      fileIndex: 24
       parentFolderIndex: 6
     path: Assets\Plugins\ProjectView+\Editor\Samples\LaTest\New Material 1.mat
     extension: mat
@@ -620,12 +814,13 @@ MonoBehaviour:
       serializedVersion: 2
       x: 0
       y: 0
-      width: 1
-      height: 1
-    isVisible: 1
-    selectableIndex: 23
+      width: 0
+      height: 0
+    isVisible: 0
+    selectableIndex: 31
+    isFile: 1
   - FileSerializationInfo:
-      fileIndex: 17
+      fileIndex: 25
       parentFolderIndex: 6
     path: Assets\Plugins\ProjectView+\Editor\Samples\LaTest\New Material 2.mat
     extension: mat
@@ -640,12 +835,118 @@ MonoBehaviour:
       serializedVersion: 2
       x: 0
       y: 0
-      width: 1
-      height: 1
-    isVisible: 1
-    selectableIndex: 24
+      width: 0
+      height: 0
+    isVisible: 0
+    selectableIndex: 32
+    isFile: 1
   - FileSerializationInfo:
-      fileIndex: 18
+      fileIndex: 26
+      parentFolderIndex: 6
+    path: Assets\Plugins\ProjectView+\Editor\Samples\LaTest\NewMaterial.mat
+    extension: mat
+    fileName: NewMaterial
+    fileIcon: {fileID: 5596697988196858232, guid: 0000000000000000d000000000000000, type: 0}
+    fileContent:
+      m_Text: NewMaterial
+      m_Image: {fileID: 5596697988196858232, guid: 0000000000000000d000000000000000, type: 0}
+      m_Tooltip: Assets\Plugins\ProjectView+\Editor\Samples\LaTest\NewMaterial.mat
+    selectableObject: {fileID: 2100000, guid: 73c27eb65e515b746be9945df144604f, type: 2}
+    selectionRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    isVisible: 0
+    selectableIndex: 33
+    isFile: 1
+  - FileSerializationInfo:
+      fileIndex: 27
+      parentFolderIndex: 6
+    path: Assets\Plugins\ProjectView+\Editor\Samples\LaTest\NewMaterial1.mat
+    extension: mat
+    fileName: NewMaterial1
+    fileIcon: {fileID: 5596697988196858232, guid: 0000000000000000d000000000000000, type: 0}
+    fileContent:
+      m_Text: NewMaterial1
+      m_Image: {fileID: 5596697988196858232, guid: 0000000000000000d000000000000000, type: 0}
+      m_Tooltip: Assets\Plugins\ProjectView+\Editor\Samples\LaTest\NewMaterial1.mat
+    selectableObject: {fileID: 2100000, guid: 84943c6420dab5d4faff777be7550c58, type: 2}
+    selectionRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    isVisible: 0
+    selectableIndex: 34
+    isFile: 1
+  - FileSerializationInfo:
+      fileIndex: 28
+      parentFolderIndex: 6
+    path: Assets\Plugins\ProjectView+\Editor\Samples\LaTest\NewMaterial2.mat
+    extension: mat
+    fileName: NewMaterial2
+    fileIcon: {fileID: 5596697988196858232, guid: 0000000000000000d000000000000000, type: 0}
+    fileContent:
+      m_Text: NewMaterial2
+      m_Image: {fileID: 5596697988196858232, guid: 0000000000000000d000000000000000, type: 0}
+      m_Tooltip: Assets\Plugins\ProjectView+\Editor\Samples\LaTest\NewMaterial2.mat
+    selectableObject: {fileID: 2100000, guid: e7519f31ad66cfb4dba4942047abc120, type: 2}
+    selectionRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    isVisible: 0
+    selectableIndex: 35
+    isFile: 1
+  - FileSerializationInfo:
+      fileIndex: 29
+      parentFolderIndex: 6
+    path: Assets\Plugins\ProjectView+\Editor\Samples\LaTest\NewScript1.cs
+    extension: cs
+    fileName: NewScript1
+    fileIcon: {fileID: -8204150473280056172, guid: 0000000000000000d000000000000000, type: 0}
+    fileContent:
+      m_Text: NewScript1
+      m_Image: {fileID: -8204150473280056172, guid: 0000000000000000d000000000000000, type: 0}
+      m_Tooltip: Assets\Plugins\ProjectView+\Editor\Samples\LaTest\NewScript1.cs
+    selectableObject: {fileID: 11500000, guid: b7c66eee35f37444d8a3219ed3e40a10, type: 3}
+    selectionRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    isVisible: 0
+    selectableIndex: 36
+    isFile: 1
+  - FileSerializationInfo:
+      fileIndex: 30
+      parentFolderIndex: 7
+    path: Assets\Plugins\ProjectView+\Editor\Samples\LaTest\New Folder\Blob.cs
+    extension: cs
+    fileName: Blob
+    fileIcon: {fileID: -8204150473280056172, guid: 0000000000000000d000000000000000, type: 0}
+    fileContent:
+      m_Text: Blob
+      m_Image: {fileID: -8204150473280056172, guid: 0000000000000000d000000000000000, type: 0}
+      m_Tooltip: Assets\Plugins\ProjectView+\Editor\Samples\LaTest\New Folder\Blob.cs
+    selectableObject: {fileID: 11500000, guid: 686b7f26a52273844a0bd440d8283685, type: 3}
+    selectionRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    isVisible: 0
+    selectableIndex: 38
+    isFile: 1
+  - FileSerializationInfo:
+      fileIndex: 31
       parentFolderIndex: 8
     path: Assets\Plugins\ProjectView+\Editor\Sprites\CompleteTransparent.png
     extension: png
@@ -660,12 +961,13 @@ MonoBehaviour:
       serializedVersion: 2
       x: 0
       y: 0
-      width: 1
-      height: 1
-    isVisible: 1
-    selectableIndex: 27
+      width: 0
+      height: 0
+    isVisible: 0
+    selectableIndex: 40
+    isFile: 1
   - FileSerializationInfo:
-      fileIndex: 19
+      fileIndex: 32
       parentFolderIndex: 8
     path: Assets\Plugins\ProjectView+\Editor\Sprites\Folder.png
     extension: png
@@ -680,12 +982,13 @@ MonoBehaviour:
       serializedVersion: 2
       x: 0
       y: 0
-      width: 1
-      height: 1
-    isVisible: 1
-    selectableIndex: 28
+      width: 0
+      height: 0
+    isVisible: 0
+    selectableIndex: 41
+    isFile: 1
   - FileSerializationInfo:
-      fileIndex: 20
+      fileIndex: 33
       parentFolderIndex: 8
     path: Assets\Plugins\ProjectView+\Editor\Sprites\FoldoutArrow.png
     extension: png
@@ -700,12 +1003,13 @@ MonoBehaviour:
       serializedVersion: 2
       x: 0
       y: 0
-      width: 1
-      height: 1
-    isVisible: 1
-    selectableIndex: 29
+      width: 0
+      height: 0
+    isVisible: 0
+    selectableIndex: 42
+    isFile: 1
   - FileSerializationInfo:
-      fileIndex: 21
+      fileIndex: 34
       parentFolderIndex: 8
     path: Assets\Plugins\ProjectView+\Editor\Sprites\New Material.mat
     extension: mat
@@ -720,12 +1024,13 @@ MonoBehaviour:
       serializedVersion: 2
       x: 0
       y: 0
-      width: 1
-      height: 1
-    isVisible: 1
-    selectableIndex: 30
+      width: 0
+      height: 0
+    isVisible: 0
+    selectableIndex: 43
+    isFile: 1
   - FileSerializationInfo:
-      fileIndex: 22
+      fileIndex: 35
       parentFolderIndex: 8
     path: Assets\Plugins\ProjectView+\Editor\Sprites\SelectedBackground.png
     extension: png
@@ -740,12 +1045,13 @@ MonoBehaviour:
       serializedVersion: 2
       x: 0
       y: 0
-      width: 1
-      height: 1
-    isVisible: 1
-    selectableIndex: 31
+      width: 0
+      height: 0
+    isVisible: 0
+    selectableIndex: 44
+    isFile: 1
   - FileSerializationInfo:
-      fileIndex: 23
+      fileIndex: 36
       parentFolderIndex: 9
     path: Assets\Scenes\SampleScene.unity
     extension: unity
@@ -763,7 +1069,8 @@ MonoBehaviour:
       width: 0
       height: 0
     isVisible: 0
-    selectableIndex: 33
+    selectableIndex: 46
+    isFile: 1
   RootFolder:
     SerializationInfo:
       parentFolderIndex: 0
@@ -783,18 +1090,19 @@ MonoBehaviour:
     _depth: 0
     _childFoldersAreTabs: 0
     _filters: []
-    selectableObject: {fileID: 102900000, guid: 00000000000000001000000000000000, type: 3}
+    selectableUnityObject: {fileID: 102900000, guid: 00000000000000001000000000000000, type: 3}
     selectionRect:
       serializedVersion: 2
       x: 0
       y: 0
-      width: 787
+      width: 1906
       height: 25
     isVisible: 1
     selectableIndex: 0
+    isFile: 0
   PVPSettings:
-    SmallSize: 20
-    NormalSize: 25
+    SmallSize: 25
+    NormalSize: 0
     LargeSize: 0
     FilesPerRow: 1
     FolderIcon: {fileID: 2800000, guid: bea1d6254b7ecdf4eb81bf72132130e9, type: 3}
@@ -802,4 +1110,4 @@ MonoBehaviour:
     NormalBackground: {fileID: 2800000, guid: 912ae41f3ff0fd1469af1a45d886465a, type: 3}
     SelectedBackground: {fileID: 2800000, guid: 697fa5a8addc1cd498f50fece7b8ee5a, type: 3}
     GUISkin: {fileID: 11400000, guid: a704c2ae3121ceb4ea0bfb7bfb1fdd7f, type: 2}
-    IconSize: 1
+    IconSize: 0

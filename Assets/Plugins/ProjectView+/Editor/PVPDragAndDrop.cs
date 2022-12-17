@@ -14,7 +14,7 @@ public static class PVPDragAndDrop
         var objReferences = new List<UnityEngine.Object>();
         foreach (var selectable in PVPSelection.SelectedElements)
         {
-            objReferences.Add(selectable.SelectableObject);
+            objReferences.Add(selectable.SelectableUnityObject);
         }
         DragAndDrop.objectReferences = objReferences.ToArray();
         DragAndDrop.visualMode = DragAndDropVisualMode.Move;
@@ -26,6 +26,9 @@ public static class PVPDragAndDrop
         DragAndDrop.AcceptDrag();
         foreach (var selectable in PVPSelection.SelectedElements)
         {
+            if (selectable == targetFolder)
+                return;
+
             selectable.Move(targetFolder);
         }
 

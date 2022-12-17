@@ -5,9 +5,11 @@ using UnityEngine;
 public interface ISelectable
 {
 
-    public UnityEngine.Object SelectableObject {get; set; }
+    public UnityEngine.Object SelectableUnityObject {get; set; }
 
-public ISelectable ParentSelectable { get;}
+    public string Path { get; }
+
+public PVPFolder ParentFolder { get;}
 
     public Rect SelectionRect { get; set; }
 
@@ -15,9 +17,13 @@ public ISelectable ParentSelectable { get;}
 
     public bool IsSelected { get; set; }
 
+    public bool IsFile { get; }
+
     public int SelectableIndex { get; set; }
 
     public bool RepaintFlag { get; set; }
+
+    public PVPFolder SelectableContextFolder { get; }
 
     public void Move(PVPFolder targetFolder);
 }

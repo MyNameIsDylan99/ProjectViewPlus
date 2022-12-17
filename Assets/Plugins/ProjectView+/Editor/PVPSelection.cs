@@ -15,7 +15,7 @@ public static class PVPSelection
 
 
         SelectedElements = new List<ISelectable> { element };
-        Selection.activeObject = element.SelectableObject;
+        Selection.activeObject = element.SelectableUnityObject;
         element.IsSelected = true;
         SetGUISkinToSelected();
         PVPEvents.InvokeRepaintWindowEvent();
@@ -31,7 +31,7 @@ public static class PVPSelection
 
         List<Object> selectedObjects = Selection.objects.ToList<Object>();
 
-        selectedObjects.Add(element.SelectableObject);
+        selectedObjects.Add(element.SelectableUnityObject);
 
         Selection.objects = selectedObjects.ToArray();
     }
@@ -44,7 +44,7 @@ public static class PVPSelection
 
         List<Object> selectedObjects = Selection.objects.ToList<Object>();
 
-        selectedObjects.Remove(element.SelectableObject);
+        selectedObjects.Remove(element.SelectableUnityObject);
 
         Selection.objects = selectedObjects.ToArray();
     }

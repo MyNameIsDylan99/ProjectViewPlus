@@ -23,6 +23,7 @@ public class PVPWindow : EditorWindow
 
     public static bool RepaintFlag {get; set;}
 
+
     #endregion
 
     [MenuItem("Tools/ProjectView+")]
@@ -35,7 +36,7 @@ public class PVPWindow : EditorWindow
     private void OnEnable()
     {
         SubscribeToEvents();
-        CurrentPath = PVPRelativePathUtility.GetPathOfScriptableObject(this);
+        CurrentPath = PVPPathUtility.GetPathOfScriptableObject(this);
         PVPData = AssetDatabase.LoadAssetAtPath<PVPDataSO>(CurrentPath + "/PVPData.asset");
 
         if (PVPData == null)
@@ -63,7 +64,6 @@ public class PVPWindow : EditorWindow
         {
             FetchData();
         }
-
         _scrollPosition = GUILayout.BeginScrollView(_scrollPosition);
 
         try
@@ -75,7 +75,6 @@ public class PVPWindow : EditorWindow
 
         }
         
-        DisplayPopupMenu();
         GUILayout.EndScrollView();
         EditorUtility.SetDirty(PVPData);
 
@@ -157,18 +156,6 @@ public class PVPWindow : EditorWindow
                 }
                 break;
         }
-    }
-
-    private void DisplayPopupMenu()
-    {
-        Event current = Event.current;
-        Vector2 mousePos = current.mousePosition;
-        if (current.type == EventType.ContextClick)
-        {
-            EditorUtility.DisplayPopupMenu(new Rect(mousePos.x, mousePos.y, 0, 0), "Assets/", null);
-            current.Use();
-        }
-
     }
 
     private void DrawTabs()

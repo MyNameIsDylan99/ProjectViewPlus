@@ -1,7 +1,8 @@
+using System.IO;
 using UnityEditor;
 using UnityEngine;
 
-public static class PVPRelativePathUtility
+public static class PVPPathUtility
 {
 
     public static string GetPathOfMonoScript(MonoScript monoScript)
@@ -54,5 +55,10 @@ public static class PVPRelativePathUtility
         }
 
         return currentPath;
+    }
+
+    public static string RemoveFileNameFromPath(string path)
+    {
+        return Path.GetDirectoryName(path);
     }
 }

@@ -5,7 +5,7 @@ using UnityEditor;
 using UnityEngine;
 
 [Serializable]
-public class PVPFolder : ISelectable
+public class PVPFolder : ISelectable, IComparable<PVPFolder>
 {
     public FolderSerializationInfo SerializationInfo;
 
@@ -36,9 +36,7 @@ public class PVPFolder : ISelectable
     #region ISelectable
 
     [SerializeField]
-    private UnityEngine.Object selectableObject;
-    [SerializeField]
-    private ISelectable parentSelectable;
+    private UnityEngine.Object selectableUnityObject;
     [SerializeField]
     private Rect selectionRect;
     [SerializeField]
@@ -46,18 +44,18 @@ public class PVPFolder : ISelectable
     private bool isSelected;
     [SerializeField]
     private int selectableIndex;
-    private bool repaintFlag;
+    [SerializeField]
+    private bool isFile;
 
     #endregion
 
     #endregion
 
     #region Private Fields
-    private static GUIStyle _foldoutStyle;
     private bool _fold = false;
     private List<PVPFile> _childFiles;
     private PVPFile[,] _groupedFiles;
-    private const int _filesPerRow = 1;
+    private bool showRenameTextField;
     [NonSerialized]
     private List<PVPFolder> childFoldersToRemove = new List<PVPFolder>();
     #endregion
@@ -75,13 +73,18 @@ public class PVPFolder : ISelectable
 
     public int Depth { get => _depth; set => _depth = value; }
 
-    public ISelectable ParentSelectable { get => ParentFolder; }
-    public UnityEngine.Object SelectableObject { get => selectableObject; set => selectableObject=value; }
+    public UnityEngine.Object SelectableUnityObject { get => selectableUnityObject; set => selectableUnityObject=value; }
     public Rect SelectionRect { get => selectionRect; set => selectionRect = value; }
     public bool IsVisible { get => isVisible; set => isVisible = value; }
     public bool IsSelected { get => isSelected; set => isSelected = value; }
     public int SelectableIndex { get => selectableIndex; set => selectableIndex = value; }
     public bool RepaintFlag { get => PVPWindow.RepaintFlag; set => PVPWindow.RepaintFlag = value; }
+
+    public bool IsFile { get => isFile; private set => isFile = value; }
+
+    public string Path { get => FolderPath; }
+
+    public PVPFolder SelectableContextFolder { get => this; }
 
 
 
@@ -117,13 +120,13 @@ public class PVPFolder : ISelectable
         _folderPath = folderPath;
         _depth = depth;
 
-
+        IsFile = false;
 
         _childFiles = FindChildFiles();
         ChildFolders = FindChildFolders();
 
         //Create the object by giving its path. Then get the assetpreview.
-        SelectableObject = AssetDatabase.LoadAssetAtPath(this._folderPath, typeof(UnityEngine.Object));
+        SelectableUnityObject = AssetDatabase.LoadAssetAtPath(this._folderPath, typeof(UnityEngine.Object));
         _folderIcon = PVPWindow.PVPData.PVPSettings.FolderIcon;
         _foldoutIcon = PVPWindow.PVPData.PVPSettings.FoldoutIcon;
 
@@ -225,6 +228,12 @@ public class PVPFolder : ISelectable
         Rect labelRect = new Rect(buttonRect.position.x + PVPWindow.IconSize, buttonRect.y, 300, PVPWindow.IconSize);
 
         var evt = Event.current;
+
+        if (CheckForRenamingInput(SelectionRect))
+        {
+            showRenameTextField = true;
+        }
+
         if (PVPSelection.CheckForSingleSelectionInput(this) && !buttonRect.Contains(evt.mousePosition))
         {
             PVPSelection.SelectSingleElement(this);
@@ -243,15 +252,32 @@ public class PVPFolder : ISelectable
         {
             PVPSelection.SetGUISkinToSelected();
         }
+        else
+        {
+            if (showRenameTextField)
+            {
+                AssetDatabase.RenameAsset(FolderPath, _folderName);
+                FolderPath = AssetDatabase.GetAssetPath(SelectableUnityObject);
+                _folderContent.tooltip = FolderPath;
+            }
 
-        //if (RepaintFlag && Event.current.type != EventType.Layout)
-        //{
-        //    PVPEvents.InvokeRepaintWindowEvent();
-        //    RepaintFlag = false;
-        //}
+
+            showRenameTextField = false;
+        }
 
         GUI.Box(SelectionRect, "");
-        GUI.Label(labelRect, _folderContent);
+
+        if (showRenameTextField)
+        {
+            _folderName = GUI.TextField(labelRect, _folderName);
+            _folderContent.text = _folderName;
+        }
+        else
+        {
+            GUI.Label(labelRect, _folderContent);
+        }
+
+        
         var matrix = GUI.matrix;
         if (_fold)
         {
@@ -277,12 +303,19 @@ public class PVPFolder : ISelectable
         }
         GUI.matrix = matrix;
         CheckForDragAndDrop(labelRect);
+        PVPContextMenu.DisplayContextMenu(this);
         DropAreaGUI(labelRect);
         PVPSelection.SetGUISkinToNormal();
         GUILayout.FlexibleSpace();
         GUILayout.EndHorizontal();
     }
 
+
+    private bool CheckForRenamingInput(Rect selectionRect)
+    {
+        var evt = Event.current;
+        return isSelected && evt.keyCode == KeyCode.F2 && evt.type == EventType.KeyDown || isSelected && evt.type == EventType.MouseDown && evt.button == 0 && selectionRect.Contains(evt.mousePosition) && PVPSelection.SelectedElements.Count <= 1;
+    }
 
     private List<PVPFolder> FindChildFolders()
     {
@@ -465,6 +498,7 @@ public class PVPFolder : ISelectable
         {
             fileNameList.Add(ChildFiles[i].GetName());
         }
+        ChildFiles.Sort();
 
         var newFileIndex = GetSortedIndex(fileNameList, file.GetName());
 
@@ -481,7 +515,13 @@ public class PVPFolder : ISelectable
         if (SerializationInfo.childFileIndeces == null)
             SerializationInfo.childFileIndeces = new List<int>();
 
+        if(!SerializationInfo.childFileIndeces.Contains(file.FileSerializationInfo.fileIndex))
         SerializationInfo.childFileIndeces.Add(file.FileSerializationInfo.fileIndex);
+        else
+        {
+            SerializationInfo.childFileIndeces.Remove(file.FileSerializationInfo.fileIndex);
+            SerializationInfo.childFileIndeces.Insert(newFileIndex,file.FileSerializationInfo.fileIndex);
+        }
 
 
 
@@ -543,5 +583,11 @@ public class PVPFolder : ISelectable
         }
 
     }
+
+    public int CompareTo(PVPFolder other)
+    {
+        return other.GetName().CompareTo(_folderName);
+    }
+
 
 }

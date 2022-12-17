@@ -38,7 +38,7 @@ public class PVPDataSO : ScriptableObject
                 }
             }
 
-
+            //childFolders.Sort();
             folder.ChildFolders = childFolders;
 
             //Add child files to folder
@@ -51,6 +51,7 @@ public class PVPDataSO : ScriptableObject
                     childFiles.Add(allFiles[childFileIndex]);
                 }
             }
+            //childFiles.Sort();
             folder.ChildFiles = childFiles;
 
             if (!folder.IsRootFolder())
