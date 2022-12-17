@@ -3,31 +3,31 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
-using UnityEngine.UIElements;
-
 
 public class PVPWindow : EditorWindow
 {
     #region Private Fields
+
     private string[] _categoryNames;
     private int _selectedCategoryIndex;
     private List<List<PVPFile>> _categoryFiles = new List<List<PVPFile>>();
     private Vector2 _scrollPosition;
-    #endregion
+
+    #endregion Private Fields
 
     #region Properties
+
     public static PVPDataSO PVPData { get; private set; }
     public static string CurrentPath { get; private set; }
     public static int IconSize { get; private set; }
     public static Rect Position { get; private set; }
 
-    public static bool RepaintFlag {get; set;}
+    public static bool RepaintFlag { get; set; }
 
-
-    #endregion
+    #endregion Properties
 
     [MenuItem("Tools/ProjectView+")]
-    static void OpenOverviewPlusWindow()
+    private static void OpenOverviewPlusWindow()
     {
         var window = GetWindow<PVPWindow>();
         window.titleContent = new GUIContent("ProjectView+");
@@ -47,7 +47,6 @@ public class PVPWindow : EditorWindow
 
         CheckIconSize();
         PVPData.OnBeforeDeserialize();
-        
     }
 
     private void OnAfterAssemblyReload()
@@ -59,7 +58,7 @@ public class PVPWindow : EditorWindow
     {
         Position = position;
         GUI.skin = PVPData.PVPSettings.GUISkin;
-        
+
         if (GUILayout.Button("Fetch data"))
         {
             FetchData();
@@ -72,9 +71,8 @@ public class PVPWindow : EditorWindow
         }
         catch (Exception)
         {
-
         }
-        
+
         GUILayout.EndScrollView();
         EditorUtility.SetDirty(PVPData);
 
@@ -87,15 +85,16 @@ public class PVPWindow : EditorWindow
 
     private void CheckIconSize()
     {
-
         switch (PVPData.PVPSettings.IconSize)
         {
             case PVPSettings.IconSizes.Small:
                 IconSize = PVPData.PVPSettings.SmallSize;
                 break;
+
             case PVPSettings.IconSizes.Normal:
                 IconSize = PVPData.PVPSettings.NormalSize;
                 break;
+
             case PVPSettings.IconSizes.Large:
                 IconSize = PVPData.PVPSettings.LargeSize;
                 break;
@@ -107,7 +106,7 @@ public class PVPWindow : EditorWindow
         PVPEvents.RepaintWindowEvent += Repaint;
         AssemblyReloadEvents.afterAssemblyReload += OnAfterAssemblyReload;
     }
-    
+
     private void CreateNewPVPDataInstance()
     {
         PVPData = PVPDataSO.CreateInstance<PVPDataSO>();
@@ -131,7 +130,6 @@ public class PVPWindow : EditorWindow
 
     public void DropAreaGUI()
     {
-
         Event evt = Event.current;
         Rect drop_area = GUILayoutUtility.GetRect(0.0f, 50.0f, GUILayout.ExpandWidth(true));
         GUI.Box(drop_area, "Add Trigger");
@@ -161,7 +159,6 @@ public class PVPWindow : EditorWindow
     private void DrawTabs()
     {
         _selectedCategoryIndex = GUILayout.Toolbar(_selectedCategoryIndex, _categoryNames);
-
     }
 
     //private void FindCategorySOs()
@@ -181,7 +178,6 @@ public class PVPWindow : EditorWindow
     //    _categories = categories;
     //}
 
-
     /// <returns>Returns true if any files have been added</returns>
     //private void GetObjectsForAllCategories()
     //{
@@ -199,8 +195,6 @@ public class PVPWindow : EditorWindow
     //    _filesLoaded = true;
     //}
 
-
-
     //private void CategoriesToStringArray()
     //{
     //    string[] array = new string[_categories.Count];
@@ -212,8 +206,6 @@ public class PVPWindow : EditorWindow
 
     //    _categoryNames = array;
     //}
-
-
 
     public static List<T> FindAssetsByType<T>() where T : UnityEngine.Object
     {
@@ -249,4 +241,3 @@ public class PVPWindow : EditorWindow
         return objects;
     }
 }
-

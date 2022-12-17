@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEditor;
 using UnityEngine;
 
 public class PVPDataSO : ScriptableObject
@@ -31,7 +30,6 @@ public class PVPDataSO : ScriptableObject
 
             if (folder.SerializationInfo.childFolderIndeces != null)
             {
-
                 foreach (var childFolderIndex in folder.SerializationInfo.childFolderIndeces)
                 {
                     childFolders.Add(allFolders[childFolderIndex]);
@@ -64,21 +62,18 @@ public class PVPDataSO : ScriptableObject
             }
 
             folder.ParentFolder = allFolders[folder.SerializationInfo.parentFolderIndex];
-            
         }
 
         //Sort selectables list
 
         var sortedSelectables = new List<ISelectable>();
-        for(int i = 0; i < PVPSelection.allSelectables.Count; i++)
+        for (int i = 0; i < PVPSelection.allSelectables.Count; i++)
         {
             ISelectable selectable = PVPSelection.allSelectables.Where<ISelectable>(x => x.SelectableIndex == i).FirstOrDefault();
-           sortedSelectables.Add(selectable);
-
+            sortedSelectables.Add(selectable);
         }
         PVPSelection.allSelectables = sortedSelectables;
     }
-
 }
 
 [Serializable]
@@ -88,14 +83,14 @@ public struct FolderSerializationInfo
     public int folderIndex;
     public List<int> childFolderIndeces;
     public List<int> childFileIndeces;
-
 }
 
 [Serializable]
 public struct FileSerializationInfo
 {
     public int fileIndex;
-    public int parentFolderIndex;}
+    public int parentFolderIndex;
+}
 
 [Serializable]
 public struct PVPSettings
@@ -107,22 +102,22 @@ public struct PVPSettings
         Large
     }
 
-    [Range(0,1000)]
+    [Range(0, 1000)]
     public int SmallSize;
+
     [Range(0, 1000)]
     public int NormalSize;
+
     [Range(0, 1000)]
     public int LargeSize;
-    [Range(1,5)]
+
+    [Range(1, 5)]
     public int FilesPerRow;
+
     public Texture2D FolderIcon;
     public Texture2D FoldoutIcon;
     public Texture2D NormalBackground;
     public Texture2D SelectedBackground;
     public GUISkin GUISkin;
     public IconSizes IconSize;
-
-
-
 }
-

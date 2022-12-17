@@ -1,7 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
 public static class PVPEvents
 {
@@ -12,5 +9,4 @@ public static class PVPEvents
         if (RepaintWindowEvent != null)
             RepaintWindowEvent();
     }
-
 }

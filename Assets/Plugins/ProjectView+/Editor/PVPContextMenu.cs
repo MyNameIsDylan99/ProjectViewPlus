@@ -30,6 +30,7 @@ public static class PVPContextMenu
         }
         set { menu = value; }
     }
+
     public static void DisplayContextMenu(ISelectable contextElemnt)
     {
         var current = Event.current;
@@ -106,6 +107,7 @@ public static class PVPContextMenu
         var newAudioClip = new PVPFile(path, contextElement.SelectableContextFolder);
         contextElement.SelectableContextFolder.AddChildFile(newAudioClip);
     }
+
     private static void CreateGUISkin()
     {
         // Create a new GUI Skin asset

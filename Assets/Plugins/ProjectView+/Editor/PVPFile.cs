@@ -9,16 +9,22 @@ public class PVPFile : ISelectable, IComparable<PVPFile>
     public FileSerializationInfo FileSerializationInfo;
 
     #region SerializedFields
+
     [SerializeField]
     private string path;
+
     [SerializeField]
     private string extension;
+
     [SerializeField]
     private string fileName;
+
     [NonSerialized]
     private PVPFolder parentFolder;
+
     [SerializeField]
     private Texture2D fileIcon;
+
     [SerializeField]
     private GUIContent fileContent;
 
@@ -26,25 +32,33 @@ public class PVPFile : ISelectable, IComparable<PVPFile>
 
     [SerializeField]
     private UnityEngine.Object selectableObject;
+
     [SerializeField]
     private Rect selectionRect;
+
     [SerializeField]
     private bool isVisible;
+
     private bool isSelected;
+
     [SerializeField]
     private int selectableIndex;
+
     [SerializeField]
     private bool isFile;
 
-    #endregion
+    #endregion ISelectable
 
-    #endregion
+    #endregion SerializedFields
 
     #region Private Fields
+
     private bool showRenameTextField;
-    #endregion
+
+    #endregion Private Fields
 
     #region Properties
+
     public PVPFolder ParentFolder { get => parentFolder; set => parentFolder = value; }
     public UnityEngine.Object SelectableUnityObject { get => selectableObject; set => selectableObject = value; }
     public Rect SelectionRect { get => selectionRect; set => selectionRect = value; }
@@ -58,16 +72,15 @@ public class PVPFile : ISelectable, IComparable<PVPFile>
     public string Path { get => path; }
 
     public PVPFolder SelectableContextFolder { get => ParentFolder; }
-    #endregion
+
+    #endregion Properties
 
     public PVPFile(string path, PVPFolder parentFolder)
     {
-
         PVPSelection.allSelectables.Add(this);
         SelectableIndex = PVPSelection.allSelectables.Count - 1;
         PVPWindow.PVPData.allFiles.Add(this);
         FileSerializationInfo.fileIndex = PVPWindow.PVPData.allFiles.Count - 1;
-
 
         FileSerializationInfo.parentFolderIndex = parentFolder.SerializationInfo.folderIndex;
 
@@ -86,22 +99,20 @@ public class PVPFile : ISelectable, IComparable<PVPFile>
         fileIcon = AssetPreview.GetMiniThumbnail(SelectableUnityObject);
 
         fileContent = new GUIContent(fileName, fileIcon, path);
-
-
     }
 
     #region Methods
 
     #region Getter Methods
+
     public string GetPath()
     {
         return path;
-
     }
+
     public string GetExtension()
     {
         return extension;
-
     }
 
     public string GetName()
@@ -114,14 +125,14 @@ public class PVPFile : ISelectable, IComparable<PVPFile>
         return parentFolder.IsRootFolder();
     }
 
-    #endregion
+    #endregion Getter Methods
 
     #region Visualization
+
     public void VisualizeFile(int depth)
     {
-
         SelectionRect = GUILayoutUtility.GetRect(0, PVPWindow.IconSize);
-        Rect fileLabel = new Rect(SelectionRect.position.x + depth * 25, SelectionRect.position.y,300,PVPWindow.IconSize);
+        Rect fileLabel = new Rect(SelectionRect.position.x + depth * 25, SelectionRect.position.y, 300, PVPWindow.IconSize);
 
         IsVisible = true;
 
@@ -162,12 +173,11 @@ public class PVPFile : ISelectable, IComparable<PVPFile>
                 path = AssetDatabase.GetAssetPath(SelectableUnityObject);
                 fileContent.tooltip = path;
             }
-                
 
             showRenameTextField = false;
         }
 
-        GUI.Box(SelectionRect,"");
+        GUI.Box(SelectionRect, "");
         if (showRenameTextField)
         {
             fileName = GUI.TextField(fileLabel, fileName);
@@ -177,7 +187,6 @@ public class PVPFile : ISelectable, IComparable<PVPFile>
         {
             GUI.Label(fileLabel, fileContent);
         }
-        
 
         PVPSelection.SetGUISkinToNormal();
 
@@ -185,7 +194,7 @@ public class PVPFile : ISelectable, IComparable<PVPFile>
         CheckForDragAndDrop(SelectionRect);
     }
 
-    #endregion
+    #endregion Visualization
 
     #region Utility
 
@@ -195,6 +204,7 @@ public class PVPFile : ISelectable, IComparable<PVPFile>
         string ext = splitPath[splitPath.Length - 1];
         return ext;
     }
+
     private string FindFileName(string path)
     {
         string[] splitPath = path.Split('\\');
@@ -210,7 +220,17 @@ public class PVPFile : ISelectable, IComparable<PVPFile>
         return isSelected && evt.keyCode == KeyCode.F2 && evt.type == EventType.KeyDown || isSelected && evt.type == EventType.MouseDown && evt.button == 0 && selectionRect.Contains(evt.mousePosition) && PVPSelection.SelectedElements.Count <= 1;
     }
 
-    #endregion
+    public void Delete()
+    {
+        parentFolder.ChildFiles.Remove(this); //Remove this file from old parent folder
+        parentFolder.SerializationInfo.childFileIndeces.Remove(FileSerializationInfo.fileIndex);
+        PVPWindow.PVPData.allFiles.Remove(this);
+        PVPSelection.allSelectables.Remove(this);
+
+        AssetDatabase.DeleteAsset(path);
+    }
+
+    #endregion Utility
 
     #region Drag and Drop
 
@@ -219,7 +239,7 @@ public class PVPFile : ISelectable, IComparable<PVPFile>
         parentFolder.ChildFiles.Remove(this); //Remove this file from old parent folder
         parentFolder.SerializationInfo.childFileIndeces.Remove(FileSerializationInfo.fileIndex);
 
-        var newPath = targetFolder.FolderPath + "\\" + fileName + "."+extension;
+        var newPath = targetFolder.FolderPath + "\\" + fileName + "." + extension;
 
         AssetDatabase.MoveAsset(path, newPath);
 
@@ -229,8 +249,6 @@ public class PVPFile : ISelectable, IComparable<PVPFile>
         FileSerializationInfo.parentFolderIndex = parentFolder.SerializationInfo.folderIndex;
 
         targetFolder.AddChildFile(this);
-        
-        
     }
 
     private void CheckForDragAndDrop(Rect dragArea)
@@ -247,7 +265,8 @@ public class PVPFile : ISelectable, IComparable<PVPFile>
     {
         return fileName.CompareTo(other.GetName());
     }
-    #endregion
 
-    #endregion
+    #endregion Drag and Drop
+
+    #endregion Methods
 }

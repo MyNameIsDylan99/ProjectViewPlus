@@ -1,23 +1,21 @@
 ﻿using System.Collections.Generic;
 
-
-    public static class ExtensionMethods
+public static class ExtensionMethods
+{
+    public static void Move<T>(this List<T> list, T item, int newIndex)
     {
-        public static void Move<T>(this List<T> list, T item, int newIndex)
+        if (item != null)
         {
-            if (item != null)
+            var oldIndex = list.IndexOf(item);
+            if (oldIndex > -1)
             {
-                var oldIndex = list.IndexOf(item);
-                if (oldIndex > -1)
-                {
-                    list.RemoveAt(oldIndex);
+                list.RemoveAt(oldIndex);
 
-                    if (newIndex > oldIndex) newIndex--;
-                    // the actual index could have shifted due to the removal
+                if (newIndex > oldIndex) newIndex--;
+                // the actual index could have shifted due to the removal
 
-                    list.Insert(newIndex, item);
-                }
+                list.Insert(newIndex, item);
             }
-
         }
     }
+}

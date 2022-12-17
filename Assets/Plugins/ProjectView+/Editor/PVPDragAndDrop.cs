@@ -1,4 +1,3 @@
-using NUnit.Framework;
 using System.Collections.Generic;
 using UnityEditor;
 
@@ -9,7 +8,6 @@ public static class PVPDragAndDrop
 {
     public static void StartDrag()
     {
-
         DragAndDrop.StartDrag("PVPDragAndDrop");
         var objReferences = new List<UnityEngine.Object>();
         foreach (var selectable in PVPSelection.SelectedElements)
@@ -22,7 +20,6 @@ public static class PVPDragAndDrop
 
     public static void AcceptDrag(PVPFolder targetFolder)
     {
-
         DragAndDrop.AcceptDrag();
         foreach (var selectable in PVPSelection.SelectedElements)
         {
@@ -31,7 +28,7 @@ public static class PVPDragAndDrop
 
             selectable.Move(targetFolder);
         }
-
     }
+
     //TODO: Finish drag and drop
 }

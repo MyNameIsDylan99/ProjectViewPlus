@@ -8,22 +8,8 @@ public static class PVPSelection
     public static List<ISelectable> allSelectables = new List<ISelectable>();
     public static List<ISelectable> SelectedElements = new List<ISelectable>();
 
-
-    public static void SelectSingleElement(ISelectable element)
-    {
-        UnselectAllSelectedElements();
-
-
-        SelectedElements = new List<ISelectable> { element };
-        Selection.activeObject = element.SelectableUnityObject;
-        element.IsSelected = true;
-        SetGUISkinToSelected();
-        PVPEvents.InvokeRepaintWindowEvent();
-    }
-
     public static void AddElement(ISelectable element)
     {
-
         SelectedElements.Add(element);
 
         element.IsSelected = true;
@@ -36,17 +22,113 @@ public static class PVPSelection
         Selection.objects = selectedObjects.ToArray();
     }
 
-    private static void RemoveElement(ISelectable element)
+    public static void CheckDeleteKey()
     {
-        SelectedElements.Remove(element);
-        element.IsSelected = false;
-        element.RepaintFlag = true;
+        // Check if the delete key was pressed
+        if (Event.current.type == EventType.KeyDown && Event.current.keyCode == KeyCode.Delete)
+        {
+            // Display a confirmation dialog
+            if (EditorUtility.DisplayDialog("Delete selected file?", "Are you sure you want to delete the selected file?", "Delete", "Cancel"))
+            {
+                // Delete the selected file
+                DeleteSelectedFiles();
+            }
+        }
+    }
 
-        List<Object> selectedObjects = Selection.objects.ToList<Object>();
+    private static void DeleteSelectedFiles()
+    {
+        foreach (var element in SelectedElements)
+        {
 
-        selectedObjects.Remove(element.SelectableUnityObject);
+        }
+    }
 
-        Selection.objects = selectedObjects.ToArray();
+
+    public static bool CheckForOpenAssetInput(ISelectable element)
+    {
+        var evt = Event.current;
+        return evt.type == EventType.MouseDown && evt.clickCount >= 2 && element.SelectionRect.Contains(evt.mousePosition);
+    }
+
+    public static bool CheckForQtrlSelectInput(ISelectable element)
+    {
+        var evt = Event.current;
+        return evt.type == EventType.MouseDown && evt.control && element.SelectionRect.Contains(evt.mousePosition);
+    }
+
+    public static bool CheckForShiftSelectInput(ISelectable element)
+    {
+        var evt = Event.current;
+        return evt.type == EventType.MouseDown && evt.shift && element.SelectionRect.Contains(evt.mousePosition);
+    }
+
+    public static bool CheckForSingleSelectionInput(ISelectable element)
+    {
+        var evt = Event.current;
+        return evt.type == EventType.MouseDown && !evt.shift && !evt.control && element.SelectionRect.Contains(evt.mousePosition) && !SelectedElements.Contains(element) || SelectedElements.Contains(element) && evt.type == EventType.MouseUp && element.SelectionRect.Contains(evt.mousePosition) && !evt.shift && !evt.control;
+    }
+
+    public static void ControlSelect(ISelectable element)
+    {
+        if (SelectedElements.Contains(element))
+        {
+            RemoveElement(element);
+        }
+        else
+        {
+            AddElement(element);
+        }
+    }
+
+    public static bool IsElementSelected(ISelectable element)
+    {
+        return SelectedElements.Contains(element);
+    }
+
+    public static void MoveSelectable(ISelectable selectable)
+    {
+        allSelectables.Move<ISelectable>(selectable, selectable.SelectableIndex);
+
+        for (int i = 0; i < allSelectables.Count - 1; i++)
+        {
+            allSelectables[i].SelectableIndex = i;
+        }
+    }
+
+    public static void MoveSelectables(ISelectable[] selectables)
+    {
+        foreach (var selectable in selectables)
+        {
+            allSelectables.Move<ISelectable>(selectable, selectable.SelectableIndex);
+        }
+
+        for (int i = 0; i < allSelectables.Count - 1; i++)
+        {
+            allSelectables[i].SelectableIndex = i;
+        }
+    }
+
+    public static void SelectSingleElement(ISelectable element)
+    {
+        UnselectAllSelectedElements();
+
+        SelectedElements = new List<ISelectable> { element };
+        Selection.activeObject = element.SelectableUnityObject;
+        element.IsSelected = true;
+        SetGUISkinToSelected();
+        PVPEvents.InvokeRepaintWindowEvent();
+    }
+    public static void SetGUISkinToNormal()
+    {
+        GUI.skin.box.normal.background = PVPWindow.PVPData.PVPSettings.NormalBackground;
+        GUI.skin.box.hover.background = PVPWindow.PVPData.PVPSettings.NormalBackground;
+    }
+
+    public static void SetGUISkinToSelected()
+    {
+        GUI.skin.box.normal.background = PVPWindow.PVPData.PVPSettings.SelectedBackground;
+        GUI.skin.box.hover.background = PVPWindow.PVPData.PVPSettings.SelectedBackground;
     }
 
     public static void ShiftSelect(ISelectable element)
@@ -59,7 +141,6 @@ public static class PVPSelection
             if (SelectedElements[i].IsVisible)
                 selectedIndeces.Add(SelectedElements[i].SelectableIndex);
         }
-
 
         if (selectedIndeces == null || selectedIndeces.Count < 1)
         {
@@ -96,21 +177,8 @@ public static class PVPSelection
 
             if (selectable.IsVisible)
             {
-
                 AddElement(selectable);
             }
-        }
-    }
-
-    public static void ControlSelect(ISelectable element)
-    {
-        if (SelectedElements.Contains(element))
-        {
-            RemoveElement(element);
-        }
-        else
-        {
-            AddElement(element);
         }
     }
 
@@ -125,69 +193,16 @@ public static class PVPSelection
         SelectedElements.Clear();
     }
 
-    public static bool CheckForShiftSelectInput(ISelectable element)
+    private static void RemoveElement(ISelectable element)
     {
-        var evt = Event.current;
-        return evt.type == EventType.MouseDown && evt.shift && element.SelectionRect.Contains(evt.mousePosition);
+        SelectedElements.Remove(element);
+        element.IsSelected = false;
+        element.RepaintFlag = true;
+
+        List<Object> selectedObjects = Selection.objects.ToList<Object>();
+
+        selectedObjects.Remove(element.SelectableUnityObject);
+
+        Selection.objects = selectedObjects.ToArray();
     }
-
-    public static bool CheckForQtrlSelectInput(ISelectable element)
-    {
-        var evt = Event.current;
-        return evt.type == EventType.MouseDown && evt.control && element.SelectionRect.Contains(evt.mousePosition);
-    }
-
-    public static bool CheckForSingleSelectionInput(ISelectable element)
-    {
-        var evt = Event.current;
-        return evt.type == EventType.MouseDown && !evt.shift && !evt.control && element.SelectionRect.Contains(evt.mousePosition) && !SelectedElements.Contains(element) || SelectedElements.Contains(element) && evt.type == EventType.MouseUp && element.SelectionRect.Contains(evt.mousePosition) && !evt.shift && !evt.control;
-
-    }
-
-    public static bool CheckForOpenAssetInput(ISelectable element)
-    {
-        var evt = Event.current;
-        return evt.type == EventType.MouseDown && evt.clickCount >= 2 && element.SelectionRect.Contains(evt.mousePosition);
-    }
-
-    public static bool IsElementSelected(ISelectable element)
-    {
-        return SelectedElements.Contains(element);
-    }
-
-    public static void SetGUISkinToSelected()
-    {
-        GUI.skin.box.normal.background = PVPWindow.PVPData.PVPSettings.SelectedBackground;
-        GUI.skin.box.hover.background = PVPWindow.PVPData.PVPSettings.SelectedBackground;
-    }
-
-    public static void SetGUISkinToNormal()
-    {
-        GUI.skin.box.normal.background = PVPWindow.PVPData.PVPSettings.NormalBackground;
-        GUI.skin.box.hover.background = PVPWindow.PVPData.PVPSettings.NormalBackground;
-    }
-
-    public static void MoveSelectable(ISelectable selectable)
-    {
-        allSelectables.Move<ISelectable>(selectable, selectable.SelectableIndex);
-
-        for (int i = 0; i < allSelectables.Count - 1; i++)
-        {
-            allSelectables[i].SelectableIndex = i;
-        }
-    }
-
-    public static void MoveSelectables(ISelectable[] selectables)
-    {
-        foreach (var selectable in selectables)
-        {
-            allSelectables.Move<ISelectable>(selectable, selectable.SelectableIndex);
-        }
-
-        for (int i = 0; i < allSelectables.Count - 1; i++)
-        {
-            allSelectables[i].SelectableIndex = i;
-        }
-    }
-
 }

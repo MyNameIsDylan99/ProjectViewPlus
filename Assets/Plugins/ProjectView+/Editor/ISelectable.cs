@@ -1,15 +1,12 @@
-using System;
-using UnityEditor;
 using UnityEngine;
 
 public interface ISelectable
 {
-
-    public UnityEngine.Object SelectableUnityObject {get; set; }
+    public UnityEngine.Object SelectableUnityObject { get; set; }
 
     public string Path { get; }
 
-public PVPFolder ParentFolder { get;}
+    public PVPFolder ParentFolder { get; }
 
     public Rect SelectionRect { get; set; }
 
@@ -26,4 +23,6 @@ public PVPFolder ParentFolder { get;}
     public PVPFolder SelectableContextFolder { get; }
 
     public void Move(PVPFolder targetFolder);
+
+    public void Delete();
 }

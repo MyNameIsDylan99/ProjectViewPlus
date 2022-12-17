@@ -4,10 +4,8 @@ using UnityEngine;
 
 public static class PVPPathUtility
 {
-
     public static string GetPathOfMonoScript(MonoScript monoScript)
     {
-        
         var currentPathWithName = AssetDatabase.GetAssetPath(monoScript);
         var splitCurrentPath = currentPathWithName.Split('/');
         string currentPath = "";
@@ -37,7 +35,6 @@ public static class PVPPathUtility
         }
 
         return currentPath;
-        
     }
 
     public static string GetPathOfScriptableObject(ScriptableObject scriptableObject)

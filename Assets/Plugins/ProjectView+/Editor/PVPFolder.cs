@@ -10,61 +10,82 @@ public class PVPFolder : ISelectable, IComparable<PVPFolder>
     public FolderSerializationInfo SerializationInfo;
 
     #region SerializedFields
+
     [NonSerialized]
     private List<PVPFolder> _childFolders;
+
     [NonSerialized]
     private PVPFolder _parentFolder;
+
     [SerializeField]
     private string _folderPath;
+
     [SerializeField]
     private string _folderName;
+
     [SerializeField]
     private GUIContent _folderContent;
+
     [SerializeField]
     private GUIContent _foldoutContent;
+
     [SerializeField]
     private static Texture2D _folderIcon;
+
     [SerializeField]
     private static Texture2D _foldoutIcon;
+
     [SerializeField]
     private int _depth;
+
     [SerializeField]
     private bool _childFoldersAreTabs;
+
     [SerializeField]
-    string[] _filters;
+    private string[] _filters;
 
     #region ISelectable
 
     [SerializeField]
     private UnityEngine.Object selectableUnityObject;
+
     [SerializeField]
     private Rect selectionRect;
+
     [SerializeField]
     private bool isVisible;
+
     private bool isSelected;
+
     [SerializeField]
     private int selectableIndex;
+
     [SerializeField]
     private bool isFile;
 
-    #endregion
+    #endregion ISelectable
 
-    #endregion
+    #endregion SerializedFields
 
     #region Private Fields
+
     private bool _fold = false;
     private List<PVPFile> _childFiles;
     private PVPFile[,] _groupedFiles;
     private bool showRenameTextField;
+
     [NonSerialized]
     private List<PVPFolder> childFoldersToRemove = new List<PVPFolder>();
-    #endregion
+
+    #endregion Private Fields
 
     #region Properties
+
     public bool ChildFoldersAreTabs { get => _childFoldersAreTabs; private set => _childFoldersAreTabs = value; }
     public List<PVPFolder> ChildFolders { get => _childFolders; set => _childFolders = value; }
 
-    public PVPFolder ParentFolder { get { return _parentFolder; } set { _parentFolder = value; } }
+    public PVPFolder ParentFolder
+    { get { return _parentFolder; } set { _parentFolder = value; } }
 
     private List<PVPFolder> FoldersToRemove { get => childFoldersToRemove; set => childFoldersToRemove = value; }
 
@@ -73,7 +94,7 @@ public class PVPFolder : ISelectable, IComparable<PVPFolder>
 
     public int Depth { get => _depth; set => _depth = value; }
 
-    public UnityEngine.Object SelectableUnityObject { get => selectableUnityObject; set => selectableUnityObject=value; }
+    public UnityEngine.Object SelectableUnityObject { get => selectableUnityObject; set => selectableUnityObject = value; }
     public Rect SelectionRect { get => selectionRect; set => selectionRect = value; }
     public bool IsVisible { get => isVisible; set => isVisible = value; }
     public bool IsSelected { get => isSelected; set => isSelected = value; }
@@ -86,10 +107,7 @@ public class PVPFolder : ISelectable, IComparable<PVPFolder>
 
     public PVPFolder SelectableContextFolder { get => this; }
 
-
-
-    #endregion
-
+    #endregion Properties
 
     public PVPFolder(string folderPath, PVPFolder parentFolder, int depth)
     {
@@ -115,7 +133,7 @@ public class PVPFolder : ISelectable, IComparable<PVPFolder>
             parentFolder.SerializationInfo.childFolderIndeces.Add(SerializationInfo.folderIndex);
         }
 
-        #endregion
+        #endregion Serialization
 
         _folderPath = folderPath;
         _depth = depth;
@@ -136,13 +154,11 @@ public class PVPFolder : ISelectable, IComparable<PVPFolder>
 
         _folderContent = new GUIContent(_folderName, _folderIcon, folderPath);
         _foldoutContent = new GUIContent(_foldoutIcon);
-
     }
 
     public void VisualizeFolder()
     {
         IsVisible = true;
-
 
         GUILayout.BeginVertical();
 
@@ -159,10 +175,9 @@ public class PVPFolder : ISelectable, IComparable<PVPFolder>
             SetChildrenNotVisible();
         }
 
-
         GUILayout.EndVertical();
 
-        if(childFoldersToRemove != null && childFoldersToRemove.Count > 0)
+        if (childFoldersToRemove != null && childFoldersToRemove.Count > 0)
         {
             foreach (var folder in childFoldersToRemove)
             {
@@ -170,12 +185,10 @@ public class PVPFolder : ISelectable, IComparable<PVPFolder>
             }
             childFoldersToRemove.Clear();
         }
-
     }
 
     public void DropAreaGUI(Rect dropArea)
     {
-
         Event evt = Event.current;
 
         switch (evt.type)
@@ -220,7 +233,6 @@ public class PVPFolder : ISelectable, IComparable<PVPFolder>
 
     private void FoldoutWithFolder()
     {
-
         GUILayout.BeginHorizontal();
 
         SelectionRect = GUILayoutUtility.GetRect(PVPWindow.Position.width, PVPWindow.IconSize);
@@ -261,7 +273,6 @@ public class PVPFolder : ISelectable, IComparable<PVPFolder>
                 _folderContent.tooltip = FolderPath;
             }
 
-
             showRenameTextField = false;
         }
 
@@ -277,7 +288,6 @@ public class PVPFolder : ISelectable, IComparable<PVPFolder>
             GUI.Label(labelRect, _folderContent);
         }
 
-        
         var matrix = GUI.matrix;
         if (_fold)
         {
@@ -298,7 +308,6 @@ public class PVPFolder : ISelectable, IComparable<PVPFolder>
                 {
                     selectables.Add(selectable);
                 }
-
             }
         }
         GUI.matrix = matrix;
@@ -309,7 +318,6 @@ public class PVPFolder : ISelectable, IComparable<PVPFolder>
         GUILayout.FlexibleSpace();
         GUILayout.EndHorizontal();
     }
-
 
     private bool CheckForRenamingInput(Rect selectionRect)
     {
@@ -352,7 +360,6 @@ public class PVPFolder : ISelectable, IComparable<PVPFolder>
         }
 
         return files;
-
     }
 
     private PVPFile[,] GroupChildFiles(List<PVPFile> files)
@@ -387,10 +394,7 @@ public class PVPFolder : ISelectable, IComparable<PVPFolder>
 
             GUILayout.EndHorizontal();
             GUILayout.EndVertical();
-
-
         }
-
     }
 
     private void AddFilesFromFilter()
@@ -417,6 +421,28 @@ public class PVPFolder : ISelectable, IComparable<PVPFolder>
                 Debug.Log("New file added : " + file.GetPath());
             }
         }
+    }
+
+    public void Delete()
+    {
+        if(ChildFiles != null && ChildFiles.Count > 0)
+        {
+            foreach (var file in ChildFiles)
+            {
+                file.Delete();
+            }
+        }
+        if (ChildFolders != null && ChildFolders.Count > 0)
+        {
+            foreach (var folder in ChildFolders)
+            {
+                folder.Delete();
+            }
+        }
+        ParentFolder.childFoldersToRemove.Add(this);
+        ParentFolder.SerializationInfo.childFolderIndeces.Remove(SerializationInfo.folderIndex);
+        PVPWindow.PVPData.allFolders.Remove(this);
+        AssetDatabase.DeleteAsset(FolderPath);
 
     }
 
@@ -454,7 +480,6 @@ public class PVPFolder : ISelectable, IComparable<PVPFolder>
         return list.IndexOf(value);
     }
 
-
     public void AddChildFolder(PVPFolder folder)
     {
         Undo.RecordObject(PVPWindow.PVPData, "");
@@ -471,7 +496,6 @@ public class PVPFolder : ISelectable, IComparable<PVPFolder>
         {
             ChildFolders.Add(folder);
         }
-
         else
         {
             ChildFolders.Insert(newFileIndex, folder);
@@ -481,7 +505,6 @@ public class PVPFolder : ISelectable, IComparable<PVPFolder>
             SerializationInfo.childFolderIndeces = new List<int>();
 
         SerializationInfo.childFolderIndeces.Add(folder.SerializationInfo.folderIndex);
-
 
         folder.Depth = _depth + 1;
         var folderSelectableIndex = SelectableIndex + newFileIndex + ChildFiles.Count + 1;
@@ -506,7 +529,6 @@ public class PVPFolder : ISelectable, IComparable<PVPFolder>
         {
             ChildFiles.Add(file);
         }
-
         else
         {
             ChildFiles.Insert(newFileIndex, file);
@@ -515,25 +537,22 @@ public class PVPFolder : ISelectable, IComparable<PVPFolder>
         if (SerializationInfo.childFileIndeces == null)
             SerializationInfo.childFileIndeces = new List<int>();
 
-        if(!SerializationInfo.childFileIndeces.Contains(file.FileSerializationInfo.fileIndex))
-        SerializationInfo.childFileIndeces.Add(file.FileSerializationInfo.fileIndex);
+        if (!SerializationInfo.childFileIndeces.Contains(file.FileSerializationInfo.fileIndex))
+            SerializationInfo.childFileIndeces.Add(file.FileSerializationInfo.fileIndex);
         else
         {
             SerializationInfo.childFileIndeces.Remove(file.FileSerializationInfo.fileIndex);
-            SerializationInfo.childFileIndeces.Insert(newFileIndex,file.FileSerializationInfo.fileIndex);
+            SerializationInfo.childFileIndeces.Insert(newFileIndex, file.FileSerializationInfo.fileIndex);
         }
 
-
-
-        var fileSelectableIndex = SelectableIndex + newFileIndex+ 1;
+        var fileSelectableIndex = SelectableIndex + newFileIndex + 1;
         file.SelectableIndex = fileSelectableIndex;
         PVPSelection.MoveSelectable(file);
     }
 
-
     public void Move(PVPFolder targetFolder)
     {
-        if(ParentFolder.FoldersToRemove==null)
+        if (ParentFolder.FoldersToRemove == null)
             ParentFolder.FoldersToRemove = new List<PVPFolder>();
         ParentFolder.FoldersToRemove.Add(this); //Remove this folder from old parent folder
         ParentFolder.SerializationInfo.childFolderIndeces.Remove(SerializationInfo.folderIndex);
@@ -549,12 +568,11 @@ public class PVPFolder : ISelectable, IComparable<PVPFolder>
 
         targetFolder.AddChildFolder(this);
         AdjustChildrenSelectableIndex();
-
     }
 
     public void AdjustChildrenSelectableIndex(List<ISelectable> selectablesToAdjust = null)
     {
-        if(selectablesToAdjust == null)
+        if (selectablesToAdjust == null)
             selectablesToAdjust = new List<ISelectable>();
 
         for (int i = 0; i < ChildFiles.Count; i++)
@@ -563,13 +581,11 @@ public class PVPFolder : ISelectable, IComparable<PVPFolder>
             selectablesToAdjust.Add(ChildFiles[i]);
         }
 
-
         if (ChildFolders == null || ChildFolders.Count == 0)
         {
             PVPSelection.MoveSelectables(selectablesToAdjust.ToArray());
             return;
         }
-            
 
         for (int i = 0; i < ChildFolders.Count; i++)
         {
@@ -581,13 +597,10 @@ public class PVPFolder : ISelectable, IComparable<PVPFolder>
         {
             AdjustChildrenSelectableIndex(selectablesToAdjust);
         }
-
     }
 
     public int CompareTo(PVPFolder other)
     {
         return other.GetName().CompareTo(_folderName);
     }
-
-
 }
