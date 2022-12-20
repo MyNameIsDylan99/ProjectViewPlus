@@ -1,34 +1,60 @@
 using System.Collections.Generic;
 using UnityEditor;
 
-/// <summary>
-/// Helper class that interacts with Unitys DragAndDrop class.
-/// </summary>
-public static class PVPDragAndDrop
+namespace ProjectViewPlus
 {
-    public static void StartDrag()
+    /// <summary>
+    /// Helper class that interacts with Unitys DragAndDrop class.
+    /// </summary>
+    public static class PVPDragAndDrop
     {
-        DragAndDrop.StartDrag("PVPDragAndDrop");
-        var objReferences = new List<UnityEngine.Object>();
-        foreach (var selectable in PVPSelection.SelectedElements)
+        /// <summary>
+        /// Start the drag and drop operation
+        /// </summary>
+        public static void StartDrag()
         {
-            objReferences.Add(selectable.SelectableUnityObject);
+            DragAndDrop.StartDrag("PVPDragAndDrop");
+            var objReferences = new List<UnityEngine.Object>();
+            foreach (var selectable in PVPSelection.SelectedElements)
+            {
+                objReferences.Add(selectable.SelectableUnityObject);
+            }
+            DragAndDrop.objectReferences = objReferences.ToArray();
+            DragAndDrop.visualMode = DragAndDropVisualMode.Move;
         }
-        DragAndDrop.objectReferences = objReferences.ToArray();
-        DragAndDrop.visualMode = DragAndDropVisualMode.Move;
+
+        /// <summary>
+        /// Accepts the drag and drop operation and moves all selected files and folders to the folder they were dragged to
+        /// </summary>
+        public static void AcceptDrag(PVPFolder targetFolder)
+        {
+            DragAndDrop.AcceptDrag();
+
+            foreach (var selectable in PVPSelection.SelectedElements)
+            {
+                if (selectable == targetFolder)
+                    return;
+
+                //Changing gui layout elements between the layout event and the repaint event(like drag and dropping files and folders) causes errors. This is a fix for this:
+                PVPWindow.LayoutEventActions.Add(new LayoutEventAction(selectable, targetFolder));
+            }
+        }
     }
 
-    public static void AcceptDrag(PVPFolder targetFolder)
+    public class LayoutEventAction
     {
-        DragAndDrop.AcceptDrag();
-        foreach (var selectable in PVPSelection.SelectedElements)
-        {
-            if (selectable == targetFolder)
-                return;
+        private ISelectable element;
+        private PVPFolder targetFolder;
 
-            selectable.Move(targetFolder);
+        public LayoutEventAction(ISelectable element, PVPFolder targetFolder)
+        {
+            this.element = element;
+            this.targetFolder = targetFolder;
+        }
+
+        public void Execute()
+        {
+            element.Move(targetFolder);
         }
     }
-
-    //TODO: Finish drag and drop
 }

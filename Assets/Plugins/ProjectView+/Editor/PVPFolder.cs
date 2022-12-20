@@ -4,603 +4,739 @@ using System.IO;
 using UnityEditor;
 using UnityEngine;
 
-[Serializable]
-public class PVPFolder : ISelectable, IComparable<PVPFolder>
+namespace ProjectViewPlus
 {
-    public FolderSerializationInfo SerializationInfo;
-
-    #region SerializedFields
-
-    [NonSerialized]
-    private List<PVPFolder> _childFolders;
-
-    [NonSerialized]
-    private PVPFolder _parentFolder;
-
-    [SerializeField]
-    private string _folderPath;
-
-    [SerializeField]
-    private string _folderName;
-
-    [SerializeField]
-    private GUIContent _folderContent;
-
-    [SerializeField]
-    private GUIContent _foldoutContent;
-
-    [SerializeField]
-    private static Texture2D _folderIcon;
-
-    [SerializeField]
-    private static Texture2D _foldoutIcon;
-
-    [SerializeField]
-    private int _depth;
-
-    [SerializeField]
-    private bool _childFoldersAreTabs;
-
-    [SerializeField]
-    private string[] _filters;
-
-    #region ISelectable
-
-    [SerializeField]
-    private UnityEngine.Object selectableUnityObject;
-
-    [SerializeField]
-    private Rect selectionRect;
-
-    [SerializeField]
-    private bool isVisible;
-
-    private bool isSelected;
-
-    [SerializeField]
-    private int selectableIndex;
-
-    [SerializeField]
-    private bool isFile;
-
-    #endregion ISelectable
-
-    #endregion SerializedFields
-
-    #region Private Fields
-
-    private bool _fold = false;
-    private List<PVPFile> _childFiles;
-    private PVPFile[,] _groupedFiles;
-    private bool showRenameTextField;
-
-    [NonSerialized]
-    private List<PVPFolder> childFoldersToRemove = new List<PVPFolder>();
-
-    #endregion Private Fields
-
-    #region Properties
-
-    public bool ChildFoldersAreTabs { get => _childFoldersAreTabs; private set => _childFoldersAreTabs = value; }
-    public List<PVPFolder> ChildFolders { get => _childFolders; set => _childFolders = value; }
-
-    public PVPFolder ParentFolder
-    { get { return _parentFolder; } set { _parentFolder = value; } }
-
-    private List<PVPFolder> FoldersToRemove { get => childFoldersToRemove; set => childFoldersToRemove = value; }
-
-    public List<PVPFile> ChildFiles { get => _childFiles; set => _childFiles = value; }
-    public string FolderPath { get => _folderPath; set => _folderPath = value; }
-
-    public int Depth { get => _depth; set => _depth = value; }
-
-    public UnityEngine.Object SelectableUnityObject { get => selectableUnityObject; set => selectableUnityObject = value; }
-    public Rect SelectionRect { get => selectionRect; set => selectionRect = value; }
-    public bool IsVisible { get => isVisible; set => isVisible = value; }
-    public bool IsSelected { get => isSelected; set => isSelected = value; }
-    public int SelectableIndex { get => selectableIndex; set => selectableIndex = value; }
-    public bool RepaintFlag { get => PVPWindow.RepaintFlag; set => PVPWindow.RepaintFlag = value; }
-
-    public bool IsFile { get => isFile; private set => isFile = value; }
-
-    public string Path { get => FolderPath; }
-
-    public PVPFolder SelectableContextFolder { get => this; }
-
-    #endregion Properties
-
-    public PVPFolder(string folderPath, PVPFolder parentFolder, int depth)
+    /// <summary>
+    /// This class represents a folder in the project view plus window. It stores relevant data of the folder it is representing, like its path, reference to the icon, childFiles and more.
+    /// </summary>
+    [Serializable]
+    public class PVPFolder : ISelectable, IComparable<PVPFolder>
     {
-        #region Serialization
+        public FolderSerializationInfo SerializationInfo;
 
-        PVPSelection.allSelectables.Add(this);
-        SelectableIndex = PVPSelection.allSelectables.Count - 1;
-        PVPWindow.PVPData.allFolders.Add(this);
-        SerializationInfo.folderIndex = PVPWindow.PVPData.allFolders.Count - 1;
+        #region SerializedFields
 
-        if (parentFolder == null)
+        [SerializeField]
+        private static Texture2D _folderIcon;
+
+        [SerializeField]
+        private static Texture2D _foldoutIcon;
+
+        [NonSerialized]
+        private List<PVPFolder> _childFolders;
+
+        [SerializeField]
+        private bool _childFoldersAreTabs;
+
+        [SerializeField]
+        private int _depth;
+
+        [SerializeField]
+        private string[] _filters;
+
+        [SerializeField]
+        private GUIContent _folderContent;
+
+        [SerializeField]
+        private string _folderName;
+
+        [SerializeField]
+        private string _folderPath;
+
+        [SerializeField]
+        private GUIContent _foldoutContent;
+
+        [NonSerialized]
+        private PVPFolder _parentFolder;
+
+        [SerializeField]
+        private string placeholderRenamingName;
+
+        #region ISelectable
+
+        [SerializeField]
+        private bool isFile;
+
+        private bool isSelected;
+
+        [SerializeField]
+        private bool isVisible;
+
+        [SerializeField]
+        private int selectableIndex;
+
+        [SerializeField]
+        private UnityEngine.Object selectableUnityObject;
+
+        [SerializeField]
+        private Rect selectionRect;
+
+        #endregion ISelectable
+
+        #endregion SerializedFields
+
+        #region Private Fields
+
+        private List<PVPFile> _childFiles;
+        private bool _fold = false;
+        private PVPFile[,] _groupedFiles;
+
+        [NonSerialized]
+        private List<PVPFolder> childFoldersToRemove = new List<PVPFolder>();
+
+        private bool showRenameTextField;
+
+        #endregion Private Fields
+
+        #region Properties
+
+        public List<PVPFile> ChildFiles { get => _childFiles; set => _childFiles = value; }
+        public List<PVPFolder> ChildFolders { get => _childFolders; set => _childFolders = value; }
+        public bool ChildFoldersAreTabs { get => _childFoldersAreTabs; private set => _childFoldersAreTabs = value; }
+        public int Depth { get => _depth; set => _depth = value; }
+
+        public List<PVPFile> FilesToRemove { get; set; }
+
+        public string FolderPath { get => _folderPath; set => _folderPath = value; }
+
+        public List<PVPFolder> FoldersToRemove { get => childFoldersToRemove; set => childFoldersToRemove = value; }
+
+        public bool IsFile { get => isFile; private set => isFile = value; }
+
+        public bool IsSelected { get => isSelected; set => isSelected = value; }
+
+        public bool IsVisible { get => isVisible; set => isVisible = value; }
+
+        public PVPFolder ParentFolder
+        { get { return _parentFolder; } set { _parentFolder = value; } }
+
+        public string Path { get => FolderPath; }
+        public bool RepaintFlag { get => PVPWindow.RepaintFlag; set => PVPWindow.RepaintFlag = value; }
+        public PVPFolder SelectableContextFolder { get => this; }
+        public int SelectableIndex { get => selectableIndex; set => selectableIndex = value; }
+        public UnityEngine.Object SelectableUnityObject { get => selectableUnityObject; set => selectableUnityObject = value; }
+        public Rect SelectionRect { get => selectionRect; set => selectionRect = value; }
+
+        #endregion Properties
+
+        public PVPFolder(string folderPath, PVPFolder parentFolder, int depth)
         {
-            PVPWindow.PVPData.RootFolder = this;
-        }
-        else
-        {
-            ParentFolder = parentFolder;
-            SerializationInfo.parentFolderIndex = parentFolder.SerializationInfo.folderIndex;
+            #region Serialization
 
-            if (parentFolder.SerializationInfo.childFolderIndeces == null)
-                parentFolder.SerializationInfo.childFolderIndeces = new List<int>();
+            //Add the folder to the allSelectables list und update the selectable index
+            PVPSelection.allSelectables.Add(this);
+            SelectableIndex = PVPSelection.allSelectables.Count - 1;
 
-            parentFolder.SerializationInfo.childFolderIndeces.Add(SerializationInfo.folderIndex);
-        }
+            //Add folder to allFolder list and update folder index
+            PVPWindow.PVPData.allFolders.Add(this);
+            SerializationInfo.folderIndex = PVPWindow.PVPData.allFolders.Count - 1;
 
-        #endregion Serialization
-
-        _folderPath = folderPath;
-        _depth = depth;
-
-        IsFile = false;
-
-        _childFiles = FindChildFiles();
-        ChildFolders = FindChildFolders();
-
-        //Create the object by giving its path. Then get the assetpreview.
-        SelectableUnityObject = AssetDatabase.LoadAssetAtPath(this._folderPath, typeof(UnityEngine.Object));
-        _folderIcon = PVPWindow.PVPData.PVPSettings.FolderIcon;
-        _foldoutIcon = PVPWindow.PVPData.PVPSettings.FoldoutIcon;
-
-        //Assets/New Folder-> folderName:New Folder
-        string[] splitPath = this._folderPath.Split('\\');
-        _folderName = splitPath[splitPath.Length - 1];
-
-        _folderContent = new GUIContent(_folderName, _folderIcon, folderPath);
-        _foldoutContent = new GUIContent(_foldoutIcon);
-    }
-
-    public void VisualizeFolder()
-    {
-        IsVisible = true;
-
-        GUILayout.BeginVertical();
-
-        FoldoutWithFolder();
-
-        if (_fold)
-        {
-            VisualizeChildFiles();
-            foreach (var VARIABLE in ChildFolders)
-                VARIABLE.VisualizeFolder();
-        }
-        else
-        {
-            SetChildrenNotVisible();
-        }
-
-        GUILayout.EndVertical();
-
-        if (childFoldersToRemove != null && childFoldersToRemove.Count > 0)
-        {
-            foreach (var folder in childFoldersToRemove)
+            //Check if it's root folder
+            if (parentFolder == null)
             {
-                ChildFolders.Remove(folder);
+                PVPWindow.PVPData.RootFolder = this;
             }
-            childFoldersToRemove.Clear();
+            else
+            {
+                //Set parent folder and parentFolder index
+                ParentFolder = parentFolder;
+                SerializationInfo.parentFolderIndex = parentFolder.SerializationInfo.folderIndex;
+
+                //Add folder index to child folder indeces list of parent folder
+                if (parentFolder.SerializationInfo.childFolderIndeces == null)
+                    parentFolder.SerializationInfo.childFolderIndeces = new List<int>();
+
+                parentFolder.SerializationInfo.childFolderIndeces.Add(SerializationInfo.folderIndex);
+            }
+
+            #endregion Serialization
+
+            _folderPath = folderPath;
+            _depth = depth;
+
+            IsFile = false;
+
+            _childFiles = FindChildFiles();
+            ChildFolders = FindChildFolders();
+
+            //Create the object by giving its path. Then get the assetpreview.
+            SelectableUnityObject = AssetDatabase.LoadAssetAtPath(_folderPath, typeof(UnityEngine.Object));
+            _folderIcon = PVPWindow.PVPSettings.FolderIcon;
+            _foldoutIcon = PVPWindow.PVPSettings.FoldoutIcon;
+
+            //Assets/New Folder-> folderName:New Folder
+            string[] splitPath = _folderPath.Split('\\');
+            _folderName = splitPath[splitPath.Length - 1];
+            placeholderRenamingName = _folderName;
+
+            _folderContent = new GUIContent(_folderName, _folderIcon, folderPath);
+            _foldoutContent = new GUIContent(_foldoutIcon);
         }
-    }
 
-    public void DropAreaGUI(Rect dropArea)
-    {
-        Event evt = Event.current;
+        #region Visualization
 
-        switch (evt.type)
+        /// <summary>
+        /// This method visualizes the folder and calls the VisualizeFile and VisualizeFolder method on it's child files and folders. If this method is called on the root folder it causes all files and folders in the directory to visualize themselves.
+        /// </summary>
+        public void VisualizeFolder()
         {
-            case EventType.DragUpdated:
-            case EventType.DragPerform:
-                if (!dropArea.Contains(evt.mousePosition))
-                    return;
+            IsVisible = true;
 
-                DragAndDrop.visualMode = DragAndDropVisualMode.Move;
+            GUILayout.BeginVertical();
 
-                if (evt.type == EventType.DragPerform)
+            FoldoutWithFolder();
+
+            if (_fold)
+            {
+                VisualizeChildFiles();
+                foreach (var VARIABLE in ChildFolders)
+                    VARIABLE.VisualizeFolder();
+            }
+            else
+            {
+                SetChildrenNotVisible();
+            }
+
+            GUILayout.EndVertical();
+
+            //Remove the files after the visualization so the collections (childFiles and folders) don't get modified while looping through them
+
+            RemoveChildFilesAndFolders();
+        }
+
+        /// <summary>
+        /// Displays all gui elements that make up the folder and checks for different inputs
+        /// </summary>
+        private void FoldoutWithFolder()
+        {
+            GUILayout.BeginHorizontal();
+
+            //Get rects for the selection box, foldout icon and folder label.
+
+            SelectionRect = GUILayoutUtility.GetRect(PVPWindow.Position.width, PVPWindow.IconSize);
+            Rect foldoutRect = new Rect(SelectionRect.x + _depth * 15, SelectionRect.y, PVPWindow.IconSize, PVPWindow.IconSize);
+            Rect labelRect = new Rect(foldoutRect.position.x + PVPWindow.IconSize, foldoutRect.y, 300, PVPWindow.IconSize);
+
+            //Check for all possible inputs.
+
+            var evt = Event.current;
+
+            if (CheckForRenamingInput(SelectionRect, foldoutRect))
+            {
+                showRenameTextField = true;
+            }
+
+            if (PVPSelection.CheckForSingleSelectionInput(this) && !foldoutRect.Contains(evt.mousePosition))
+            {
+                PVPSelection.SelectSingleElement(this);
+            }
+            if (PVPSelection.CheckForShiftSelectionInput(this) && !foldoutRect.Contains(evt.mousePosition))
+            {
+                PVPSelection.ShiftSelection(this);
+            }
+
+            if (PVPSelection.CheckForQtrlSelectInput(this))
+            {
+                PVPSelection.ControlSelect(this);
+            }
+
+            if (IsSelected)
+            {
+                PVPSelection.SetGUISkinToSelected();
+
+                if (showRenameTextField)
                 {
-                    PVPDragAndDrop.AcceptDrag(this);
+                    if (evt.keyCode == KeyCode.Return)
+                    {
+                        RenameFolderAndStopRenaming();
+                    }
+                    else if (evt.keyCode == KeyCode.Escape)
+                    {
+                        placeholderRenamingName = _folderName;
+                        showRenameTextField = false;
+                        PVPWindow.RepaintFlag = true;
+                    }
                 }
-                break;
-        }
-    }
+            }
+            //If user was renaming the folder and then clicked on a different file / folder.
+            else if (showRenameTextField)
+            {
+                RenameFolderAndStopRenaming();
+            }
 
-    private void CheckForDragAndDrop(Rect dragArea)
-    {
-        var evt = Event.current;
+            GUI.Box(SelectionRect, "");
 
-        if (evt.type == EventType.MouseDrag && dragArea.Contains(evt.mousePosition))
-        {
-            PVPDragAndDrop.StartDrag();
-        }
-    }
-
-    private void SetChildrenNotVisible()
-    {
-        foreach (var childFile in ChildFiles)
-        {
-            childFile.IsVisible = false;
-        }
-
-        foreach (var childFolder in ChildFolders)
-        {
-            childFolder.IsVisible = false;
-        }
-    }
-
-    private void FoldoutWithFolder()
-    {
-        GUILayout.BeginHorizontal();
-
-        SelectionRect = GUILayoutUtility.GetRect(PVPWindow.Position.width, PVPWindow.IconSize);
-        Rect buttonRect = new Rect(SelectionRect.x + _depth * 15, SelectionRect.y, PVPWindow.IconSize, PVPWindow.IconSize);
-        Rect labelRect = new Rect(buttonRect.position.x + PVPWindow.IconSize, buttonRect.y, 300, PVPWindow.IconSize);
-
-        var evt = Event.current;
-
-        if (CheckForRenamingInput(SelectionRect))
-        {
-            showRenameTextField = true;
-        }
-
-        if (PVPSelection.CheckForSingleSelectionInput(this) && !buttonRect.Contains(evt.mousePosition))
-        {
-            PVPSelection.SelectSingleElement(this);
-        }
-        if (PVPSelection.CheckForShiftSelectInput(this) && !buttonRect.Contains(evt.mousePosition))
-        {
-            PVPSelection.ShiftSelect(this);
-        }
-
-        if (PVPSelection.CheckForQtrlSelectInput(this))
-        {
-            PVPSelection.ControlSelect(this);
-        }
-
-        if (IsSelected)
-        {
-            PVPSelection.SetGUISkinToSelected();
-        }
-        else
-        {
             if (showRenameTextField)
             {
-                AssetDatabase.RenameAsset(FolderPath, _folderName);
-                FolderPath = AssetDatabase.GetAssetPath(SelectableUnityObject);
-                _folderContent.tooltip = FolderPath;
+                placeholderRenamingName = GUI.TextField(labelRect, placeholderRenamingName);
+            }
+            else
+            {
+                GUI.Label(labelRect, _folderContent);
             }
 
+            //Visualize and rotate foldout icon
+
+            var matrix = GUI.matrix;
+            if (_fold)
+            {
+                GUIUtility.RotateAroundPivot(90, foldoutRect.center);
+            }
+
+            if (GUI.Button(foldoutRect, _foldoutContent))
+            {
+                _fold = !_fold;
+            }
+            GUI.matrix = matrix; //Return rotation back to normal
+
+            CheckForDragAndDrop(labelRect);
+            PVPContextMenu.DisplayContextMenu(this);
+            DropAreaGUI(labelRect);
+            PVPSelection.SetGUISkinToNormal();
+
+            GUILayout.FlexibleSpace();
+            GUILayout.EndHorizontal();
+        }
+
+        private void RemoveChildFilesAndFolders()
+        {
+            if (childFoldersToRemove != null && childFoldersToRemove.Count > 0)
+            {
+                foreach (var folder in childFoldersToRemove)
+                {
+                    ChildFolders.Remove(folder);
+                }
+                childFoldersToRemove.Clear();
+            }
+
+            if (FilesToRemove != null && FilesToRemove.Count > 0)
+            {
+                foreach (var file in FilesToRemove)
+                {
+                    ChildFiles.Remove(file);
+                }
+                FilesToRemove.Clear();
+            }
+        }
+
+        #endregion Visualization
+
+        #region Drag and Drop
+
+        private void CheckForDragAndDrop(Rect dragArea)
+        {
+            var evt = Event.current;
+
+            if (evt.type == EventType.MouseDrag && dragArea.Contains(evt.mousePosition))
+            {
+                PVPDragAndDrop.StartDrag();
+            }
+        }
+
+        /// <summary>
+        /// Check if a file/folder was dragged on to the folder
+        /// </summary>
+        private void DropAreaGUI(Rect dropArea)
+        {
+            Event evt = Event.current;
+
+            switch (evt.type)
+            {
+                case EventType.DragUpdated:
+                case EventType.DragPerform:
+                    if (!dropArea.Contains(evt.mousePosition))
+                        return;
+
+                    DragAndDrop.visualMode = DragAndDropVisualMode.Move;
+
+                    //Check if dragged element is a parent folder. If yes cancel the drag and drop operation
+
+                    bool containsChildFolder = false;
+
+                    foreach (var selectedElement in PVPSelection.SelectedElements)
+                    {
+                        containsChildFolder = IsParentFolder(selectedElement.Path);
+                        if (containsChildFolder)
+                        {
+                            DragAndDrop.visualMode = DragAndDropVisualMode.Rejected;
+                            return;
+                        }
+                    }
+
+                    if (evt.type == EventType.DragPerform)
+                    {
+                        PVPDragAndDrop.AcceptDrag(this);
+                    }
+                    break;
+            }
+        }
+
+        #endregion Drag and Drop
+
+        #region Renaming
+
+        private bool CheckForRenamingInput(Rect selectionRect, Rect foldoutRect)
+        {
+            var evt = Event.current;
+            return isSelected && evt.keyCode == KeyCode.F2 && evt.type == EventType.KeyDown || isSelected && evt.type == EventType.MouseDown && evt.button == 0 && selectionRect.Contains(evt.mousePosition) && PVPSelection.SelectedElements.Count <= 1 && !foldoutRect.Contains(evt.mousePosition) && evt.clickCount == 1;
+        }
+
+        private void RenameFolderAndStopRenaming()
+        {
+            _folderName = placeholderRenamingName;
+            _folderContent.text = _folderName;
+            AssetDatabase.RenameAsset(FolderPath, _folderName);
+            FolderPath = AssetDatabase.GetAssetPath(SelectableUnityObject);
+            _folderContent.tooltip = FolderPath;
+
+            PVPWindow.RepaintFlag = true;
             showRenameTextField = false;
         }
 
-        GUI.Box(SelectionRect, "");
+        #endregion Renaming
 
-        if (showRenameTextField)
-        {
-            _folderName = GUI.TextField(labelRect, _folderName);
-            _folderContent.text = _folderName;
-        }
-        else
-        {
-            GUI.Label(labelRect, _folderContent);
-        }
+        #region Child files and folders
 
-        var matrix = GUI.matrix;
-        if (_fold)
+        public void AddChildFile(PVPFile file)
         {
-            EditorGUIUtility.RotateAroundPivot(90, buttonRect.center);
-        }
+            Undo.RecordObject(PVPWindow.PVPData, "");
+            List<string> fileNameList = new List<string>(ChildFiles.Count);
 
-        if (GUI.Button(buttonRect, _foldoutContent))
-        {
-            _fold = !_fold;
-            if (!_fold)
+            for (int i = 0; i < ChildFiles.Count; i++)
             {
-                List<ISelectable> selectables = new List<ISelectable>();
-                foreach (var selectable in ChildFolders)
-                {
-                    selectables.Add(selectable);
-                }
-                foreach (var selectable in ChildFiles)
-                {
-                    selectables.Add(selectable);
-                }
+                fileNameList.Add(ChildFiles[i].GetNameWithExtension());
             }
-        }
-        GUI.matrix = matrix;
-        CheckForDragAndDrop(labelRect);
-        PVPContextMenu.DisplayContextMenu(this);
-        DropAreaGUI(labelRect);
-        PVPSelection.SetGUISkinToNormal();
-        GUILayout.FlexibleSpace();
-        GUILayout.EndHorizontal();
-    }
+            ChildFiles.Sort();
 
-    private bool CheckForRenamingInput(Rect selectionRect)
-    {
-        var evt = Event.current;
-        return isSelected && evt.keyCode == KeyCode.F2 && evt.type == EventType.KeyDown || isSelected && evt.type == EventType.MouseDown && evt.button == 0 && selectionRect.Contains(evt.mousePosition) && PVPSelection.SelectedElements.Count <= 1;
-    }
+            var newFileIndex = GetSortedIndex(fileNameList, file.GetNameWithExtension());
 
-    private List<PVPFolder> FindChildFolders()
-    {
-        //GetDirectories will return all the subfolders in the given path.
-        string[] dirs = Directory.GetDirectories(_folderPath);
-        List<PVPFolder> folders = new List<PVPFolder>();
-        foreach (var directory in dirs)
-        {
-            //Turn all directories into our 'UnityFolder' Object.
-            PVPFolder newfolder = new PVPFolder(directory, this, _depth + 1);
-            folders.Add(newfolder);
-        }
-        return folders;
-    }
-
-    private List<PVPFile> FindChildFiles()
-    {
-        //GetFiles is similar but returns all the files under the path(obviously)
-        string[] fileNames = Directory.GetFiles(_folderPath);
-        List<PVPFile> files = new List<PVPFile>();
-        foreach (var file in fileNames)
-        {
-            PVPFile newfile = new PVPFile(file, this);
-            //Pass meta files..
-            if (newfile.GetExtension().Equals("meta"))
+            if (ChildFiles.Count < 1)
             {
-                SerializationInfo.childFileIndeces.Remove(newfile.FileSerializationInfo.fileIndex);
-                PVPWindow.PVPData.allFiles.Remove(newfile);
-                PVPSelection.allSelectables.Remove(newfile);
-                continue;
+                ChildFiles.Add(file);
+            }
+            else
+            {
+                ChildFiles.Insert(newFileIndex, file);
             }
 
-            files.Add(newfile);
-        }
+            if (SerializationInfo.childFileIndeces == null)
+                SerializationInfo.childFileIndeces = new List<int>();
 
-        return files;
-    }
-
-    private PVPFile[,] GroupChildFiles(List<PVPFile> files)
-    {
-        //This method groups files by rows of how many files the user wants to display per row.
-        int size = files.Count;
-        int rows = (size / PVPWindow.PVPData.PVPSettings.FilesPerRow) + 1;
-        _groupedFiles = new PVPFile[rows, PVPWindow.PVPData.PVPSettings.FilesPerRow];
-        int index = 0;
-        for (int i = 0; i < rows; i++)
-            for (int j = 0; j < PVPWindow.PVPData.PVPSettings.FilesPerRow; j++)
-                if (i * PVPWindow.PVPData.PVPSettings.FilesPerRow + j <= size - 1)
-                    _groupedFiles[i, j] = files[index++];
-        return _groupedFiles;
-    }
-
-    private void VisualizeChildFiles()
-    {
-        int size = _childFiles.Count;
-        int rows = (size / PVPWindow.PVPData.PVPSettings.FilesPerRow) + 1;
-        _groupedFiles = GroupChildFiles(_childFiles);
-        int i = 0, j = 0;
-        for (i = 0; i < rows; i++)
-        {
-            GUILayout.BeginVertical();
-            GUILayout.BeginHorizontal();
-            for (j = 0; j < PVPWindow.PVPData.PVPSettings.FilesPerRow; j++)
+            if (!SerializationInfo.childFileIndeces.Contains(file.FileSerializationInfo.fileIndex))
+                SerializationInfo.childFileIndeces.Insert(newFileIndex, file.FileSerializationInfo.fileIndex);
+            else
             {
-                if (i * PVPWindow.PVPData.PVPSettings.FilesPerRow + j <= size - 1)
-                    _groupedFiles[i, j].VisualizeFile(_depth);
+                SerializationInfo.childFileIndeces.Move(file.FileSerializationInfo.fileIndex, newFileIndex);
             }
 
-            GUILayout.EndHorizontal();
-            GUILayout.EndVertical();
+            var fileSelectableIndex = SelectableIndex + newFileIndex + 1;
+            file.SelectableIndex = fileSelectableIndex;
+            PVPSelection.MoveSelectable(file);
         }
-    }
 
-    private void AddFilesFromFilter()
-    {
-        List<PVPFile> files = new List<PVPFile>();
-        foreach (var filter in _filters)
+        public void AddChildFolder(PVPFolder folder)
         {
-            string[] guids = AssetDatabase.FindAssets(filter, new string[] { "Assets" });
-            foreach (var guid in guids)
-            {
-                var path = AssetDatabase.GUIDToAssetPath(guid);
-                PVPFile file = new PVPFile(path, this);
+            List<string> folderNameList = new List<string>(ChildFolders.Count);
 
-                bool userWantsToMoveFile = false;
-                if (!file.IsChildOfRootFolder())
+            for (int i = 0; i < ChildFolders.Count; i++)
+            {
+                folderNameList.Add(ChildFolders[i].GetName());
+            }
+
+            var newFolderIndex = GetSortedIndex(folderNameList, folder.GetName());
+
+            if (ChildFolders.Count < 1)
+            {
+                ChildFolders.Add(folder);
+            }
+            else
+            {
+                ChildFolders.Insert(newFolderIndex, folder);
+            }
+
+            if (SerializationInfo.childFolderIndeces == null)
+                SerializationInfo.childFolderIndeces = new List<int>();
+
+            if (!SerializationInfo.childFolderIndeces.Contains(folder.SerializationInfo.folderIndex))
+                SerializationInfo.childFolderIndeces.Insert(newFolderIndex, folder.SerializationInfo.folderIndex);
+            else
+            {
+                SerializationInfo.childFolderIndeces.Move(folder.SerializationInfo.folderIndex, newFolderIndex);
+            }
+
+            folder.Depth = _depth + 1;
+            var folderSelectableIndex = SelectableIndex + newFolderIndex + ChildFiles.Count + 1;
+            folder.SelectableIndex = folderSelectableIndex;
+            PVPSelection.MoveSelectable(folder);
+        }
+
+        /// <summary>
+        /// This method get's called after a folder was dragged and dropped. It adjusts the selectable indeces of its child files and folders and calls the AdjustChildrenSelectableIndex function on it's childFolders until there are none left.
+        /// </summary>
+        /// <param name="selectablesToAdjust">The root folder that calls this function leaves it to null. This list will be filled up with all children of the folder and passed down until there are no child folders left.</param>
+        public void AdjustChildrenSelectableIndex(List<ISelectable> selectablesToAdjust = null)
+        {
+            //
+            if (selectablesToAdjust == null)
+                selectablesToAdjust = new List<ISelectable>();
+
+            for (int i = 0; i < ChildFiles.Count; i++)
+            {
+                ChildFiles[i].SelectableIndex = SelectableIndex + i + 1;
+                selectablesToAdjust.Add(ChildFiles[i]);
+            }
+
+            if (ChildFolders == null || ChildFolders.Count == 0)
+            {
+                PVPSelection.MoveSelectables(selectablesToAdjust.ToArray());
+                return;
+            }
+
+            for (int i = 0; i < ChildFolders.Count; i++)
+            {
+                ChildFolders[i].SelectableIndex = SelectableIndex + ChildFiles.Count + i + 1;
+                selectablesToAdjust.Add(ChildFolders[i]);
+            }
+
+            foreach (var childFolder in ChildFolders)
+            {
+                AdjustChildrenSelectableIndex(selectablesToAdjust);
+            }
+        }
+
+        private List<PVPFile> FindChildFiles()
+        {
+            //GetFiles is similar but returns all the files under the path
+            string[] fileNames = Directory.GetFiles(_folderPath);
+            List<PVPFile> files = new List<PVPFile>();
+            foreach (var file in fileNames)
+            {
+                PVPFile newfile = new PVPFile(file, this);
+                //Pass meta files..
+                if (newfile.Extension.Equals("meta"))
                 {
-                    userWantsToMoveFile = EditorUtility.DisplayDialog("File conflict", $"File {file.GetName()} is currently in this path: {file.GetPath()}. Do you want to move the file to {path}?", "Yes", "No");
+                    SerializationInfo.childFileIndeces.Remove(newfile.FileSerializationInfo.fileIndex);
+                    PVPWindow.PVPData.allFiles.Remove(newfile);
+                    PVPSelection.allSelectables.Remove(newfile);
+                    continue;
                 }
 
-                if (!_childFiles.Contains(file) && userWantsToMoveFile)
+                files.Add(newfile);
+            }
+
+            return files;
+        }
+
+        private List<PVPFolder> FindChildFolders()
+        {
+            //GetDirectories will return all the subfolders in the given path.
+            string[] dirs = Directory.GetDirectories(_folderPath);
+            List<PVPFolder> folders = new List<PVPFolder>();
+            foreach (var directory in dirs)
+            {
+                //Turn all directories into our 'UnityFolder' Object.
+                PVPFolder newfolder = new PVPFolder(directory, this, _depth + 1);
+                folders.Add(newfolder);
+            }
+            return folders;
+        }
+
+        /// <summary>
+        /// This method groups files by rows of how many files the user wants to display per row.
+        /// </summary>
+        private PVPFile[,] GroupChildFiles(List<PVPFile> files)
+        {
+            int size = files.Count;
+            int rows = size / PVPWindow.PVPSettings.FilesPerRow + 1;
+            _groupedFiles = new PVPFile[rows, PVPWindow.PVPSettings.FilesPerRow];
+            int index = 0;
+            for (int i = 0; i < rows; i++)
+                for (int j = 0; j < PVPWindow.PVPSettings.FilesPerRow; j++)
+                    if (i * PVPWindow.PVPSettings.FilesPerRow + j <= size - 1)
+                        _groupedFiles[i, j] = files[index++];
+            return _groupedFiles;
+        }
+
+        private void SetChildrenNotVisible()
+        {
+            foreach (var childFile in ChildFiles)
+            {
+                childFile.IsVisible = false;
+            }
+
+            foreach (var childFolder in ChildFolders)
+            {
+                childFolder.IsVisible = false;
+            }
+        }
+
+        private void VisualizeChildFiles()
+        {
+            int size = _childFiles.Count;
+            int rows = size / PVPWindow.PVPSettings.FilesPerRow + 1;
+            _groupedFiles = GroupChildFiles(_childFiles);
+            int i = 0, j = 0;
+            for (i = 0; i < rows; i++)
+            {
+                GUILayout.BeginVertical();
+                GUILayout.BeginHorizontal();
+                for (j = 0; j < PVPWindow.PVPSettings.FilesPerRow; j++)
                 {
-                    _childFiles.Add(file);
+                    if (i * PVPWindow.PVPSettings.FilesPerRow + j <= size - 1)
+                        _groupedFiles[i, j].VisualizeFile(_depth);
                 }
-                Debug.Log("New file added : " + file.GetPath());
+
+                GUILayout.EndHorizontal();
+                GUILayout.EndVertical();
             }
         }
-    }
 
-    public void Delete()
-    {
-        if(ChildFiles != null && ChildFiles.Count > 0)
+        #endregion Child files and folders
+
+        #region Utility
+
+        /// <summary>
+        /// Updates standard compare to function so that the folder name is used as a comparison basis
+        /// </summary>
+        public int CompareTo(PVPFolder other)
         {
-            foreach (var file in ChildFiles)
+            return other.GetName().CompareTo(_folderName);
+        }
+
+        /// <summary>
+        /// Deletes the folder with all it's child files and folders.
+        /// </summary>
+        public void Delete()
+        {
+            //Delete all child files
+            if (ChildFiles != null && ChildFiles.Count > 0)
             {
-                file.Delete();
+                foreach (var file in ChildFiles)
+                {
+                    file.Delete();
+                }
             }
-        }
-        if (ChildFolders != null && ChildFolders.Count > 0)
-        {
-            foreach (var folder in ChildFolders)
+            //Delete all child folders
+            if (ChildFolders != null && ChildFolders.Count > 0)
             {
-                folder.Delete();
+                foreach (var folder in ChildFolders)
+                {
+                    folder.Delete();
+                }
+            }
+            //Remove folder from parent folder
+            if (ParentFolder.FoldersToRemove == null)
+                ParentFolder.FoldersToRemove = new List<PVPFolder>();
+
+            ParentFolder.FoldersToRemove.Add(this);
+            ParentFolder.SerializationInfo.childFolderIndeces.Remove(SerializationInfo.folderIndex);
+
+            //Remove folder from allFolders list
+            PVPWindow.PVPData.RemoveFolder(this);
+
+            //Remove folder from allSelectables list
+            PVPSelection.RemoveElement(this);
+
+            //Delete folder asset
+            AssetDatabase.DeleteAsset(FolderPath);
+        }
+
+        public int GetDepth()
+        {
+            return _depth;
+        }
+
+        public string GetName()
+        {
+            return _folderPath;
+        }
+
+        public bool IsRootFolder()
+        {
+            if (_folderPath == "Assets")
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public void Move(PVPFolder targetFolder)
+        {
+            if (ParentFolder.FoldersToRemove == null)
+                ParentFolder.FoldersToRemove = new List<PVPFolder>();
+            ParentFolder.FoldersToRemove.Add(this); //Remove this folder from old parent folder
+            ParentFolder.SerializationInfo.childFolderIndeces.Remove(SerializationInfo.folderIndex);
+
+            var newPath = targetFolder.FolderPath + "\\" + _folderName;
+
+            AssetDatabase.MoveAsset(FolderPath, newPath);
+
+            FolderPath = newPath;
+
+            ParentFolder = targetFolder;
+            SerializationInfo.parentFolderIndex = ParentFolder.SerializationInfo.folderIndex;
+
+            targetFolder.AddChildFolder(this);
+            AdjustChildrenSelectableIndex();
+        }
+
+        private int GetSortedIndex(List<string> list, string value)
+        {
+            // Add the value to the list if it is not already there
+            if (!list.Contains(value))
+            {
+                list.Add(value);
+            }
+
+            // Sort the list alphabetically
+            list.Sort();
+
+            // Find the index of the value in the sorted list
+            return list.IndexOf(value);
+        }
+
+        private bool IsParentFolder(string parentFolder)
+        {
+            string parentFolderPath = System.IO.Path.GetFullPath(parentFolder);
+            string childFolderPath = System.IO.Path.GetFullPath(FolderPath);
+            // Check if the child folder is a subfolder of the parent folder
+            // by checking if the child folder path starts with the parent folder path
+            return childFolderPath.StartsWith(parentFolderPath, StringComparison.OrdinalIgnoreCase);
+        }
+
+        #endregion Utility
+
+        #region For the future
+
+        /// <summary>
+        /// Not implemented yet
+        /// </summary>
+        private void AddFilesFromFilter()
+        {
+            List<PVPFile> files = new List<PVPFile>();
+            foreach (var filter in _filters)
+            {
+                string[] guids = AssetDatabase.FindAssets(filter, new string[] { "Assets" });
+                foreach (var guid in guids)
+                {
+                    var path = AssetDatabase.GUIDToAssetPath(guid);
+                    PVPFile file = new PVPFile(path, this);
+
+                    bool userWantsToMoveFile = false;
+                    if (!file.IsChildOfRootFolder())
+                    {
+                        userWantsToMoveFile = EditorUtility.DisplayDialog("File conflict", $"File {file.GetNameWithExtension()} is currently in this path: {file.Path}. Do you want to move the file to {path}?", "Yes", "No");
+                    }
+
+                    if (!_childFiles.Contains(file) && userWantsToMoveFile)
+                    {
+                        _childFiles.Add(file);
+                    }
+                    Debug.Log("New file added : " + file.Path);
+                }
             }
         }
-        ParentFolder.childFoldersToRemove.Add(this);
-        ParentFolder.SerializationInfo.childFolderIndeces.Remove(SerializationInfo.folderIndex);
-        PVPWindow.PVPData.allFolders.Remove(this);
-        AssetDatabase.DeleteAsset(FolderPath);
 
-    }
-
-    public string GetName()
-    {
-        return _folderPath;
-    }
-
-    public int GetDepth()
-    {
-        return _depth;
-    }
-
-    public bool IsRootFolder()
-    {
-        if (_folderPath == "Assets")
-        {
-            return true;
-        }
-        return false;
-    }
-
-    private int GetSortedIndex(List<string> list, string value)
-    {
-        // Add the value to the list if it is not already there
-        if (!list.Contains(value))
-        {
-            list.Add(value);
-        }
-
-        // Sort the list alphabetically
-        list.Sort();
-
-        // Find the index of the value in the sorted list
-        return list.IndexOf(value);
-    }
-
-    public void AddChildFolder(PVPFolder folder)
-    {
-        Undo.RecordObject(PVPWindow.PVPData, "");
-        List<string> folderNameList = new List<string>(ChildFolders.Count);
-
-        for (int i = 0; i < ChildFolders.Count; i++)
-        {
-            folderNameList.Add(ChildFolders[i].GetName());
-        }
-
-        var newFileIndex = GetSortedIndex(folderNameList, folder.GetName());
-
-        if (ChildFolders.Count < 1)
-        {
-            ChildFolders.Add(folder);
-        }
-        else
-        {
-            ChildFolders.Insert(newFileIndex, folder);
-        }
-
-        if (SerializationInfo.childFolderIndeces == null)
-            SerializationInfo.childFolderIndeces = new List<int>();
-
-        SerializationInfo.childFolderIndeces.Add(folder.SerializationInfo.folderIndex);
-
-        folder.Depth = _depth + 1;
-        var folderSelectableIndex = SelectableIndex + newFileIndex + ChildFiles.Count + 1;
-        folder.SelectableIndex = folderSelectableIndex;
-        PVPSelection.MoveSelectable(folder);
-    }
-
-    public void AddChildFile(PVPFile file)
-    {
-        Undo.RecordObject(PVPWindow.PVPData, "");
-        List<string> fileNameList = new List<string>(ChildFiles.Count);
-
-        for (int i = 0; i < ChildFiles.Count; i++)
-        {
-            fileNameList.Add(ChildFiles[i].GetName());
-        }
-        ChildFiles.Sort();
-
-        var newFileIndex = GetSortedIndex(fileNameList, file.GetName());
-
-        if (ChildFiles.Count < 1)
-        {
-            ChildFiles.Add(file);
-        }
-        else
-        {
-            ChildFiles.Insert(newFileIndex, file);
-        }
-
-        if (SerializationInfo.childFileIndeces == null)
-            SerializationInfo.childFileIndeces = new List<int>();
-
-        if (!SerializationInfo.childFileIndeces.Contains(file.FileSerializationInfo.fileIndex))
-            SerializationInfo.childFileIndeces.Add(file.FileSerializationInfo.fileIndex);
-        else
-        {
-            SerializationInfo.childFileIndeces.Remove(file.FileSerializationInfo.fileIndex);
-            SerializationInfo.childFileIndeces.Insert(newFileIndex, file.FileSerializationInfo.fileIndex);
-        }
-
-        var fileSelectableIndex = SelectableIndex + newFileIndex + 1;
-        file.SelectableIndex = fileSelectableIndex;
-        PVPSelection.MoveSelectable(file);
-    }
-
-    public void Move(PVPFolder targetFolder)
-    {
-        if (ParentFolder.FoldersToRemove == null)
-            ParentFolder.FoldersToRemove = new List<PVPFolder>();
-        ParentFolder.FoldersToRemove.Add(this); //Remove this folder from old parent folder
-        ParentFolder.SerializationInfo.childFolderIndeces.Remove(SerializationInfo.folderIndex);
-
-        var newPath = targetFolder.FolderPath + "\\" + _folderName;
-
-        AssetDatabase.MoveAsset(FolderPath, newPath);
-
-        FolderPath = newPath;
-
-        this.ParentFolder = targetFolder;
-        SerializationInfo.parentFolderIndex = ParentFolder.SerializationInfo.folderIndex;
-
-        targetFolder.AddChildFolder(this);
-        AdjustChildrenSelectableIndex();
-    }
-
-    public void AdjustChildrenSelectableIndex(List<ISelectable> selectablesToAdjust = null)
-    {
-        if (selectablesToAdjust == null)
-            selectablesToAdjust = new List<ISelectable>();
-
-        for (int i = 0; i < ChildFiles.Count; i++)
-        {
-            ChildFiles[i].SelectableIndex = SelectableIndex + i + 1;
-            selectablesToAdjust.Add(ChildFiles[i]);
-        }
-
-        if (ChildFolders == null || ChildFolders.Count == 0)
-        {
-            PVPSelection.MoveSelectables(selectablesToAdjust.ToArray());
-            return;
-        }
-
-        for (int i = 0; i < ChildFolders.Count; i++)
-        {
-            ChildFolders[i].SelectableIndex = SelectableIndex + ChildFiles.Count + i + 1;
-            selectablesToAdjust.Add(ChildFolders[i]);
-        }
-
-        foreach (var childFolder in ChildFolders)
-        {
-            AdjustChildrenSelectableIndex(selectablesToAdjust);
-        }
-    }
-
-    public int CompareTo(PVPFolder other)
-    {
-        return other.GetName().CompareTo(_folderName);
+        #endregion For the future
     }
 }

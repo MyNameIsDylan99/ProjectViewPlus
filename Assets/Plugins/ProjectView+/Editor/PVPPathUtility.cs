@@ -2,60 +2,48 @@ using System.IO;
 using UnityEditor;
 using UnityEngine;
 
-public static class PVPPathUtility
+namespace ProjectViewPlus
 {
-    public static string GetPathOfMonoScript(MonoScript monoScript)
+    /// <summary>
+    /// Static class with utility function for finding paths.
+    /// </summary>
+    public static class PVPPathUtility
     {
-        var currentPathWithName = AssetDatabase.GetAssetPath(monoScript);
-        var splitCurrentPath = currentPathWithName.Split('/');
-        string currentPath = "";
-        for (int i = 0; i < splitCurrentPath.Length - 1; i++)
+        /// <summary>
+        /// Returns the directory the monoscript asset is in
+        /// </summary>
+        public static string GetDirectoryOfMonoScript(MonoScript monoScript)
         {
-            if (i > 0)
-                currentPath += "/";
-
-            currentPath += splitCurrentPath[i];
+            var path = AssetDatabase.GetAssetPath(monoScript);
+            return GetDirectory(path);
         }
 
-        return currentPath;
-    }
-
-    public static string GetPathOfMonobehaviour(MonoBehaviour monoBehaviour)
-    {
-        var thisMS = MonoScript.FromMonoBehaviour(monoBehaviour);
-        var currentPathWithName = AssetDatabase.GetAssetPath(thisMS);
-        var splitCurrentPath = currentPathWithName.Split('/');
-        string currentPath = "";
-        for (int i = 0; i < splitCurrentPath.Length - 1; i++)
+        /// <summary>
+        /// Returns the directory the monobehaviour asset is in
+        /// </summary>
+        public static string GetDirectoryOfMonobehaviour(MonoBehaviour monoBehaviour)
         {
-            if (i > 0)
-                currentPath += "/";
-
-            currentPath += splitCurrentPath[i];
+            var thisMS = MonoScript.FromMonoBehaviour(monoBehaviour);
+            var path = AssetDatabase.GetAssetPath(thisMS);
+            return GetDirectory(path);
         }
 
-        return currentPath;
-    }
-
-    public static string GetPathOfScriptableObject(ScriptableObject scriptableObject)
-    {
-        var thisMS = MonoScript.FromScriptableObject(scriptableObject);
-        var currentPathWithName = AssetDatabase.GetAssetPath(thisMS);
-        var splitCurrentPath = currentPathWithName.Split('/');
-        string currentPath = "";
-        for (int i = 0; i < splitCurrentPath.Length - 1; i++)
+        /// <summary>
+        /// Returns the directory the scriptableobject asset is in
+        /// </summary>
+        public static string GetDirectoryOfScriptableObject(ScriptableObject scriptableObject)
         {
-            if (i > 0)
-                currentPath += "/";
-
-            currentPath += splitCurrentPath[i];
+            var thisMS = MonoScript.FromScriptableObject(scriptableObject);
+            var path = AssetDatabase.GetAssetPath(thisMS);
+            return GetDirectory(path);
         }
 
-        return currentPath;
-    }
-
-    public static string RemoveFileNameFromPath(string path)
-    {
-        return Path.GetDirectoryName(path);
+        /// <summary>
+        /// Returns the directory of the path
+        /// </summary>
+        public static string GetDirectory(string path)
+        {
+            return Path.GetDirectoryName(path);
+        }
     }
 }

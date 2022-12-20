@@ -3,270 +3,322 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-[Serializable]
-public class PVPFile : ISelectable, IComparable<PVPFile>
+namespace ProjectViewPlus
 {
-    public FileSerializationInfo FileSerializationInfo;
-
-    #region SerializedFields
-
-    [SerializeField]
-    private string path;
-
-    [SerializeField]
-    private string extension;
-
-    [SerializeField]
-    private string fileName;
-
-    [NonSerialized]
-    private PVPFolder parentFolder;
-
-    [SerializeField]
-    private Texture2D fileIcon;
-
-    [SerializeField]
-    private GUIContent fileContent;
-
-    #region ISelectable
-
-    [SerializeField]
-    private UnityEngine.Object selectableObject;
-
-    [SerializeField]
-    private Rect selectionRect;
-
-    [SerializeField]
-    private bool isVisible;
-
-    private bool isSelected;
-
-    [SerializeField]
-    private int selectableIndex;
-
-    [SerializeField]
-    private bool isFile;
-
-    #endregion ISelectable
-
-    #endregion SerializedFields
-
-    #region Private Fields
-
-    private bool showRenameTextField;
-
-    #endregion Private Fields
-
-    #region Properties
-
-    public PVPFolder ParentFolder { get => parentFolder; set => parentFolder = value; }
-    public UnityEngine.Object SelectableUnityObject { get => selectableObject; set => selectableObject = value; }
-    public Rect SelectionRect { get => selectionRect; set => selectionRect = value; }
-    public bool IsVisible { get => isVisible; set => isVisible = value; }
-    public bool IsSelected { get => isSelected; set => isSelected = value; }
-    public int SelectableIndex { get => selectableIndex; set => selectableIndex = value; }
-    public bool RepaintFlag { get => PVPWindow.RepaintFlag; set => PVPWindow.RepaintFlag = value; }
-
-    public bool IsFile { get => isFile; private set => isFile = value; }
-
-    public string Path { get => path; }
-
-    public PVPFolder SelectableContextFolder { get => ParentFolder; }
-
-    #endregion Properties
-
-    public PVPFile(string path, PVPFolder parentFolder)
+    /// <summary>
+    /// This class represents a file in the project view plus window. It stores relevant data of the file it is representing, like its path, reference to the icon and more.
+    /// </summary>
+    [Serializable]
+    public class PVPFile : ISelectable, IComparable<PVPFile>
     {
-        PVPSelection.allSelectables.Add(this);
-        SelectableIndex = PVPSelection.allSelectables.Count - 1;
-        PVPWindow.PVPData.allFiles.Add(this);
-        FileSerializationInfo.fileIndex = PVPWindow.PVPData.allFiles.Count - 1;
+        public FileSerializationInfo FileSerializationInfo;
 
-        FileSerializationInfo.parentFolderIndex = parentFolder.SerializationInfo.folderIndex;
+        #region SerializedFields
 
-        if (parentFolder.SerializationInfo.childFileIndeces == null)
-            parentFolder.SerializationInfo.childFileIndeces = new List<int>();
-        parentFolder.SerializationInfo.childFileIndeces.Add(FileSerializationInfo.fileIndex);
+        [SerializeField]
+        private string extension;
 
-        this.path = path;
-        extension = FindExtension(path);
-        fileName = FindFileName(path);
-        IsFile = true;
+        [SerializeField]
+        private GUIContent fileContent;
 
-        this.parentFolder = parentFolder;
+        [SerializeField]
+        private Texture2D fileIcon;
 
-        SelectableUnityObject = AssetDatabase.LoadAssetAtPath(this.path, typeof(UnityEngine.Object));
-        fileIcon = AssetPreview.GetMiniThumbnail(SelectableUnityObject);
+        [SerializeField]
+        private string fileName;
 
-        fileContent = new GUIContent(fileName, fileIcon, path);
-    }
+        [NonSerialized]
+        private PVPFolder parentFolder;
 
-    #region Methods
+        [SerializeField]
+        private string path;
 
-    #region Getter Methods
+        #region ISelectable
 
-    public string GetPath()
-    {
-        return path;
-    }
+        [SerializeField]
+        private bool isFile;
 
-    public string GetExtension()
-    {
-        return extension;
-    }
+        private bool isSelected;
 
-    public string GetName()
-    {
-        return fileName + extension;
-    }
+        [SerializeField]
+        private bool isVisible;
 
-    public bool IsChildOfRootFolder()
-    {
-        return parentFolder.IsRootFolder();
-    }
+        [SerializeField]
+        private string placeholderRenamingName;
 
-    #endregion Getter Methods
+        [SerializeField]
+        private int selectableIndex;
 
-    #region Visualization
+        [SerializeField]
+        private UnityEngine.Object selectableObject;
 
-    public void VisualizeFile(int depth)
-    {
-        SelectionRect = GUILayoutUtility.GetRect(0, PVPWindow.IconSize);
-        Rect fileLabel = new Rect(SelectionRect.position.x + depth * 25, SelectionRect.position.y, 300, PVPWindow.IconSize);
+        [SerializeField]
+        private Rect selectionRect;
 
-        IsVisible = true;
+        #endregion ISelectable
 
-        if (CheckForRenamingInput(SelectionRect))
+        #endregion SerializedFields
+
+        #region Private Fields
+
+        private bool showRenameTextField;
+
+        #endregion Private Fields
+
+        #region Properties
+
+        public string Extension { get => extension; }
+        public bool IsFile { get => isFile; private set => isFile = value; }
+        public bool IsSelected { get => isSelected; set => isSelected = value; }
+        public bool IsVisible { get => isVisible; set => isVisible = value; }
+        public PVPFolder ParentFolder { get => parentFolder; set => parentFolder = value; }
+        public string Path { get => path; }
+        public bool RepaintFlag { get => PVPWindow.RepaintFlag; set => PVPWindow.RepaintFlag = value; }
+        public PVPFolder SelectableContextFolder { get => ParentFolder; }
+        public int SelectableIndex { get => selectableIndex; set => selectableIndex = value; }
+        public UnityEngine.Object SelectableUnityObject { get => selectableObject; set => selectableObject = value; }
+        public Rect SelectionRect { get => selectionRect; set => selectionRect = value; }
+
+        #endregion Properties
+
+        public PVPFile(string path, PVPFolder parentFolder)
         {
-            showRenameTextField = true;
+            //Add file to allSelectables list and update selectable index
+            PVPSelection.allSelectables.Add(this);
+            SelectableIndex = PVPSelection.allSelectables.Count - 1;
+
+            //Add file to allFiles list and update file index
+            PVPWindow.PVPData.allFiles.Add(this);
+            FileSerializationInfo.fileIndex = PVPWindow.PVPData.allFiles.Count - 1;
+
+            //Set the parent folder index
+            FileSerializationInfo.parentFolderIndex = parentFolder.SerializationInfo.folderIndex;
+
+            //Add file index to parentFolders childFileIndeces list
+            if (parentFolder.SerializationInfo.childFileIndeces == null)
+                parentFolder.SerializationInfo.childFileIndeces = new List<int>();
+
+            parentFolder.SerializationInfo.childFileIndeces.Add(FileSerializationInfo.fileIndex);
+
+            //Initialize all fields
+            this.path = path;
+            extension = FindExtension(path);
+            fileName = FindFileName(path);
+            placeholderRenamingName = fileName;
+            IsFile = true;
+
+            this.parentFolder = parentFolder;
+
+            SelectableUnityObject = AssetDatabase.LoadAssetAtPath(this.path, typeof(UnityEngine.Object));
+            fileIcon = AssetPreview.GetMiniThumbnail(SelectableUnityObject);
+
+            fileContent = new GUIContent(fileName, fileIcon, path);
         }
 
-        if (PVPSelection.CheckForSingleSelectionInput(this))
+        #region Methods
+
+        #region Getter Methods
+
+        public string GetNameWithExtension()
         {
-            PVPSelection.SelectSingleElement(this);
+            return fileName + extension;
         }
 
-        if (PVPSelection.CheckForOpenAssetInput(this))
+        public bool IsChildOfRootFolder()
         {
-            AssetDatabase.OpenAsset(SelectableUnityObject);
+            return parentFolder.IsRootFolder();
         }
 
-        if (PVPSelection.CheckForShiftSelectInput(this))
-        {
-            PVPSelection.ShiftSelect(this);
-        }
+        #endregion Getter Methods
 
-        if (PVPSelection.CheckForQtrlSelectInput(this))
-        {
-            PVPSelection.ControlSelect(this);
-        }
+        #region Visualization
 
-        if (IsSelected)
+        /// <summary>
+        /// This methods visualizes the file. Since this method get's called in the ongui event of the PVPWindow all gui event based checks like check if file gets selected happen here.
+        /// </summary>
+        public void VisualizeFile(int depth)
         {
-            PVPSelection.SetGUISkinToSelected();
-        }
-        else
-        {
-            if (showRenameTextField)
+            //Get rects
+            SelectionRect = GUILayoutUtility.GetRect(0, PVPWindow.IconSize);
+            Rect fileLabel = new Rect(SelectionRect.position.x + depth * 25, SelectionRect.position.y, 300, PVPWindow.IconSize);
+
+            IsVisible = true;
+
+            //Check for different inputs and execute logic accordingly
+            if (CheckForRenamingInput(SelectionRect))
             {
-                AssetDatabase.RenameAsset(GetPath(), fileName);
-                path = AssetDatabase.GetAssetPath(SelectableUnityObject);
-                fileContent.tooltip = path;
+                showRenameTextField = true;
             }
 
+            if (PVPSelection.CheckForSingleSelectionInput(this))
+            {
+                PVPSelection.SelectSingleElement(this);
+            }
+
+            if (PVPSelection.CheckForOpenAssetInput(this))
+            {
+                AssetDatabase.OpenAsset(SelectableUnityObject);
+            }
+
+            if (PVPSelection.CheckForShiftSelectionInput(this))
+            {
+                PVPSelection.ShiftSelection(this);
+            }
+
+            if (PVPSelection.CheckForQtrlSelectInput(this))
+            {
+                PVPSelection.ControlSelect(this);
+            }
+
+            //If selected display selected guiskin.
+            if (IsSelected)
+            {
+                PVPSelection.SetGUISkinToSelected();
+
+                if (showRenameTextField)
+                {
+                    var evt = Event.current;
+                    if (evt.keyCode == KeyCode.Return)
+                    {
+                        RenameFileAndStopRenaming();
+                    }
+                    else if (evt.keyCode == KeyCode.Escape)
+                    {
+                        placeholderRenamingName = fileName;
+                        showRenameTextField = false;
+                        PVPWindow.RepaintFlag = true;
+                    }
+                }
+            }
+            //If user was renaming and clicked away
+            else if (showRenameTextField)
+            {
+                RenameFileAndStopRenaming();
+            }
+            GUI.Box(SelectionRect, "");
+            if (showRenameTextField)
+            {
+                placeholderRenamingName = GUI.TextField(fileLabel, placeholderRenamingName);
+            }
+            else
+            {
+                GUI.Label(fileLabel, fileContent);
+            }
+
+            PVPSelection.SetGUISkinToNormal();
+
+            //Check for ContextMenu input and display if needed
+            PVPContextMenu.DisplayContextMenu(this);
+
+            //Check for drag and drop input and execute if needed
+            CheckForDragAndDrop(SelectionRect);
+        }
+
+        #endregion Visualization
+
+        #region Utility
+
+        /// <summary>
+        /// Deletes the file and removes all references that other scripts had to it.
+        /// </summary>
+        public void Delete()
+        {
+            if (parentFolder.FilesToRemove == null)
+                parentFolder.FilesToRemove = new List<PVPFile>();
+
+            parentFolder.FilesToRemove.Add(this); //Remove this file from old parent folder
+            parentFolder.SerializationInfo.childFileIndeces.Remove(FileSerializationInfo.fileIndex);
+            PVPWindow.PVPData.RemoveFile(this);
+            PVPSelection.RemoveElement(this);
+
+            AssetDatabase.DeleteAsset(path);
+        }
+
+        private bool CheckForRenamingInput(Rect selectionRect)
+        {
+            var evt = Event.current;
+            return isSelected && evt.keyCode == KeyCode.F2 && evt.type == EventType.KeyDown || isSelected && evt.type == EventType.MouseDown && evt.button == 0 && selectionRect.Contains(evt.mousePosition) && PVPSelection.SelectedElements.Count <= 1 && evt.clickCount == 1;
+        }
+
+        private string FindExtension(string path)
+        {
+            string[] splitPath = path.Split('.');
+            string ext = splitPath[splitPath.Length - 1];
+            return ext;
+        }
+
+        private string FindFileName(string path)
+        {
+            string[] splitPath = path.Split('\\');
+            string fullName = splitPath[splitPath.Length - 1];
+            string splitExt = fullName.Split('.')[0];
+
+            return splitExt;
+        }
+
+        private void RenameFileAndStopRenaming()
+        {
+            fileName = placeholderRenamingName;
+            fileContent.text = fileName;
+            AssetDatabase.RenameAsset(Path, fileName);
+            path = AssetDatabase.GetAssetPath(SelectableUnityObject);
+            fileContent.tooltip = path;
+
+            PVPWindow.RepaintFlag = true;
             showRenameTextField = false;
         }
 
-        GUI.Box(SelectionRect, "");
-        if (showRenameTextField)
+        #endregion Utility
+
+        #region Drag and Drop
+
+        /// <summary>
+        /// Updates standard compare to function so that the fileName is used as a comparison basis
+        /// </summary>
+        public int CompareTo(PVPFile other)
         {
-            fileName = GUI.TextField(fileLabel, fileName);
-            fileContent.text = fileName;
+            return fileName.CompareTo(other.GetNameWithExtension());
         }
-        else
+
+        /// <summary>
+        /// Move the file to a new folder. Makes sure all references to the file are updated accordingly
+        /// </summary>
+        public void Move(PVPFolder targetFolder)
         {
-            GUI.Label(fileLabel, fileContent);
+            if (parentFolder.FilesToRemove == null)
+                parentFolder.FilesToRemove = new List<PVPFile>();
+
+            parentFolder.FilesToRemove.Add(this); //Remove this file from old parent folder
+            parentFolder.SerializationInfo.childFileIndeces.Remove(FileSerializationInfo.fileIndex);
+
+            //Set new path
+            var newPath = targetFolder.FolderPath + "\\" + fileName + "." + extension;
+
+            //Actually move the file
+            AssetDatabase.MoveAsset(path, newPath);
+
+            //Update fields
+            path = newPath;
+
+            parentFolder = targetFolder;
+            FileSerializationInfo.parentFolderIndex = parentFolder.SerializationInfo.folderIndex;
+
+            //Add file to new parent folder
+            targetFolder.AddChildFile(this);
         }
 
-        PVPSelection.SetGUISkinToNormal();
-
-        PVPContextMenu.DisplayContextMenu(this);
-        CheckForDragAndDrop(SelectionRect);
-    }
-
-    #endregion Visualization
-
-    #region Utility
-
-    private string FindExtension(string path)
-    {
-        string[] splitPath = path.Split('.');
-        string ext = splitPath[splitPath.Length - 1];
-        return ext;
-    }
-
-    private string FindFileName(string path)
-    {
-        string[] splitPath = path.Split('\\');
-        string fullName = splitPath[splitPath.Length - 1];
-        string splitExt = fullName.Split('.')[0];
-
-        return splitExt;
-    }
-
-    private bool CheckForRenamingInput(Rect selectionRect)
-    {
-        var evt = Event.current;
-        return isSelected && evt.keyCode == KeyCode.F2 && evt.type == EventType.KeyDown || isSelected && evt.type == EventType.MouseDown && evt.button == 0 && selectionRect.Contains(evt.mousePosition) && PVPSelection.SelectedElements.Count <= 1;
-    }
-
-    public void Delete()
-    {
-        parentFolder.ChildFiles.Remove(this); //Remove this file from old parent folder
-        parentFolder.SerializationInfo.childFileIndeces.Remove(FileSerializationInfo.fileIndex);
-        PVPWindow.PVPData.allFiles.Remove(this);
-        PVPSelection.allSelectables.Remove(this);
-
-        AssetDatabase.DeleteAsset(path);
-    }
-
-    #endregion Utility
-
-    #region Drag and Drop
-
-    public void Move(PVPFolder targetFolder)
-    {
-        parentFolder.ChildFiles.Remove(this); //Remove this file from old parent folder
-        parentFolder.SerializationInfo.childFileIndeces.Remove(FileSerializationInfo.fileIndex);
-
-        var newPath = targetFolder.FolderPath + "\\" + fileName + "." + extension;
-
-        AssetDatabase.MoveAsset(path, newPath);
-
-        this.path = newPath;
-
-        this.parentFolder = targetFolder;
-        FileSerializationInfo.parentFolderIndex = parentFolder.SerializationInfo.folderIndex;
-
-        targetFolder.AddChildFile(this);
-    }
-
-    private void CheckForDragAndDrop(Rect dragArea)
-    {
-        var evt = Event.current;
-
-        if (evt.type == EventType.MouseDrag && dragArea.Contains(evt.mousePosition))
+        private void CheckForDragAndDrop(Rect dragArea)
         {
-            PVPDragAndDrop.StartDrag();
+            var evt = Event.current;
+
+            if (evt.type == EventType.MouseDrag && dragArea.Contains(evt.mousePosition))
+            {
+                PVPDragAndDrop.StartDrag();
+            }
         }
+
+        #endregion Drag and Drop
+
+        #endregion Methods
     }
-
-    public int CompareTo(PVPFile other)
-    {
-        return fileName.CompareTo(other.GetName());
-    }
-
-    #endregion Drag and Drop
-
-    #endregion Methods
 }

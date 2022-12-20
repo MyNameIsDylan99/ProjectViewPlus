@@ -4,240 +4,241 @@ using System.Linq;
 using UnityEditor;
 using UnityEngine;
 
-public class PVPWindow : EditorWindow
+namespace ProjectViewPlus
 {
-    #region Private Fields
-
-    private string[] _categoryNames;
-    private int _selectedCategoryIndex;
-    private List<List<PVPFile>> _categoryFiles = new List<List<PVPFile>>();
-    private Vector2 _scrollPosition;
-
-    #endregion Private Fields
-
-    #region Properties
-
-    public static PVPDataSO PVPData { get; private set; }
-    public static string CurrentPath { get; private set; }
-    public static int IconSize { get; private set; }
-    public static Rect Position { get; private set; }
-
-    public static bool RepaintFlag { get; set; }
-
-    #endregion Properties
-
-    [MenuItem("Tools/ProjectView+")]
-    private static void OpenOverviewPlusWindow()
+    /// <summary>
+    /// This class draws the PVPWindow. It calls visualize folder on the root folder which causes all files and folders to be displayed.
+    /// </summary>
+    public class PVPWindow : EditorWindow
     {
-        var window = GetWindow<PVPWindow>();
-        window.titleContent = new GUIContent("ProjectView+");
-    }
+        #region Private Fields
 
-    private void OnEnable()
-    {
-        SubscribeToEvents();
-        CurrentPath = PVPPathUtility.GetPathOfScriptableObject(this);
-        PVPData = AssetDatabase.LoadAssetAtPath<PVPDataSO>(CurrentPath + "/PVPData.asset");
+        private string[] _categoryNames;
+        private Vector2 _scrollPosition;
+        private int _selectedCategoryIndex;
 
-        if (PVPData == null)
+        #endregion Private Fields
+
+        #region Properties
+
+        public static string CurrentDirectory { get; private set; }
+        public static int IconSize { get; set; }
+        public static Rect Position { get; private set; }
+        public static PVPDataSO PVPData { get; private set; }
+        public static PVPSettingsSO PVPSettings { get; private set; }
+        public static bool RepaintFlag { get; set; }
+
+        public static List<LayoutEventAction> LayoutEventActions { get; set; } = new List<LayoutEventAction>();
+
+        #endregion Properties
+
+        private void OnDisable()
         {
-            CreateNewPVPDataInstance();
-            FetchData();
+            UnsubscribeToEvents();
         }
 
-        CheckIconSize();
-        PVPData.OnBeforeDeserialize();
-    }
-
-    private void OnAfterAssemblyReload()
-    {
-        PVPData.OnBeforeDeserialize();
-    }
-
-    private void OnGUI()
-    {
-        Position = position;
-        GUI.skin = PVPData.PVPSettings.GUISkin;
-
-        if (GUILayout.Button("Fetch data"))
+        private void OnEnable()
         {
-            FetchData();
-        }
-        _scrollPosition = GUILayout.BeginScrollView(_scrollPosition);
+            SubscribeToEvents();
 
-        try
-        {
-            PVPData.RootFolder.VisualizeFolder();
-        }
-        catch (Exception)
-        {
+            //Get references to PVPData and PVPSettings instance
+            CurrentDirectory = PVPPathUtility.GetDirectoryOfScriptableObject(this);
+            PVPData = AssetDatabase.LoadAssetAtPath<PVPDataSO>(CurrentDirectory + "/PVPData.asset");
+            PVPSettings = AssetDatabase.LoadAssetAtPath<PVPSettingsSO>(CurrentDirectory + "/PVPSettings.asset");
+
+            if (PVPData == null)
+            {
+                CreateNewPVPDataInstance();
+                SynchronizeData();
+            }
+
+            if (PVPSettings == null)
+                CreateNewPVPSettingsInstance();
+
+            CheckIconSize();
+            PVPData.OnBeforeDeserialize();
         }
 
-        GUILayout.EndScrollView();
-        EditorUtility.SetDirty(PVPData);
-
-        if (RepaintFlag)
+        private void OnGUI()
         {
-            Repaint();
-            RepaintFlag = false;
-        }
-    }
+            //Changing gui layout elements between the layout event and the repaint event(like drag and dropping files and folders) causes errors. This is a fix for this:
 
-    private void CheckIconSize()
-    {
-        switch (PVPData.PVPSettings.IconSize)
-        {
-            case PVPSettings.IconSizes.Small:
-                IconSize = PVPData.PVPSettings.SmallSize;
-                break;
-
-            case PVPSettings.IconSizes.Normal:
-                IconSize = PVPData.PVPSettings.NormalSize;
-                break;
-
-            case PVPSettings.IconSizes.Large:
-                IconSize = PVPData.PVPSettings.LargeSize;
-                break;
-        }
-    }
-
-    private void SubscribeToEvents()
-    {
-        PVPEvents.RepaintWindowEvent += Repaint;
-        AssemblyReloadEvents.afterAssemblyReload += OnAfterAssemblyReload;
-    }
-
-    private void CreateNewPVPDataInstance()
-    {
-        PVPData = PVPDataSO.CreateInstance<PVPDataSO>();
-        AssetDatabase.CreateAsset(PVPData, CurrentPath + "/PVPData.asset");
-        PVPData.PVPSettings.FolderIcon = AssetDatabase.LoadAssetAtPath<Texture2D>(CurrentPath + "/Sprites/Folder.png");
-        PVPData.PVPSettings.FoldoutIcon = AssetDatabase.LoadAssetAtPath<Texture2D>(CurrentPath + "/Sprites/FoldoutArrow.png");
-        PVPData.PVPSettings.NormalBackground = AssetDatabase.LoadAssetAtPath<Texture2D>(CurrentPath + "/Sprites/CompleteTransparent.png");
-        PVPData.PVPSettings.SelectedBackground = AssetDatabase.LoadAssetAtPath<Texture2D>(CurrentPath + "/Sprites/SelectedBackground.png");
-        PVPData.PVPSettings.GUISkin = AssetDatabase.LoadAssetAtPath<GUISkin>(CurrentPath + "/GUISkins/PVPSkin.guiskin");
-    }
-
-    private void FetchData()
-    {
-        Undo.RecordObject(PVPData, "projectViewPlusDataChanged");
-        PVPData.RootFolder = null;
-        PVPData.allFolders = new List<PVPFolder>();
-        PVPData.allFiles = new List<PVPFile>();
-        PVPSelection.allSelectables = new List<ISelectable>();
-        PVPData.RootFolder = new PVPFolder("Assets", null, 0); //
-    }
-
-    public void DropAreaGUI()
-    {
-        Event evt = Event.current;
-        Rect drop_area = GUILayoutUtility.GetRect(0.0f, 50.0f, GUILayout.ExpandWidth(true));
-        GUI.Box(drop_area, "Add Trigger");
-
-        switch (evt.type)
-        {
-            case EventType.DragUpdated:
-            case EventType.DragPerform:
-                if (!drop_area.Contains(evt.mousePosition))
-                    return;
-
-                DragAndDrop.visualMode = DragAndDropVisualMode.Copy;
-
-                if (evt.type == EventType.DragPerform)
+            if (Event.current.type == EventType.Layout && LayoutEventActions.Count > 0)
+            {
+                foreach (var layoutEventAction in LayoutEventActions)
                 {
-                    DragAndDrop.AcceptDrag();
-
-                    foreach (UnityEngine.Object dragged_object in DragAndDrop.objectReferences)
-                    {
-                        // Do On Drag Stuff here
-                    }
+                    layoutEventAction.Execute();
                 }
-                break;
-        }
-    }
-
-    private void DrawTabs()
-    {
-        _selectedCategoryIndex = GUILayout.Toolbar(_selectedCategoryIndex, _categoryNames);
-    }
-
-    //private void FindCategorySOs()
-    //{
-    //    List<CategorySO> categories = new List<CategorySO>();
-    //    var guids = AssetDatabase.FindAssets("t:CategorySO");
-
-    //    if (guids != null)
-    //    {
-    //        foreach (var guid in guids)
-    //        {
-    //            var assetPath = AssetDatabase.GUIDToAssetPath(guid);
-    //            categories.Add(AssetDatabase.LoadAssetAtPath<CategorySO>(assetPath));
-    //        }
-    //    }
-
-    //    _categories = categories;
-    //}
-
-    /// <returns>Returns true if any files have been added</returns>
-    //private void GetObjectsForAllCategories()
-    //{
-    //    if (_categories == null || _categories.Count <= 0)
-    //    {
-    //        Debug.Log("No categories");
-    //        _filesLoaded = false;
-    //        return;
-    //    }
-
-    //    for (int i = 0; i < _categories.Count; i++)
-    //    {
-    //        _categoryFiles.Add(GetObjectsForCategory(_categories[i]));
-    //    }
-    //    _filesLoaded = true;
-    //}
-
-    //private void CategoriesToStringArray()
-    //{
-    //    string[] array = new string[_categories.Count];
-
-    //    for (int i = 0; i < _categories.Count; i++)
-    //    {
-    //        array[i] = _categories[i].Name;
-    //    }
-
-    //    _categoryNames = array;
-    //}
-
-    public static List<T> FindAssetsByType<T>() where T : UnityEngine.Object
-    {
-        List<T> assets = new List<T>();
-        string[] guids = AssetDatabase.FindAssets(string.Format("t:{0}", typeof(T)));
-        for (int i = 0; i < guids.Length; i++)
-        {
-            string assetPath = AssetDatabase.GUIDToAssetPath(guids[i]);
-            T asset = AssetDatabase.LoadAssetAtPath<T>(assetPath);
-            if (asset != null)
-            {
-                assets.Add(asset);
+                LayoutEventActions.Clear();
             }
-        }
-        return assets;
-    }
 
-    public static List<Type> GetListOfTypesThatInheritFromType<T>() where T : class
-    {
-        List<Type> objects = new List<Type>();
-        foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
-        {
-            foreach (Type type in assembly.GetTypes()
-            .Where(myType => myType.IsClass && !myType.IsAbstract && myType.IsSubclassOf(typeof(T))))
+            Position = position;
+
+            PVPSelection.CheckDeleteKey();
+
+            if (GUI.Button(new Rect(Position.width - 200, 35, 100, 30), "Synchronize"))
             {
-                objects.Add(type);
-                Debug.Log(type.Name);
-                if (type.Name == "Script")
-                    Debug.LogWarning(type.Name);
+                SynchronizeData();
+            }
+
+            GUI.skin = PVPSettings.GUISkin;
+
+            if (GUI.Button(new Rect(Position.width - 75, 25, 50, 50), new GUIContent(PVPSettings.SettingsIcon)))
+            {
+                PVPSettingsWindow.OpenWindow();
+            }
+
+            //Start visualizing folders and files
+
+            _scrollPosition = GUILayout.BeginScrollView(_scrollPosition);
+
+            PVPData.RootFolder.VisualizeFolder();
+
+            GUILayout.EndScrollView();
+
+            EditorUtility.SetDirty(PVPData);
+
+            //Repaint flag to allow for a more responsive ui
+            if (RepaintFlag)
+            {
+                Repaint();
+                RepaintFlag = false;
             }
         }
 
-        return objects;
+        [MenuItem("Tools/ProjectView+")]
+        private static void OpenOverviewPlusWindow()
+        {
+            var window = GetWindow<PVPWindow>();
+            window.titleContent = new GUIContent("ProjectView+");
+            window.minSize = new Vector2(500, 500);
+            window.autoRepaintOnSceneChange = false;
+        }
+
+        private void CheckIconSize()
+        {
+            switch (PVPSettings.IconSize)
+            {
+                case PVPSettingsSO.IconSizes.Small:
+                    IconSize = PVPSettings.SmallSize;
+                    break;
+
+                case PVPSettingsSO.IconSizes.Normal:
+                    IconSize = PVPSettings.NormalSize;
+                    break;
+
+                case PVPSettingsSO.IconSizes.Large:
+                    IconSize = PVPSettings.LargeSize;
+                    break;
+            }
+        }
+
+        private void CreateNewPVPDataInstance()
+        {
+            PVPData = CreateInstance<PVPDataSO>();
+            AssetDatabase.CreateAsset(PVPData, CurrentDirectory + '\\' + "PVPData.asset");
+        }
+
+        private void CreateNewPVPSettingsInstance()
+        {
+            PVPSettings = CreateInstance<PVPSettingsSO>();
+            AssetDatabase.CreateAsset(PVPSettings, CurrentDirectory + '\\' + "PVPSettings.asset");
+            PVPSettings.SmallSize = 25;
+            PVPSettings.NormalSize = 30;
+            PVPSettings.LargeSize = 50;
+            PVPSettings.FilesPerRow = 1;
+            PVPSettings.FolderIcon = AssetDatabase.LoadAssetAtPath<Texture2D>(CurrentDirectory + "/Sprites/Folder.png");
+            PVPSettings.FoldoutIcon = AssetDatabase.LoadAssetAtPath<Texture2D>(CurrentDirectory + "/Sprites/FoldoutArrow.png");
+            PVPSettings.NormalBackground = AssetDatabase.LoadAssetAtPath<Texture2D>(CurrentDirectory + "/Sprites/CompleteTransparent.png");
+            PVPSettings.SelectedBackground = AssetDatabase.LoadAssetAtPath<Texture2D>(CurrentDirectory + "/Sprites/SelectedBackground.png");
+            PVPSettings.SettingsIcon = AssetDatabase.LoadAssetAtPath<Texture2D>(CurrentDirectory + "/Sprites/gear.png");
+            PVPSettings.GUISkin = AssetDatabase.LoadAssetAtPath<GUISkin>(CurrentDirectory + "/GUISkins/PVPSkin.guiskin");
+        }
+
+        /// <summary>
+        /// Synchronizes the files and folders of the ProjectView+ window with all files that exist in the project.
+        /// </summary>
+        private void SynchronizeData()
+        {
+            Undo.RecordObject(PVPData, "projectViewPlusDataChanged");
+            PVPData.RootFolder = null;
+            PVPData.allFolders = new List<PVPFolder>();
+            PVPData.allFiles = new List<PVPFile>();
+            PVPSelection.allSelectables = new List<ISelectable>();
+            PVPData.RootFolder = new PVPFolder("Assets", null, 0); //
+        }
+
+        /// <summary>
+        /// Whenever assemblys get reloaded make sure the files and folders don't lose their unserialized references
+        /// </summary>
+        private void OnAfterAssemblyReload()
+        {
+            PVPData.OnBeforeDeserialize();
+        }
+
+        private void SubscribeToEvents()
+        {
+            PVPEvents.RepaintWindowEvent += Repaint;
+            AssemblyReloadEvents.afterAssemblyReload += OnAfterAssemblyReload;
+        }
+
+        private void UnsubscribeToEvents()
+        {
+            PVPEvents.RepaintWindowEvent -= Repaint;
+            AssemblyReloadEvents.afterAssemblyReload -= OnAfterAssemblyReload;
+        }
+
+        #region For the future
+
+        private void DrawTabs()
+        {
+            _selectedCategoryIndex = GUILayout.Toolbar(_selectedCategoryIndex, _categoryNames);
+        }
+
+        #region Filters
+
+        /// <summary>
+        /// Finds all assets of the specified type T in the assets folder of the project.
+        /// </summary>
+        public static List<T> FindAssetsByType<T>() where T : UnityEngine.Object
+        {
+            List<T> assets = new List<T>();
+            string[] guids = AssetDatabase.FindAssets(string.Format("t:{0}", typeof(T)));
+            for (int i = 0; i < guids.Length; i++)
+            {
+                string assetPath = AssetDatabase.GUIDToAssetPath(guids[i]);
+                T asset = AssetDatabase.LoadAssetAtPath<T>(assetPath);
+                if (asset != null)
+                {
+                    assets.Add(asset);
+                }
+            }
+            return assets;
+        }
+
+        /// <summary>
+        /// Returns a list of types that inherit from the specified type T.
+        /// </summary>
+        public static List<Type> GetListOfTypesThatInheritFromType<T>() where T : class
+        {
+            List<Type> objects = new List<Type>();
+            foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
+            {
+                foreach (Type type in assembly.GetTypes()
+                .Where(myType => myType.IsClass && !myType.IsAbstract && myType.IsSubclassOf(typeof(T))))
+                {
+                    objects.Add(type);
+                    Debug.Log(type.Name);
+                    if (type.Name == "Script")
+                        Debug.LogWarning(type.Name);
+                }
+            }
+
+            return objects;
+        }
+
+        #endregion Filters
+
+        #endregion For the future
     }
 }

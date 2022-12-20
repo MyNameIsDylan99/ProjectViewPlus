@@ -1,12 +1,18 @@
 using System;
 
-public static class PVPEvents
+namespace ProjectViewPlus
 {
-    public static event Action RepaintWindowEvent;
-
-    public static void InvokeRepaintWindowEvent()
+    /// <summary>
+    /// Container for all project view plus specific events
+    /// </summary>
+    public static class PVPEvents
     {
-        if (RepaintWindowEvent != null)
-            RepaintWindowEvent();
+        public static event Action RepaintWindowEvent;
+
+        public static void InvokeRepaintWindowEvent()
+        {
+            if (RepaintWindowEvent != null)
+                RepaintWindowEvent();
+        }
     }
 }
