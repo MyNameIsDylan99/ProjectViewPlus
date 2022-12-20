@@ -2,6 +2,9 @@ using UnityEngine;
 
 namespace ProjectViewPlus
 {
+    /// <summary>
+    /// An interface for all selectable elements in project view plus. (Files and Folders)
+    /// </summary>
     public interface ISelectable
     {
         public UnityEngine.Object SelectableUnityObject { get; set; }
