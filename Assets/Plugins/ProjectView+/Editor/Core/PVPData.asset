@@ -1,0 +1,973 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57dd26b3b7a87464bb00fd35be3f1f84, type: 3}
+  m_Name: PVPData
+  m_EditorClassIdentifier: 
+  allFiles:
+  - FileSerializationInfo:
+      fileIndex: 0
+      parentFolderIndex: 0
+    extension: index
+    fileContent:
+      m_Text: Assets
+      m_Image: {fileID: 0}
+      m_Tooltip: Assets\Assets.index
+    fileIcon: {fileID: 0}
+    fileName: Assets
+    path: Assets\Assets.index
+    isFile: 1
+    isVisible: 1
+    placeholderRenamingName: Assets
+    selectableIndex: 1
+    selectableObject: {fileID: 6653382117853536652, guid: c636cafd04426dc459549a265ef9daf9, type: 3}
+    selectionRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 1
+      height: 1
+  - FileSerializationInfo:
+      fileIndex: 1
+      parentFolderIndex: 4
+    extension: asset
+    fileContent:
+      m_Text: PVPData
+      m_Image: {fileID: 2376468200823113483, guid: 0000000000000000d000000000000000, type: 0}
+      m_Tooltip: Assets\Plugins\ProjectView+\Editor\Core\PVPData.asset
+    fileIcon: {fileID: 2376468200823113483, guid: 0000000000000000d000000000000000, type: 0}
+    fileName: PVPData
+    path: Assets\Plugins\ProjectView+\Editor\Core\PVPData.asset
+    isFile: 1
+    isVisible: 0
+    placeholderRenamingName: PVPData
+    selectableIndex: 11
+    selectableObject: {fileID: 11400000}
+    selectionRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+  - FileSerializationInfo:
+      fileIndex: 2
+      parentFolderIndex: 4
+    extension: cs
+    fileContent:
+      m_Text: PVPDataSO
+      m_Image: {fileID: -8204150473280056172, guid: 0000000000000000d000000000000000, type: 0}
+      m_Tooltip: Assets\Plugins\ProjectView+\Editor\Core\PVPDataSO.cs
+    fileIcon: {fileID: -8204150473280056172, guid: 0000000000000000d000000000000000, type: 0}
+    fileName: PVPDataSO
+    path: Assets\Plugins\ProjectView+\Editor\Core\PVPDataSO.cs
+    isFile: 1
+    isVisible: 0
+    placeholderRenamingName: PVPDataSO
+    selectableIndex: 12
+    selectableObject: {fileID: 11500000, guid: 57dd26b3b7a87464bb00fd35be3f1f84, type: 3}
+    selectionRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+  - FileSerializationInfo:
+      fileIndex: 3
+      parentFolderIndex: 4
+    extension: cs
+    fileContent:
+      m_Text: PVPFile
+      m_Image: {fileID: -8204150473280056172, guid: 0000000000000000d000000000000000, type: 0}
+      m_Tooltip: Assets\Plugins\ProjectView+\Editor\Core\PVPFile.cs
+    fileIcon: {fileID: -8204150473280056172, guid: 0000000000000000d000000000000000, type: 0}
+    fileName: PVPFile
+    path: Assets\Plugins\ProjectView+\Editor\Core\PVPFile.cs
+    isFile: 1
+    isVisible: 0
+    placeholderRenamingName: PVPFile
+    selectableIndex: 13
+    selectableObject: {fileID: 11500000, guid: 0ec0939e6e0b5284bb5b0289308b6c71, type: 3}
+    selectionRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+  - FileSerializationInfo:
+      fileIndex: 4
+      parentFolderIndex: 4
+    extension: cs
+    fileContent:
+      m_Text: PVPFolder
+      m_Image: {fileID: -8204150473280056172, guid: 0000000000000000d000000000000000, type: 0}
+      m_Tooltip: Assets\Plugins\ProjectView+\Editor\Core\PVPFolder.cs
+    fileIcon: {fileID: -8204150473280056172, guid: 0000000000000000d000000000000000, type: 0}
+    fileName: PVPFolder
+    path: Assets\Plugins\ProjectView+\Editor\Core\PVPFolder.cs
+    isFile: 1
+    isVisible: 0
+    placeholderRenamingName: PVPFolder
+    selectableIndex: 14
+    selectableObject: {fileID: 11500000, guid: 803b9189ffefc784d8cf25da9709ea72, type: 3}
+    selectionRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+  - FileSerializationInfo:
+      fileIndex: 5
+      parentFolderIndex: 4
+    extension: asset
+    fileContent:
+      m_Text: PVPSettings
+      m_Image: {fileID: 2376468200823113483, guid: 0000000000000000d000000000000000, type: 0}
+      m_Tooltip: Assets\Plugins\ProjectView+\Editor\Core\PVPSettings.asset
+    fileIcon: {fileID: 2376468200823113483, guid: 0000000000000000d000000000000000, type: 0}
+    fileName: PVPSettings
+    path: Assets\Plugins\ProjectView+\Editor\Core\PVPSettings.asset
+    isFile: 1
+    isVisible: 0
+    placeholderRenamingName: PVPSettings
+    selectableIndex: 15
+    selectableObject: {fileID: 11400000, guid: 0648b6e58ce43b444a54070b896da8b6, type: 2}
+    selectionRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+  - FileSerializationInfo:
+      fileIndex: 6
+      parentFolderIndex: 4
+    extension: cs
+    fileContent:
+      m_Text: PVPSettingsSO
+      m_Image: {fileID: -8204150473280056172, guid: 0000000000000000d000000000000000, type: 0}
+      m_Tooltip: Assets\Plugins\ProjectView+\Editor\Core\PVPSettingsSO.cs
+    fileIcon: {fileID: -8204150473280056172, guid: 0000000000000000d000000000000000, type: 0}
+    fileName: PVPSettingsSO
+    path: Assets\Plugins\ProjectView+\Editor\Core\PVPSettingsSO.cs
+    isFile: 1
+    isVisible: 0
+    placeholderRenamingName: PVPSettingsSO
+    selectableIndex: 16
+    selectableObject: {fileID: 11500000, guid: 4624ab22876a6e649b844e39f338b830, type: 3}
+    selectionRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+  - FileSerializationInfo:
+      fileIndex: 7
+      parentFolderIndex: 4
+    extension: cs
+    fileContent:
+      m_Text: PVPSettingsWindow
+      m_Image: {fileID: -8204150473280056172, guid: 0000000000000000d000000000000000, type: 0}
+      m_Tooltip: Assets\Plugins\ProjectView+\Editor\Core\PVPSettingsWindow.cs
+    fileIcon: {fileID: -8204150473280056172, guid: 0000000000000000d000000000000000, type: 0}
+    fileName: PVPSettingsWindow
+    path: Assets\Plugins\ProjectView+\Editor\Core\PVPSettingsWindow.cs
+    isFile: 1
+    isVisible: 0
+    placeholderRenamingName: PVPSettingsWindow
+    selectableIndex: 17
+    selectableObject: {fileID: 11500000, guid: 3fc854fc9f3591b458c41afda89426a9, type: 3}
+    selectionRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+  - FileSerializationInfo:
+      fileIndex: 8
+      parentFolderIndex: 4
+    extension: cs
+    fileContent:
+      m_Text: PVPWindow
+      m_Image: {fileID: -8204150473280056172, guid: 0000000000000000d000000000000000, type: 0}
+      m_Tooltip: Assets\Plugins\ProjectView+\Editor\Core\PVPWindow.cs
+    fileIcon: {fileID: -8204150473280056172, guid: 0000000000000000d000000000000000, type: 0}
+    fileName: PVPWindow
+    path: Assets\Plugins\ProjectView+\Editor\Core\PVPWindow.cs
+    isFile: 1
+    isVisible: 0
+    placeholderRenamingName: PVPWindow
+    selectableIndex: 18
+    selectableObject: {fileID: 11500000, guid: 2acf1b0aced498248a661f8d9eb5e0cb, type: 3}
+    selectionRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+  - FileSerializationInfo:
+      fileIndex: 9
+      parentFolderIndex: 5
+    extension: guiskin
+    fileContent:
+      m_Text: PVPSkin
+      m_Image: {fileID: -5787505426856470801, guid: 0000000000000000d000000000000000, type: 0}
+      m_Tooltip: Assets\Plugins\ProjectView+\Editor\Core\GUISkins\PVPSkin.guiskin
+    fileIcon: {fileID: -5787505426856470801, guid: 0000000000000000d000000000000000, type: 0}
+    fileName: PVPSkin
+    path: Assets\Plugins\ProjectView+\Editor\Core\GUISkins\PVPSkin.guiskin
+    isFile: 1
+    isVisible: 0
+    placeholderRenamingName: PVPSkin
+    selectableIndex: 20
+    selectableObject: {fileID: 11400000, guid: a704c2ae3121ceb4ea0bfb7bfb1fdd7f, type: 2}
+    selectionRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+  - FileSerializationInfo:
+      fileIndex: 10
+      parentFolderIndex: 6
+    extension: png
+    fileContent:
+      m_Text: CompleteTransparent
+      m_Image: {fileID: 2800000, guid: 912ae41f3ff0fd1469af1a45d886465a, type: 3}
+      m_Tooltip: Assets\Plugins\ProjectView+\Editor\Core\Sprites\CompleteTransparent.png
+    fileIcon: {fileID: 2800000, guid: 912ae41f3ff0fd1469af1a45d886465a, type: 3}
+    fileName: CompleteTransparent
+    path: Assets\Plugins\ProjectView+\Editor\Core\Sprites\CompleteTransparent.png
+    isFile: 1
+    isVisible: 0
+    placeholderRenamingName: CompleteTransparent
+    selectableIndex: 22
+    selectableObject: {fileID: 2800000, guid: 912ae41f3ff0fd1469af1a45d886465a, type: 3}
+    selectionRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+  - FileSerializationInfo:
+      fileIndex: 11
+      parentFolderIndex: 6
+    extension: png
+    fileContent:
+      m_Text: Folder
+      m_Image: {fileID: 2800000, guid: bea1d6254b7ecdf4eb81bf72132130e9, type: 3}
+      m_Tooltip: Assets\Plugins\ProjectView+\Editor\Core\Sprites\Folder.png
+    fileIcon: {fileID: 2800000, guid: bea1d6254b7ecdf4eb81bf72132130e9, type: 3}
+    fileName: Folder
+    path: Assets\Plugins\ProjectView+\Editor\Core\Sprites\Folder.png
+    isFile: 1
+    isVisible: 0
+    placeholderRenamingName: Folder
+    selectableIndex: 23
+    selectableObject: {fileID: 2800000, guid: bea1d6254b7ecdf4eb81bf72132130e9, type: 3}
+    selectionRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+  - FileSerializationInfo:
+      fileIndex: 12
+      parentFolderIndex: 6
+    extension: png
+    fileContent:
+      m_Text: FoldoutArrow
+      m_Image: {fileID: 2800000, guid: 6cee8f0b27f85534d88779b7246c667b, type: 3}
+      m_Tooltip: Assets\Plugins\ProjectView+\Editor\Core\Sprites\FoldoutArrow.png
+    fileIcon: {fileID: 2800000, guid: 6cee8f0b27f85534d88779b7246c667b, type: 3}
+    fileName: FoldoutArrow
+    path: Assets\Plugins\ProjectView+\Editor\Core\Sprites\FoldoutArrow.png
+    isFile: 1
+    isVisible: 0
+    placeholderRenamingName: FoldoutArrow
+    selectableIndex: 24
+    selectableObject: {fileID: 2800000, guid: 6cee8f0b27f85534d88779b7246c667b, type: 3}
+    selectionRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+  - FileSerializationInfo:
+      fileIndex: 13
+      parentFolderIndex: 6
+    extension: png
+    fileContent:
+      m_Text: gear
+      m_Image: {fileID: 2800000, guid: 2338ff35ba40fa64fbb66952ebff35a6, type: 3}
+      m_Tooltip: Assets\Plugins\ProjectView+\Editor\Core\Sprites\gear.png
+    fileIcon: {fileID: 2800000, guid: 2338ff35ba40fa64fbb66952ebff35a6, type: 3}
+    fileName: gear
+    path: Assets\Plugins\ProjectView+\Editor\Core\Sprites\gear.png
+    isFile: 1
+    isVisible: 0
+    placeholderRenamingName: gear
+    selectableIndex: 25
+    selectableObject: {fileID: 2800000, guid: 2338ff35ba40fa64fbb66952ebff35a6, type: 3}
+    selectionRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+  - FileSerializationInfo:
+      fileIndex: 14
+      parentFolderIndex: 6
+    extension: png
+    fileContent:
+      m_Text: SelectedBackground
+      m_Image: {fileID: 2800000, guid: 697fa5a8addc1cd498f50fece7b8ee5a, type: 3}
+      m_Tooltip: Assets\Plugins\ProjectView+\Editor\Core\Sprites\SelectedBackground.png
+    fileIcon: {fileID: 2800000, guid: 697fa5a8addc1cd498f50fece7b8ee5a, type: 3}
+    fileName: SelectedBackground
+    path: Assets\Plugins\ProjectView+\Editor\Core\Sprites\SelectedBackground.png
+    isFile: 1
+    isVisible: 0
+    placeholderRenamingName: SelectedBackground
+    selectableIndex: 26
+    selectableObject: {fileID: 2800000, guid: 697fa5a8addc1cd498f50fece7b8ee5a, type: 3}
+    selectionRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+  - FileSerializationInfo:
+      fileIndex: 15
+      parentFolderIndex: 7
+    extension: cs
+    fileContent:
+      m_Text: ISelectable
+      m_Image: {fileID: -8204150473280056172, guid: 0000000000000000d000000000000000, type: 0}
+      m_Tooltip: Assets\Plugins\ProjectView+\Editor\Selection\ISelectable.cs
+    fileIcon: {fileID: -8204150473280056172, guid: 0000000000000000d000000000000000, type: 0}
+    fileName: ISelectable
+    path: Assets\Plugins\ProjectView+\Editor\Selection\ISelectable.cs
+    isFile: 1
+    isVisible: 0
+    placeholderRenamingName: ISelectable
+    selectableIndex: 28
+    selectableObject: {fileID: 11500000, guid: 9713479b90872a4469bffc28d2f982d3, type: 3}
+    selectionRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+  - FileSerializationInfo:
+      fileIndex: 16
+      parentFolderIndex: 7
+    extension: cs
+    fileContent:
+      m_Text: PVPContextMenu
+      m_Image: {fileID: -8204150473280056172, guid: 0000000000000000d000000000000000, type: 0}
+      m_Tooltip: Assets\Plugins\ProjectView+\Editor\Selection\PVPContextMenu.cs
+    fileIcon: {fileID: -8204150473280056172, guid: 0000000000000000d000000000000000, type: 0}
+    fileName: PVPContextMenu
+    path: Assets\Plugins\ProjectView+\Editor\Selection\PVPContextMenu.cs
+    isFile: 1
+    isVisible: 0
+    placeholderRenamingName: PVPContextMenu
+    selectableIndex: 29
+    selectableObject: {fileID: 11500000, guid: 5744f03c9b778074da25596aba73ae2a, type: 3}
+    selectionRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+  - FileSerializationInfo:
+      fileIndex: 17
+      parentFolderIndex: 7
+    extension: cs
+    fileContent:
+      m_Text: PVPDragAndDrop
+      m_Image: {fileID: -8204150473280056172, guid: 0000000000000000d000000000000000, type: 0}
+      m_Tooltip: Assets\Plugins\ProjectView+\Editor\Selection\PVPDragAndDrop.cs
+    fileIcon: {fileID: -8204150473280056172, guid: 0000000000000000d000000000000000, type: 0}
+    fileName: PVPDragAndDrop
+    path: Assets\Plugins\ProjectView+\Editor\Selection\PVPDragAndDrop.cs
+    isFile: 1
+    isVisible: 0
+    placeholderRenamingName: PVPDragAndDrop
+    selectableIndex: 30
+    selectableObject: {fileID: 11500000, guid: 37831fefe13fbe643b8078b735e3a2c2, type: 3}
+    selectionRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+  - FileSerializationInfo:
+      fileIndex: 18
+      parentFolderIndex: 7
+    extension: cs
+    fileContent:
+      m_Text: PVPSelection
+      m_Image: {fileID: -8204150473280056172, guid: 0000000000000000d000000000000000, type: 0}
+      m_Tooltip: Assets\Plugins\ProjectView+\Editor\Selection\PVPSelection.cs
+    fileIcon: {fileID: -8204150473280056172, guid: 0000000000000000d000000000000000, type: 0}
+    fileName: PVPSelection
+    path: Assets\Plugins\ProjectView+\Editor\Selection\PVPSelection.cs
+    isFile: 1
+    isVisible: 0
+    placeholderRenamingName: PVPSelection
+    selectableIndex: 31
+    selectableObject: {fileID: 11500000, guid: 26660a00d25f7824f9045385460fc8d2, type: 3}
+    selectionRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+  - FileSerializationInfo:
+      fileIndex: 19
+      parentFolderIndex: 8
+    extension: cs
+    fileContent:
+      m_Text: ExtensionMethods
+      m_Image: {fileID: -8204150473280056172, guid: 0000000000000000d000000000000000, type: 0}
+      m_Tooltip: Assets\Plugins\ProjectView+\Editor\Utility\ExtensionMethods.cs
+    fileIcon: {fileID: -8204150473280056172, guid: 0000000000000000d000000000000000, type: 0}
+    fileName: ExtensionMethods
+    path: Assets\Plugins\ProjectView+\Editor\Utility\ExtensionMethods.cs
+    isFile: 1
+    isVisible: 0
+    placeholderRenamingName: ExtensionMethods
+    selectableIndex: 33
+    selectableObject: {fileID: 11500000, guid: 80826a16896a6ee4c9aa6f1bd79804a1, type: 3}
+    selectionRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+  - FileSerializationInfo:
+      fileIndex: 20
+      parentFolderIndex: 8
+    extension: cs
+    fileContent:
+      m_Text: PVPEvents
+      m_Image: {fileID: -8204150473280056172, guid: 0000000000000000d000000000000000, type: 0}
+      m_Tooltip: Assets\Plugins\ProjectView+\Editor\Utility\PVPEvents.cs
+    fileIcon: {fileID: -8204150473280056172, guid: 0000000000000000d000000000000000, type: 0}
+    fileName: PVPEvents
+    path: Assets\Plugins\ProjectView+\Editor\Utility\PVPEvents.cs
+    isFile: 1
+    isVisible: 0
+    placeholderRenamingName: PVPEvents
+    selectableIndex: 34
+    selectableObject: {fileID: 11500000, guid: 8da33288bbed4b745b42d2333b5bcc67, type: 3}
+    selectionRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+  - FileSerializationInfo:
+      fileIndex: 21
+      parentFolderIndex: 8
+    extension: cs
+    fileContent:
+      m_Text: PVPPathUtility
+      m_Image: {fileID: -8204150473280056172, guid: 0000000000000000d000000000000000, type: 0}
+      m_Tooltip: Assets\Plugins\ProjectView+\Editor\Utility\PVPPathUtility.cs
+    fileIcon: {fileID: -8204150473280056172, guid: 0000000000000000d000000000000000, type: 0}
+    fileName: PVPPathUtility
+    path: Assets\Plugins\ProjectView+\Editor\Utility\PVPPathUtility.cs
+    isFile: 1
+    isVisible: 0
+    placeholderRenamingName: PVPPathUtility
+    selectableIndex: 35
+    selectableObject: {fileID: 11500000, guid: 768d0f35105f0be4698364ab2f7e1e32, type: 3}
+    selectionRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+  - FileSerializationInfo:
+      fileIndex: 22
+      parentFolderIndex: 9
+    extension: unity
+    fileContent:
+      m_Text: SampleScene
+      m_Image: {fileID: 985423054452513129, guid: 0000000000000000d000000000000000, type: 0}
+      m_Tooltip: Assets\Scenes\SampleScene.unity
+    fileIcon: {fileID: 985423054452513129, guid: 0000000000000000d000000000000000, type: 0}
+    fileName: SampleScene
+    path: Assets\Scenes\SampleScene.unity
+    isFile: 1
+    isVisible: 0
+    placeholderRenamingName: SampleScene
+    selectableIndex: 37
+    selectableObject: {fileID: 102900000, guid: 9fc0d4010bbf28b4594072e72b8655ab, type: 3}
+    selectionRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+  - FileSerializationInfo:
+      fileIndex: 23
+      parentFolderIndex: 11
+    extension: guiskin
+    fileContent:
+      m_Text: NewGUISkin
+      m_Image: {fileID: -5787505426856470801, guid: 0000000000000000d000000000000000, type: 0}
+      m_Tooltip: Assets\NewFolder1\NewGUISkin.guiskin
+    fileIcon: {fileID: -5787505426856470801, guid: 0000000000000000d000000000000000, type: 0}
+    fileName: NewGUISkin
+    path: Assets\NewFolder1\NewGUISkin.guiskin
+    isFile: 1
+    isVisible: 0
+    placeholderRenamingName: NewGUISkin
+    selectableIndex: 5
+    selectableObject: {fileID: 11400000, guid: b3afdf375c4b49c4bb4bc60765f216ff, type: 2}
+    selectionRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+  - FileSerializationInfo:
+      fileIndex: 24
+      parentFolderIndex: 10
+    extension: anim
+    fileContent:
+      m_Text: NewAnimationClip
+      m_Image: {fileID: -3945805152363740611, guid: 0000000000000000d000000000000000, type: 0}
+      m_Tooltip: Assets\NewFolder\NewAnimationClip.anim
+    fileIcon: {fileID: -3945805152363740611, guid: 0000000000000000d000000000000000, type: 0}
+    fileName: NewAnimationClip
+    path: Assets\NewFolder\NewAnimationClip.anim
+    isFile: 1
+    isVisible: 0
+    placeholderRenamingName: NewAnimationClip
+    selectableIndex: 3
+    selectableObject: {fileID: 7400000, guid: 189d2a0040b93ec46959908f2432eefe, type: 2}
+    selectionRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+  allFolders:
+  - SerializationInfo:
+      childFileIndeces: 00000000
+      childFolderIndeces: 0a0000000b0000000100000009000000
+      folderIndex: 0
+      parentFolderIndex: 0
+    _childFoldersAreTabs: 0
+    _depth: 0
+    _filters: []
+    _folderContent:
+      m_Text: Assets
+      m_Image: {fileID: 2800000, guid: bea1d6254b7ecdf4eb81bf72132130e9, type: 3}
+      m_Tooltip: Assets
+    _folderName: Assets
+    _folderPath: Assets
+    _foldoutContent:
+      m_Text: 
+      m_Image: {fileID: 2800000, guid: 6cee8f0b27f85534d88779b7246c667b, type: 3}
+      m_Tooltip: 
+    placeholderRenamingName: Assets
+    isFile: 0
+    isVisible: 1
+    selectableIndex: 0
+    selectableUnityObject: {fileID: 102900000, guid: 00000000000000001000000000000000, type: 3}
+    selectionRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 808
+      height: 25
+  - SerializationInfo:
+      childFileIndeces: 
+      childFolderIndeces: 02000000
+      folderIndex: 1
+      parentFolderIndex: 0
+    _childFoldersAreTabs: 0
+    _depth: 1
+    _filters: []
+    _folderContent:
+      m_Text: Plugins
+      m_Image: {fileID: 2800000, guid: bea1d6254b7ecdf4eb81bf72132130e9, type: 3}
+      m_Tooltip: Assets\Plugins
+    _folderName: Plugins
+    _folderPath: Assets\Plugins
+    _foldoutContent:
+      m_Text: 
+      m_Image: {fileID: 2800000, guid: 6cee8f0b27f85534d88779b7246c667b, type: 3}
+      m_Tooltip: 
+    placeholderRenamingName: Plugins
+    isFile: 0
+    isVisible: 1
+    selectableIndex: 7
+    selectableUnityObject: {fileID: 102900000, guid: bdb11fdbed3c646418eea6c959f3b952, type: 3}
+    selectionRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 1
+      height: 1
+  - SerializationInfo:
+      childFileIndeces: 
+      childFolderIndeces: 03000000
+      folderIndex: 2
+      parentFolderIndex: 1
+    _childFoldersAreTabs: 0
+    _depth: 2
+    _filters: []
+    _folderContent:
+      m_Text: ProjectView+
+      m_Image: {fileID: 2800000, guid: bea1d6254b7ecdf4eb81bf72132130e9, type: 3}
+      m_Tooltip: Assets\Plugins\ProjectView+
+    _folderName: ProjectView+
+    _folderPath: Assets\Plugins\ProjectView+
+    _foldoutContent:
+      m_Text: 
+      m_Image: {fileID: 2800000, guid: 6cee8f0b27f85534d88779b7246c667b, type: 3}
+      m_Tooltip: 
+    placeholderRenamingName: ProjectView+
+    isFile: 0
+    isVisible: 1
+    selectableIndex: 8
+    selectableUnityObject: {fileID: 102900000, guid: 448a4bc250cbb6f4492b597590b1bdf5, type: 3}
+    selectionRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 1
+      height: 1
+  - SerializationInfo:
+      childFileIndeces: 
+      childFolderIndeces: 040000000700000008000000
+      folderIndex: 3
+      parentFolderIndex: 2
+    _childFoldersAreTabs: 0
+    _depth: 3
+    _filters: []
+    _folderContent:
+      m_Text: Editor
+      m_Image: {fileID: 2800000, guid: bea1d6254b7ecdf4eb81bf72132130e9, type: 3}
+      m_Tooltip: Assets\Plugins\ProjectView+\Editor
+    _folderName: Editor
+    _folderPath: Assets\Plugins\ProjectView+\Editor
+    _foldoutContent:
+      m_Text: 
+      m_Image: {fileID: 2800000, guid: 6cee8f0b27f85534d88779b7246c667b, type: 3}
+      m_Tooltip: 
+    placeholderRenamingName: Editor
+    isFile: 0
+    isVisible: 0
+    selectableIndex: 9
+    selectableUnityObject: {fileID: 102900000, guid: 50522a65de4a93f47898a000d79fab05, type: 3}
+    selectionRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+  - SerializationInfo:
+      childFileIndeces: 0100000002000000030000000400000005000000060000000700000008000000
+      childFolderIndeces: 0500000006000000
+      folderIndex: 4
+      parentFolderIndex: 3
+    _childFoldersAreTabs: 0
+    _depth: 4
+    _filters: []
+    _folderContent:
+      m_Text: Core
+      m_Image: {fileID: 2800000, guid: bea1d6254b7ecdf4eb81bf72132130e9, type: 3}
+      m_Tooltip: Assets\Plugins\ProjectView+\Editor\Core
+    _folderName: Core
+    _folderPath: Assets\Plugins\ProjectView+\Editor\Core
+    _foldoutContent:
+      m_Text: 
+      m_Image: {fileID: 2800000, guid: 6cee8f0b27f85534d88779b7246c667b, type: 3}
+      m_Tooltip: 
+    placeholderRenamingName: Core
+    isFile: 0
+    isVisible: 0
+    selectableIndex: 10
+    selectableUnityObject: {fileID: 102900000, guid: 29e07068183ba7744a735a8cca1bb584, type: 3}
+    selectionRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+  - SerializationInfo:
+      childFileIndeces: 09000000
+      childFolderIndeces: 
+      folderIndex: 5
+      parentFolderIndex: 4
+    _childFoldersAreTabs: 0
+    _depth: 5
+    _filters: []
+    _folderContent:
+      m_Text: GUISkins
+      m_Image: {fileID: 2800000, guid: bea1d6254b7ecdf4eb81bf72132130e9, type: 3}
+      m_Tooltip: Assets\Plugins\ProjectView+\Editor\Core\GUISkins
+    _folderName: GUISkins
+    _folderPath: Assets\Plugins\ProjectView+\Editor\Core\GUISkins
+    _foldoutContent:
+      m_Text: 
+      m_Image: {fileID: 2800000, guid: 6cee8f0b27f85534d88779b7246c667b, type: 3}
+      m_Tooltip: 
+    placeholderRenamingName: GUISkins
+    isFile: 0
+    isVisible: 0
+    selectableIndex: 19
+    selectableUnityObject: {fileID: 102900000, guid: 2c17e4804b9d5f44494e3d5cca44916a, type: 3}
+    selectionRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+  - SerializationInfo:
+      childFileIndeces: 0a0000000b0000000c0000000d0000000e000000
+      childFolderIndeces: 
+      folderIndex: 6
+      parentFolderIndex: 4
+    _childFoldersAreTabs: 0
+    _depth: 5
+    _filters: []
+    _folderContent:
+      m_Text: Sprites
+      m_Image: {fileID: 2800000, guid: bea1d6254b7ecdf4eb81bf72132130e9, type: 3}
+      m_Tooltip: Assets\Plugins\ProjectView+\Editor\Core\Sprites
+    _folderName: Sprites
+    _folderPath: Assets\Plugins\ProjectView+\Editor\Core\Sprites
+    _foldoutContent:
+      m_Text: 
+      m_Image: {fileID: 2800000, guid: 6cee8f0b27f85534d88779b7246c667b, type: 3}
+      m_Tooltip: 
+    placeholderRenamingName: Sprites
+    isFile: 0
+    isVisible: 0
+    selectableIndex: 21
+    selectableUnityObject: {fileID: 102900000, guid: 24938c3cb8b39034c94f8ab27a319da4, type: 3}
+    selectionRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+  - SerializationInfo:
+      childFileIndeces: 0f000000100000001100000012000000
+      childFolderIndeces: 
+      folderIndex: 7
+      parentFolderIndex: 3
+    _childFoldersAreTabs: 0
+    _depth: 4
+    _filters: []
+    _folderContent:
+      m_Text: Selection
+      m_Image: {fileID: 2800000, guid: bea1d6254b7ecdf4eb81bf72132130e9, type: 3}
+      m_Tooltip: Assets\Plugins\ProjectView+\Editor\Selection
+    _folderName: Selection
+    _folderPath: Assets\Plugins\ProjectView+\Editor\Selection
+    _foldoutContent:
+      m_Text: 
+      m_Image: {fileID: 2800000, guid: 6cee8f0b27f85534d88779b7246c667b, type: 3}
+      m_Tooltip: 
+    placeholderRenamingName: Selection
+    isFile: 0
+    isVisible: 0
+    selectableIndex: 27
+    selectableUnityObject: {fileID: 102900000, guid: 7de3547740818f244b8dfce35d3c0d2a, type: 3}
+    selectionRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+  - SerializationInfo:
+      childFileIndeces: 130000001400000015000000
+      childFolderIndeces: 
+      folderIndex: 8
+      parentFolderIndex: 3
+    _childFoldersAreTabs: 0
+    _depth: 4
+    _filters: []
+    _folderContent:
+      m_Text: Utility
+      m_Image: {fileID: 2800000, guid: bea1d6254b7ecdf4eb81bf72132130e9, type: 3}
+      m_Tooltip: Assets\Plugins\ProjectView+\Editor\Utility
+    _folderName: Utility
+    _folderPath: Assets\Plugins\ProjectView+\Editor\Utility
+    _foldoutContent:
+      m_Text: 
+      m_Image: {fileID: 2800000, guid: 6cee8f0b27f85534d88779b7246c667b, type: 3}
+      m_Tooltip: 
+    placeholderRenamingName: Utility
+    isFile: 0
+    isVisible: 0
+    selectableIndex: 32
+    selectableUnityObject: {fileID: 102900000, guid: 55e4383c7aab86146a8de0b6159ab8f8, type: 3}
+    selectionRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+  - SerializationInfo:
+      childFileIndeces: 16000000
+      childFolderIndeces: 
+      folderIndex: 9
+      parentFolderIndex: 0
+    _childFoldersAreTabs: 0
+    _depth: 1
+    _filters: []
+    _folderContent:
+      m_Text: Scenes
+      m_Image: {fileID: 2800000, guid: bea1d6254b7ecdf4eb81bf72132130e9, type: 3}
+      m_Tooltip: Assets\Scenes
+    _folderName: Scenes
+    _folderPath: Assets\Scenes
+    _foldoutContent:
+      m_Text: 
+      m_Image: {fileID: 2800000, guid: 6cee8f0b27f85534d88779b7246c667b, type: 3}
+      m_Tooltip: 
+    placeholderRenamingName: Scenes
+    isFile: 0
+    isVisible: 1
+    selectableIndex: 36
+    selectableUnityObject: {fileID: 102900000, guid: f78aa477e102c0340b80303bff7ca231, type: 3}
+    selectionRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 1
+      height: 1
+  - SerializationInfo:
+      childFileIndeces: 18000000
+      childFolderIndeces: 
+      folderIndex: 10
+      parentFolderIndex: 0
+    _childFoldersAreTabs: 0
+    _depth: 1
+    _filters: []
+    _folderContent:
+      m_Text: NewFolder
+      m_Image: {fileID: 2800000, guid: bea1d6254b7ecdf4eb81bf72132130e9, type: 3}
+      m_Tooltip: Assets\NewFolder
+    _folderName: NewFolder
+    _folderPath: Assets\NewFolder
+    _foldoutContent:
+      m_Text: 
+      m_Image: {fileID: 2800000, guid: 6cee8f0b27f85534d88779b7246c667b, type: 3}
+      m_Tooltip: 
+    placeholderRenamingName: NewFolder
+    isFile: 0
+    isVisible: 1
+    selectableIndex: 2
+    selectableUnityObject: {fileID: 102900000, guid: eee84155fc2663b49a51e801071cd821, type: 3}
+    selectionRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 1
+      height: 1
+  - SerializationInfo:
+      childFileIndeces: 17000000
+      childFolderIndeces: 0c000000
+      folderIndex: 11
+      parentFolderIndex: 0
+    _childFoldersAreTabs: 0
+    _depth: 1
+    _filters: []
+    _folderContent:
+      m_Text: NewFolder1
+      m_Image: {fileID: 2800000, guid: bea1d6254b7ecdf4eb81bf72132130e9, type: 3}
+      m_Tooltip: Assets\NewFolder1
+    _folderName: NewFolder1
+    _folderPath: Assets\NewFolder1
+    _foldoutContent:
+      m_Text: 
+      m_Image: {fileID: 2800000, guid: 6cee8f0b27f85534d88779b7246c667b, type: 3}
+      m_Tooltip: 
+    placeholderRenamingName: NewFolder1
+    isFile: 0
+    isVisible: 1
+    selectableIndex: 4
+    selectableUnityObject: {fileID: 102900000, guid: 1cd32a45c4c62ca449e46d952ec46362, type: 3}
+    selectionRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 1
+      height: 1
+  - SerializationInfo:
+      childFileIndeces: 
+      childFolderIndeces: 
+      folderIndex: 12
+      parentFolderIndex: 11
+    _childFoldersAreTabs: 0
+    _depth: 2
+    _filters: []
+    _folderContent:
+      m_Text: NewFolder
+      m_Image: {fileID: 2800000, guid: bea1d6254b7ecdf4eb81bf72132130e9, type: 3}
+      m_Tooltip: Assets\NewFolder1\NewFolder
+    _folderName: NewFolder
+    _folderPath: Assets\NewFolder1\NewFolder
+    _foldoutContent:
+      m_Text: 
+      m_Image: {fileID: 2800000, guid: 6cee8f0b27f85534d88779b7246c667b, type: 3}
+      m_Tooltip: 
+    placeholderRenamingName: NewFolder
+    isFile: 0
+    isVisible: 0
+    selectableIndex: 6
+    selectableUnityObject: {fileID: 102900000, guid: a28fff52b56beb742914b5f6d126fb96, type: 3}
+    selectionRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+  RootFolder:
+    SerializationInfo:
+      childFileIndeces: 00000000
+      childFolderIndeces: 0a0000000b0000000100000009000000
+      folderIndex: 0
+      parentFolderIndex: 0
+    _childFoldersAreTabs: 0
+    _depth: 0
+    _filters: []
+    _folderContent:
+      m_Text: Assets
+      m_Image: {fileID: 2800000, guid: bea1d6254b7ecdf4eb81bf72132130e9, type: 3}
+      m_Tooltip: Assets
+    _folderName: Assets
+    _folderPath: Assets
+    _foldoutContent:
+      m_Text: 
+      m_Image: {fileID: 2800000, guid: 6cee8f0b27f85534d88779b7246c667b, type: 3}
+      m_Tooltip: 
+    placeholderRenamingName: Assets
+    isFile: 0
+    isVisible: 1
+    selectableIndex: 0
+    selectableUnityObject: {fileID: 102900000, guid: 00000000000000001000000000000000, type: 3}
+    selectionRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 808
+      height: 25

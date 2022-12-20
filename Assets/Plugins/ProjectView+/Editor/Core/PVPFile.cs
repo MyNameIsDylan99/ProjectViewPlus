@@ -79,6 +79,8 @@ namespace ProjectViewPlus
         public UnityEngine.Object SelectableUnityObject { get => selectableObject; set => selectableObject = value; }
         public Rect SelectionRect { get => selectionRect; set => selectionRect = value; }
 
+        public bool DeleteFlag { get; set; }
+
         #endregion Properties
 
         public PVPFile(string path, PVPFolder parentFolder)

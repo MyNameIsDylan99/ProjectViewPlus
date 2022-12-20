@@ -35,7 +35,7 @@ namespace ProjectViewPlus
         private void OnDisable()
         {
             UnsubscribeToEvents();
-            //PVPData.RemoveNullReferencesAsync();
+            PVPData.RemoveNullReferencesAsync();
         }
 
         private void OnEnable()

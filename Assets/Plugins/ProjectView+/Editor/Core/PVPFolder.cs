@@ -111,6 +111,7 @@ namespace ProjectViewPlus
 
         public bool SortChildFolders { get; set; }
 
+        public bool DeleteFlag { get; set; }
         public PVPFolder ParentFolder
         { get { return _parentFolder; } set { _parentFolder = value; } }
 

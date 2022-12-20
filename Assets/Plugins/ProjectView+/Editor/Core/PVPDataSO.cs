@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using UnityEditor;
 using UnityEngine;
 
 namespace ProjectViewPlus
@@ -50,7 +51,10 @@ namespace ProjectViewPlus
         public async void OnBeforeDeserialize()
         {
             if (cleanUpTask != null)
+            {
                 await cleanUpTask;
+            }
+                
 
             PVPSelection.allSelectables = new List<ISelectable>();
 
@@ -130,7 +134,10 @@ namespace ProjectViewPlus
         /// </summary>
         public void RemoveFile(PVPFile file)
         {
-            allFiles[allFiles.IndexOf(file)] = null;
+            var index = allFiles.IndexOf(file);
+
+            if(index > -1)
+            allFiles[index].DeleteFlag = true;
         }
 
         /// <summary>
@@ -138,32 +145,43 @@ namespace ProjectViewPlus
         /// </summary>
         public void RemoveFolder(PVPFolder folder)
         {
-            allFolders[allFolders.IndexOf(folder)] = null;
+            var index = allFolders.IndexOf(folder);
+
+            if(index > -1)
+            allFolders[index].DeleteFlag = true;
         }
 
         /// <summary>
-        /// Removes all null references in the lists. (Not properly working yet)
+        /// Removes all null references in the lists.
         /// </summary>
         public void RemoveNullReferencesAsync()
         {
+            Undo.RecordObject(PVPWindow.PVPData, "");
+            if (cleanUpTask != null && !cleanUpTask.IsCompleted)
+                return;
+
             cleanUpTask = Task.Run(() =>
              {
-                 allFiles.RemoveAll(x => x == null);
+                 allFiles.RemoveAll(x => x.DeleteFlag);
+
+                 allFolders.RemoveAll(x => x.DeleteFlag);
+
+                 //Reset childFolder and file indeces on all folders
+
+                 foreach (var folder in allFolders)
+                 {
+                     folder.SerializationInfo.childFolderIndeces = new List<int>();
+                     folder.SerializationInfo.childFileIndeces = new List<int>();
+                 }
 
                  for (int i = 0; i < allFiles.Count; i++)
                  {
-                     //Remove old childFile index from parent folder and add new one
-                     if (allFiles[i].ParentFolder.SerializationInfo.childFileIndeces != null)
-                     {
-                         allFiles[i].ParentFolder.SerializationInfo.childFileIndeces.Remove(allFiles[i].FileSerializationInfo.fileIndex);
-
-                         allFiles[i].ParentFolder.SerializationInfo.childFileIndeces.Add(i);
-                     }
+                     //Add new file index to parent folder
+                     if(allFiles[i].ParentFolder!=null)
+                     allFiles[i].ParentFolder.SerializationInfo.childFileIndeces.Add(i);
                      //Set file index to new
                      allFiles[i].FileSerializationInfo.fileIndex = i;
                  }
-
-                 allFolders.RemoveAll(x => x == null);
 
                  for (int i = 0; i < allFolders.Count; i++)
                  {
@@ -180,11 +198,11 @@ namespace ProjectViewPlus
                              childFolder.SerializationInfo.parentFolderIndex = i;
                          }
 
-                     //Set child folder index of parent folder to new index
 
-                     if (allFolders[i].ParentFolder != null)
+                     //Add child folder index of parent folder to new index
+
+                     if (allFolders[i].ParentFolder != null && !allFolders[i].IsRootFolder())
                      {
-                         allFolders[i].ParentFolder.SerializationInfo.childFolderIndeces.Remove(allFolders[i].SerializationInfo.folderIndex);
                          allFolders[i].ParentFolder.SerializationInfo.childFolderIndeces.Add(i);
                      }
 
