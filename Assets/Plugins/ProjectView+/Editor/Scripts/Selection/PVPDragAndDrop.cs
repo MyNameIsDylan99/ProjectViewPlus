@@ -55,6 +55,9 @@ namespace ProjectViewPlus
             this.targetFolder = targetFolder;
         }
 
+        /// <summary>
+        /// Execute the action
+        /// </summary>
         public void Execute()
         {
             element.Move(targetFolder);
