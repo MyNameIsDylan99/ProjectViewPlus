@@ -142,7 +142,6 @@ namespace ProjectViewPlus
         private void CreateNewPVPSettingsInstance()
         {
             PVPSettings = CreateInstance<PVPSettingsSO>();
-            AssetDatabase.CreateAsset(PVPSettings, CurrentDirectory + '\\' + "PVPSettings.asset");
             PVPSettings.SmallSize = 25;
             PVPSettings.NormalSize = 30;
             PVPSettings.LargeSize = 50;
@@ -153,6 +152,7 @@ namespace ProjectViewPlus
             PVPSettings.SelectedBackground = AssetDatabase.LoadAssetAtPath<Texture2D>(CurrentDirectory + "/Sprites/SelectedBackground.png");
             PVPSettings.SettingsIcon = AssetDatabase.LoadAssetAtPath<Texture2D>(CurrentDirectory + "/Sprites/gear.png");
             PVPSettings.GUISkin = AssetDatabase.LoadAssetAtPath<GUISkin>(CurrentDirectory + "/GUISkins/PVPSkin.guiskin");
+            AssetDatabase.CreateAsset(PVPSettings, CurrentDirectory + '\\' + "PVPSettings.asset");
         }
 
         /// <summary>
