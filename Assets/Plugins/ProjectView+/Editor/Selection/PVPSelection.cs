@@ -129,7 +129,7 @@ namespace ProjectViewPlus
                 allSelectables.Move(selectable, selectable.SelectableIndex);
             }
 
-            for (int i = 0; i < allSelectables.Count - 1; i++)
+            for (int i = 0; i < allSelectables.Count; i++)
             {
                 allSelectables[i].SelectableIndex = i;
             }

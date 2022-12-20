@@ -35,6 +35,7 @@ namespace ProjectViewPlus
         private void OnDisable()
         {
             UnsubscribeToEvents();
+            //PVPData.RemoveNullReferencesAsync();
         }
 
         private void OnEnable()
@@ -46,14 +47,14 @@ namespace ProjectViewPlus
             PVPData = AssetDatabase.LoadAssetAtPath<PVPDataSO>(CurrentDirectory + "/PVPData.asset");
             PVPSettings = AssetDatabase.LoadAssetAtPath<PVPSettingsSO>(CurrentDirectory + "/PVPSettings.asset");
 
+            if (PVPSettings == null)
+                CreateNewPVPSettingsInstance();
+
             if (PVPData == null)
             {
                 CreateNewPVPDataInstance();
                 SynchronizeData();
             }
-
-            if (PVPSettings == null)
-                CreateNewPVPSettingsInstance();
 
             CheckIconSize();
             PVPData.OnBeforeDeserialize();

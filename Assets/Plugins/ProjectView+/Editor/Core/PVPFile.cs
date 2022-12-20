@@ -266,6 +266,7 @@ namespace ProjectViewPlus
 
             PVPWindow.RepaintFlag = true;
             showRenameTextField = false;
+            parentFolder.SortChildFiles = true;
         }
 
         #endregion Utility
@@ -285,6 +286,9 @@ namespace ProjectViewPlus
         /// </summary>
         public void Move(PVPFolder targetFolder)
         {
+            if (targetFolder == parentFolder)
+                return;
+
             if (parentFolder.FilesToRemove == null)
                 parentFolder.FilesToRemove = new List<PVPFile>();
 

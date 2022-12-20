@@ -7,6 +7,9 @@ using UnityEngine.SceneManagement;
 
 namespace ProjectViewPlus
 {
+    /// <summary>
+    /// Custom context menu for the pvp window.
+    /// </summary>
     public static class PVPContextMenu
     {
         private static ISelectable contextElement;

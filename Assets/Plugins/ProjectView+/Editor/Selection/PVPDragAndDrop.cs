@@ -40,6 +40,7 @@ namespace ProjectViewPlus
             }
         }
     }
+
     /// <summary>
     /// This class stores an action that will be executed inside the GUI layout event type.
     /// Currently only stores one type of action but can be abstracted to allow for differenct actions if needed.
