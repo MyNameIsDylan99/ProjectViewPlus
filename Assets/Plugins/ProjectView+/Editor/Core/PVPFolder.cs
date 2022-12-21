@@ -378,7 +378,7 @@ namespace ProjectViewPlus
                     foreach (var selectedElement in PVPSelection.SelectedElements)
                     {
                         containsChildFolder = IsParentFolder(selectedElement.Path);
-                        if (containsChildFolder || ContainsSelectableWithSameName(selectedElement))
+                        if (containsChildFolder || ContainsSelectableWithSameName(selectedElement.SelectableUnityObject.name))
                         {
                             DragAndDrop.visualMode = DragAndDropVisualMode.Rejected;
                             return;
@@ -400,11 +400,13 @@ namespace ProjectViewPlus
         private bool CheckForRenamingInput(Rect selectionRect, Rect foldoutRect)
         {
             var evt = Event.current;
-            return isSelected && evt.keyCode == KeyCode.F2 && evt.type == EventType.KeyDown || isSelected && evt.type == EventType.MouseDown && evt.button == 0 && selectionRect.Contains(evt.mousePosition) && PVPSelection.SelectedElements.Count <= 1 && !foldoutRect.Contains(evt.mousePosition) && evt.clickCount == 1;
+            return !IsRootFolder()&&(isSelected && evt.keyCode == KeyCode.F2 && evt.type == EventType.KeyDown || isSelected && evt.type == EventType.MouseDown && evt.button == 0 && selectionRect.Contains(evt.mousePosition) && PVPSelection.SelectedElements.Count <= 1 && !foldoutRect.Contains(evt.mousePosition) && evt.clickCount == 1);
         }
 
         private void RenameFolderAndStopRenaming()
         {
+            if (ParentFolder.ContainsSelectableWithSameName(placeholderRenamingName))
+                return; 
             _folderName = placeholderRenamingName;
             _folderContent.text = _folderName;
             AssetDatabase.RenameAsset(FolderPath, _folderName);
@@ -420,9 +422,8 @@ namespace ProjectViewPlus
 
         #region Child files and folders
 
-        public bool ContainsSelectableWithSameName(ISelectable element)
+        public bool ContainsSelectableWithSameName(string selectableName)
         {
-            var selectableName = element.SelectableUnityObject.name;
 
             foreach (var folder in ChildFolders)
             {

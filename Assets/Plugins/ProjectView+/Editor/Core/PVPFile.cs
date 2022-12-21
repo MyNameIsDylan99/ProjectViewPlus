@@ -260,6 +260,9 @@ namespace ProjectViewPlus
 
         private void RenameFileAndStopRenaming()
         {
+            if (ParentFolder.ContainsSelectableWithSameName(placeholderRenamingName))
+                return;
+
             fileName = placeholderRenamingName;
             fileContent.text = fileName;
             AssetDatabase.RenameAsset(Path, fileName);
