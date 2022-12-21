@@ -446,12 +446,9 @@ namespace ProjectViewPlus
         {
             ChildFiles.Add(file);
             ChildFiles.Sort();
-            var newFileIndex = ChildFiles.IndexOf(file);
 
-            if (SerializationInfo.childFileIndeces == null)
-                SerializationInfo.childFileIndeces = new List<int>();
+            SerializationInfo.childFileIndeces = new List<int>();
 
-            SerializationInfo.childFileIndeces.Clear();
 
             for (int i = 0; i < ChildFiles.Count; i++)
             {
@@ -469,10 +466,7 @@ namespace ProjectViewPlus
             ChildFolders.Add(folder);
             ChildFolders.Sort();
 
-            if (SerializationInfo.childFolderIndeces == null)
-                SerializationInfo.childFolderIndeces = new List<int>();
-
-            SerializationInfo.childFolderIndeces.Clear();
+            SerializationInfo.childFolderIndeces = new List<int>();
 
             for (int i = 0; i < ChildFolders.Count; i++)
             {
@@ -484,7 +478,7 @@ namespace ProjectViewPlus
         }
 
         /// <summary>
-        /// This method get's called after a folder was dragged and dropped. It adjusts the selectable indeces of its child files and folders and calls the AdjustChildrenSelectableIndex function on it's childFolders until there are none left.
+        /// This method get's called after a file or folder was dragged and dropped. It adjusts the selectable indeces of its child files and folders and calls the AdjustChildrenSelectableIndex function on it's childFolders until there are none left.
         /// </summary>
         /// <param name="selectablesToAdjust">The root folder that calls this function leaves it to null. This list will be filled up with all children of the folder and passed down until there are no child folders left.</param>
         public void AdjustChildrenSelectableIndex(List<ISelectable> selectablesToAdjust = null)

@@ -168,17 +168,23 @@ namespace ProjectViewPlus
 
                  //Reset childFolder and file indeces on all folders
 
-                 foreach (var folder in allFolders)
-                 {
-                     folder.SerializationInfo.childFolderIndeces = new List<int>();
-                     folder.SerializationInfo.childFileIndeces = new List<int>();
-                 }
+                 //foreach (var folder in allFolders)
+                 //{
+                 //    folder.SerializationInfo.childFolderIndeces = new List<int>();
+                 //    folder.SerializationInfo.childFileIndeces = new List<int>();
+                 //}
 
                  for (int i = 0; i < allFiles.Count; i++)
                  {
                      //Add new file index to parent folder
-                     if(allFiles[i].ParentFolder!=null)
-                     allFiles[i].ParentFolder.SerializationInfo.childFileIndeces.Add(i);
+                     if (allFiles[i].ParentFolder != null)
+                     {
+                         var index = allFiles[i].ParentFolder.SerializationInfo.childFileIndeces.IndexOf(allFiles[i].FileSerializationInfo.fileIndex);
+                         if(index > -1)
+                         allFiles[i].ParentFolder.SerializationInfo.childFileIndeces.RemoveAt(index);
+                         allFiles[i].ParentFolder.SerializationInfo.childFileIndeces.Insert(index,i);
+                     }
+                     
                      //Set file index to new
                      allFiles[i].FileSerializationInfo.fileIndex = i;
                  }
@@ -203,7 +209,10 @@ namespace ProjectViewPlus
 
                      if (allFolders[i].ParentFolder != null && !allFolders[i].IsRootFolder())
                      {
-                         allFolders[i].ParentFolder.SerializationInfo.childFolderIndeces.Add(i);
+                         var index = allFolders[i].ParentFolder.SerializationInfo.childFolderIndeces.IndexOf(allFolders[i].SerializationInfo.folderIndex);
+                         if(index > -1)
+                         allFolders[i].ParentFolder.SerializationInfo.childFolderIndeces.RemoveAt(index);
+                         allFolders[i].ParentFolder.SerializationInfo.childFolderIndeces.Insert(index,i);
                      }
 
                      //Set own index to new index
